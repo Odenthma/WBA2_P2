@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CacheList>
+	<Chache c_id="c0001">
+		<location lat="50.98817" lon="7.83573"></location>
+		<name>Mein erster Geocache</name>
+		<datum>22.10.1987 </datum>
+		<typ>traditional cache</typ>
+		<Owner b_id="b0001">Malte Odenthal</Owner>
+		<parkplatz lat="50.98834" lon="7.83556"></parkplatz>
+		<informationen>
+			<schwierigkeit>mittel</schwierigkeit>
+			<terrain>bergig</terrain>
+			<land>DE</land>
+			<Bundesland>NRW</Bundesland>
+			<provinz>Oberberg</provinz>
+			<beschreibung_klein>Sehr einfacher Cache</beschreibung_klein>
+			<beschreibung_lang>Mein erster Cache, einfach zu meistern</beschreibung_lang>
+			<Hinweise>Gute Schuhe ist ein Muss!</Hinweise>
+			<geschätze_zeit>mittel</geschätze_zeit>
+			<log>
+				<gefunden_von b_id="b0002">kalle</gefunden_von>
+				<gefunden_datum>12.03.2012</gefunden_datum>
+				<Kommentar>Schöne Runde!</Kommentar></log>
+			<Kommentare>
+				<Kommentar k_id="k0001">
+					<Autor b_id="b0001">Malte Odenthal</Autor>
+					<Datum>13.03.2012</Datum>
+					<text>Diese Runde hat viele Erinnerungen in mir geweckt. Deswegen habe ich diesen Cache erstellt!</text>
+				</Kommentar>
+				<Kommentar k_id="k0002">
+					<Autor b_id="b0002">kalle</Autor>
+					<Datum>14.03.2012</Datum>
+					<text>Hat mir sehr gut gefallen, hoffe du wirst weitere erstellen! Danke!</text>
+				</Kommentar>
+			</Kommentare>
+			<Travelbug t_id="t0001">ja</Travelbug>
+			</informationen>
+	</Chache>
+</CacheList>
+

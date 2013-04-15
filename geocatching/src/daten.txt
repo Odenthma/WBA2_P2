@@ -1,0 +1,35 @@
+identifikation über lat und long
+
+daten:
+->
+	- lat long
+	- erstellungsdatum
+	- identifizierungsid
+	- beschreibung
+	- Cachetyp
+	- Erstellername
+	- erstellerid
+	- parkplatz lat long
+	->
+		- schwierigkeit
+		- terrain
+		- land
+		- provinz
+		- beschreibung_klein
+		- beschreibung_lang
+		- Hinweise
+		->
+			- Log wer es gefunden hat
+			- wann gefunden
+			->
+				- kommentare
+			<-
+		<-
+	<-
+	-travelbug
+<-
+
+Implementieren was mitgenommen werden muss. Inventarliste oder sowas.
+
+Travelbug
+- es sollte so eine Art Historie erstellt werden, indem man nachvollziehen kann wo sich der bug befindet und wo er schon überall war
