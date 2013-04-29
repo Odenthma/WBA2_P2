@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/CacheList" xmlns:tns="http://www.example.org/CacheList" elementFormDefault="qualified">
+
+
+cachelist
+	cache
+
+<xsd:element name="CacheList" type="CacheListType"/>
+
+<xsd:complexType name="CacheListType">
+	<xsd:element name="Cache" type="CacheType"/>
+</xsd:complexType>
+
+cache
+	location
+	name
+	datum
+	typ
+	owner
+	parkplatz
+	informationen
+	logs
+	kommentare
+	
+<xsd:complexType name="CacheType">
+	<xsd:sequence>
+		<xsd:element name="location" -->attribute lat lon
+		<xsd:element name="Name" type="xsd:string"/>
+		<xsd:element name="Datum" -->Attribut Datum
+		<xsd:element name="Typ" -->Enumeration als Attribut
+		<xsd:element name="Owner" type="xsd:string"/>-->Owner als Attribut
+		<xsd:element name="Parkplatz" -->attribute lat lon
+		<xsd:element name="Informationen" type="InformationenType"/>
+		<xsd:element name="Logs" type="LogsType"/>
+		<xsd:element name="Kommentare" type="KommentareType"/>
+	</xsd:sequence>
+	<xsd:attribute name"c_id" type="cType" use="required"/>
+</xsd:complexType>
+
+<xsd:simpleType name="cType">
+	<xsd:restriction base="xsd:string">
+		<xs:pattern value="[c][0-9][0-9][0-9][0-9]"/>
+		<xs:Length value="5"/>
+	</xsd:restriction>
+</xsd:simpleType>
+informationen
+	schwierigkeit
+	terrain
+	land
+	Bundesland
+	provinz
+	beschreibung_klein
+	beschreibung_lang
+	Hinweise
+	geschätze_zeit
+	Travelbug
+	
+<xsd:complexType name="InformationenType">
+	<xsd:sequence>
+		<xsd:element name="Schwierigkeit"
+		<xsd:element name="Terrain"
+		<xsd:element name="Land"
+		<xsd:element name="Bundesland" typ="BundesLandType"/>
+		<xsd:element name="Provinz"
+		<xsd:element name="BeschreibungKlein"
+		<xsd:element name="BeschreibungGross"
+		<xsd:element name="Hinweise"
+		<xsd:element name="GeschaetzteZeit"
+		<xsd:element name="TravelBug"
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:simpleType name="BundeslandType">
+    <xsd:restriction base="xsd:string">
+    	<xsd:enumeration value="Baden-Württemberg"/>
+ 		<xsd:enumeration value="Bayern"/>
+ 		<xsd:enumeration value="Berlin"/>
+		<xsd:enumeration value="Brandenburg"/>
+ 		<xsd:enumeration value="Bremen"/>
+ 		<xsd:enumeration value="Hamburg"/>
+ 		<xsd:enumeration value="Hessen"/>
+ 		<xsd:enumeration value="Mecklenburg-Vorpommern"/>
+ 		<xsd:enumeration value="Niedersachsen"/>
+ 		<xsd:enumeration value="Nordrhein-Westfalen"/>
+ 		<xsd:enumeration value="Rheinland-Pfalz"/>
+ 		<xsd:enumeration value="Saarland"/>
+ 		<xsd:enumeration value="Sachsen"/>
+ 		<xsd:enumeration value="Schleswig-Holstein"/>
+ 		<xsd:enumeration value="Thüringen"/>
+    </xsd:restriction>
+</xsd:simpleType>
+
+logs
+	log
+	
+<xsd:complexType name=LogsType">
+	<xsd:element name="Log" type="logType"/>
+</xsd:complexType>
+
+log
+	gefunden_von
+	gefunden_datum
+	Kommentar
+	
+<xsd:complexType name="LogType">
+	<xsd:sequence>
+		<xsd:element name="GefundenVon"
+		<xsd:element name="GefundenDatum"
+		<xsd:element name="Kommentar"
+	</xsd:sequence>
+</xsd:complexType>
+	
+Kommentare
+	kommentar
+
+<xsd:complexType name="KommentareType">
+	<xsd:element name="Kommentar" type="KommentarType"/>
+</xsd:complexType>
+
+kommentar
+	Autor
+	Datum
+	text
+
+<xsd:complexType name="KommentarType">
+	<xsd:sequence>
+		<xsd:element name="Autor"
+		<xsd:element name="Datum"
+		<xsd:element name="Text"
+	</xsd:sequence>
+</xsd:complexType>
+	
+
+
+</schema>
