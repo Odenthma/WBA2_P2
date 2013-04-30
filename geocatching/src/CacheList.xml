@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CacheList>
 	<Chache c_id="c0001">
-		<location lat="50.98817" lon="7.83573"></location>
+		<location lat="50.98817" lon="7.83573"></location> --> koordinaten range: 0-85, -180-180
 		<name>Mein erster Geocache</name>
 		<datum>22.10.1987 </datum> --> Datum als Attribut
 		<typ>traditional cache</typ> --> Typ als Attribut
