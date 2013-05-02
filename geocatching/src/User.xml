@@ -1,2 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--  wir brauchen noch einen verschlüsselungsmechanismus für das Passwort!! -->
+<!--  einige ver- und entschlüsselungsverfahren für strings: http://www.javatips.net/blog/2011/08/how-to-encode-and-decode-in-base64-using-java -->
