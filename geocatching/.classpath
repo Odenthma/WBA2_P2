@@ -2,5 +2,13 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Downloads/JAXB2_20120218.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jaxbw-plugin/lib/activation.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jaxbw-plugin/lib/flamingo-wizard.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jaxbw-plugin/lib/jaxb-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jaxbw-plugin/lib/jaxb-impl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jaxbw-plugin/lib/jaxbw-plugin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jaxbw-plugin/lib/jaxb-xjc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jaxbw-plugin/lib/jsr173_1.0_api.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
