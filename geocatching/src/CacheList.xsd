@@ -71,12 +71,12 @@ alle name -> kamelSchreibWeise
 	<xsd:sequence>
 		<xsd:element name="location">
 			<xsd:complexType>
-        		<xsd:attribute name="lat" type="latRestriction"/>
+        		<xsd:attribute name="lat" type="latRestriction" use="required"/>
         		<xsd:attribute name="lon" type="lonRestriction"/>
    			</xsd:complexType>
 		</xsd:element> 
 		<xsd:element name="Name" type="xsd:string"/>
-		<xsd:element name="Datum" type="dateRestriction"/>
+		<xsd:element name="Datum" type="xsd:date"/> <!--  testweise date, sonst dateRestriction -->
 		<xsd:element name="Typ" type="cacheTypeEnum"/>
 		<xsd:element name="Owner">
 			<xsd:complexType>
@@ -241,7 +241,7 @@ alle name -> kamelSchreibWeise
         		</xsd:simpleContent>
         	</xsd:complexType>
 		</xsd:element>
-		<xsd:element name="gefundenDatum" type="dateRestriction"/>
+		<xsd:element name="gefundenDatum" type="xsd:date"/> <!--  testweise date, sonst dateRestriction -->
 		<xsd:element name="kommentar" type="xsd:string"/>
 	</xsd:sequence>
 </xsd:complexType>
@@ -294,7 +294,7 @@ alle name -> kamelSchreibWeise
 				</xsd:simpleContent>
 			</xsd:complexType>
 		</xsd:element>
-		<xsd:element name="Datum" type="dateRestriction"/>
+		<xsd:element name="Datum" type="xsd:date"/> <!--  testweise date, sonst dateRestriction -->
 		<xsd:element name="Text" type="xsd:string"/>
 	</xsd:sequence>
 </xsd:complexType>
