@@ -5,7 +5,7 @@
 		<name>Mein erster Geocache</name>
 		<datum>22.10.1987 </datum> --> Datum als Attribut
 		<typ>traditional cache</typ> --> Typ als Attribut
-		<Owner b_id="a0001">Malte Odenthal</Owner>
+		<Owner b_id="b0001">Malte Odenthal</Owner>
 		<parkplatz lat="50.98834" lon="7.83556"></parkplatz>
 		<informationen>
 			<schwierigkeit>mittel</schwierigkeit> --> als attribut wegen enumeration??
@@ -21,6 +21,11 @@
 		</informationen>
 		<logs>
 			<log id="l0001">
+				<gefunden_von b_id="b0002">kalle</gefunden_von>
+				<gefunden_datum>12.03.2012</gefunden_datum> --> als attribut wegen datumsformat??
+				<Kommentar>Schöne Runde!</Kommentar>
+			</log>
+			<log id="l0002">
 				<gefunden_von b_id="b0002">kalle</gefunden_von>
 				<gefunden_datum>12.03.2012</gefunden_datum> --> als attribut wegen datumsformat??
 				<Kommentar>Schöne Runde!</Kommentar>

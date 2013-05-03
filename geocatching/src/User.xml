@@ -23,5 +23,8 @@
 	<optional>
 		<news wanted="yes"/>
 		<benachrichtigung wanted="yes"/>
+		<ortsListe>
+			<!-- Liste mit Orten -->
+		</ortsListe>
 	</optional>
 </user>
