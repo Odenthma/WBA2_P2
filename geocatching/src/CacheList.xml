@@ -20,7 +20,7 @@
 			<Travelbug t_id="t0001">ja</Travelbug> --> als attribut wegen enumeration??
 		</informationen>
 		<logs>
-			<log id="l001">
+			<log id="l0001">
 				<gefunden_von b_id="b0002">kalle</gefunden_von>
 				<gefunden_datum>12.03.2012</gefunden_datum> --> als attribut wegen datumsformat??
 				<Kommentar>Schöne Runde!</Kommentar>
