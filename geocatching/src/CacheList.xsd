@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/CacheList" xmlns:tns="http://www.example.org/CacheList" elementFormDefault="qualified">
+<schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
 
 <!--  
 TODO:
@@ -17,11 +17,15 @@ alle name -> kamelSchreibWeise
 <xsd:element name="CacheList" type="CacheListType"/>
 
 <xsd:complexType name="CacheListType">
+	 <xsd:sequence>
 	<xsd:element name="Cache" type="CacheType">
-		<xsd:complexType>
+	
+		<!--<xsd:complexType>
         	<xsd:attribute name="c_id" type="cIdRestriction"/> 
-        </xsd:complexType>
+        </xsd:complexType>   -->
+        
 	</xsd:element>
+	 </xsd:sequence>
 </xsd:complexType>
 
 <xsd:simpleType name="cIdRestriction">
@@ -32,19 +36,19 @@ alle name -> kamelSchreibWeise
 
 <xsd:simpleType name="bIdRestriction">
 	<xsd:restriction base="xsd:token"> 
-		<xsd:pattern value="[b][0-9]{4}"/> <!--  nur c+4stellige zahl -->
+		<xsd:pattern value="[b][0-9]{4}"/> <!--  nur b+4stellige zahl -->
     </xsd:restriction> 
 </xsd:simpleType>
 
 <xsd:simpleType name="lIdRestriction">
 	<xsd:restriction base="xsd:token"> 
-		<xsd:pattern value="[l][0-9]{4}"/> <!--  nur c+4stellige zahl -->
+		<xsd:pattern value="[l][0-9]{4}"/> <!--  nur l+4stellige zahl -->
     </xsd:restriction> 
 </xsd:simpleType>
 
 <xsd:simpleType name="kIdRestriction">
 	<xsd:restriction base="xsd:token"> 
-		<xsd:pattern value="[k][0-9]{4}"/> <!--  nur c+4stellige zahl -->
+		<xsd:pattern value="[k][0-9]{4}"/> <!--  nur k+4stellige zahl -->
     </xsd:restriction> 
 </xsd:simpleType>
 
@@ -72,9 +76,9 @@ alle name -> kamelSchreibWeise
 		<xsd:element name="Datum" type="dateRestriction"/>
 		<xsd:element name="Typ" type="cacheTypeEnum"/>
 		<xsd:element name="Owner" type="xsd:string">
-			<xs:complexType>
-    			<xs:attribute name="b_id" type="bIdRestriction" />
-    		</xs:complexType>
+			<xsd:complexType>
+    			<xsd:attribute name="b_id" type="bIdRestriction" />
+    		</xsd:complexType>
     	</xsd:element>
 		<xsd:element name="Parkplatz" type="xsd:string">
 			<xsd:complexType>
@@ -107,15 +111,15 @@ alle name -> kamelSchreibWeise
     </xsd:restriction> 
 </xsd:simpleType>
   
-<xs:simpleType name="cacheTypeEnum">
-	<xs:restriction base="xs:string">
-		<xs:enumeration value="Traditional Cache" />
-		<xs:enumeration value="Multi Cache" />
-		<xs:enumeration value="Puzzle Cache" />
-		<xs:enumeration value="Mystery Cache" />
-		<xs:enumeration value="Unknown Cache" />
-	</xs:restriction>
-</xs:simpleType>
+<xsd:simpleType name="cacheTypeEnum">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="Traditional Cache" />
+		<xsd:enumeration value="Multi Cache" />
+		<xsd:enumeration value="Puzzle Cache" />
+		<xsd:enumeration value="Mystery Cache" />
+		<xsd:enumeration value="Unknown Cache" />
+	</xsd:restriction>
+</xsd:simpleType>
 
 <!-- <xsd:simpleType name="cType">
 	<xsd:restriction base="xsd:string">
@@ -141,29 +145,29 @@ alle name -> kamelSchreibWeise
 		<xsd:element name="Schwierigkeit" type="doubleValueEnum"/>
 		<xsd:element name="Terrain" type="doubleValueEnum"/>
 		<xsd:element name="Land" type="xsd:string"/>
-		<xsd:element name="Bundesland" typ="bundesLandEnum"/>
+		<xsd:element name="Bundesland" type="bundeslandEnum"/>
 		<xsd:element name="Provinz" type="xsd:string"/>
 		<xsd:element name="BeschreibungKlein" type="xsd:string"/>
 		<xsd:element name="BeschreibungGross" type="xsd:string"/>
 		<xsd:element name="Hinweise" type="xsd:string"/>
-		<xsd:element name="GeschaetzteZeit" type="decimal"/>
+		<xsd:element name="GeschaetzteZeit" type="xsd:decimal"/>
 		<xsd:element name="TravelBug" type="yesNoEnum"/>
 	</xsd:sequence>
 </xsd:complexType>
 
-<xs:simpleType name="doubleValueEnum">
-	<xs:restriction base="xs:double">
-		<xs:enumeration value="1.0" />
-		<xs:enumeration value="1.5" />
-		<xs:enumeration value="2.0" />
-		<xs:enumeration value="2.5" />
-		<xs:enumeration value="3.0" />
-		<xs:enumeration value="3.5" />
-		<xs:enumeration value="4.0" />
-		<xs:enumeration value="4.5" />
-		<xs:enumeration value="5.0" />
-	</xs:restriction>
-</xs:simpleType>
+<xsd:simpleType name="doubleValueEnum">
+	<xsd:restriction base="xsd:double">
+		<xsd:enumeration value="1.0" />
+		<xsd:enumeration value="1.5" />
+		<xsd:enumeration value="2.0" />
+		<xsd:enumeration value="2.5" />
+		<xsd:enumeration value="3.0" />
+		<xsd:enumeration value="3.5" />
+		<xsd:enumeration value="4.0" />
+		<xsd:enumeration value="4.5" />
+		<xsd:enumeration value="5.0" />
+	</xsd:restriction>
+</xsd:simpleType>
 
 <xsd:simpleType name="bundeslandEnum">
     <xsd:restriction base="xsd:string">
@@ -185,30 +189,46 @@ alle name -> kamelSchreibWeise
     </xsd:restriction>
 </xsd:simpleType>
 
-<xs:simpleType name="yesNoEnum">
-	<xs:restriction base="xs:string">
-		<xs:enumeration value="ja" />
-		<xs:enumeration value="nein" />
-	</xs:restriction>
-</xs:simpleType>
+<xsd:simpleType name="yesNoEnum">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="ja" />
+		<xsd:enumeration value="nein" />
+	</xsd:restriction>
+</xsd:simpleType>
 
 <!-- logs
 	log -->
 	
-<xsd:complexType name=LogsType">
-	<xsd:element name="Log" type="logType">
-		<xsd:complexType>
-        	<xsd:attribute name="l_id" type="lIdRestriction"/> 
-        </xsd:complexType>
-	</xsd:element>
-</xsd:complexType>
+<!-- <xsd:complexType name="LogsType">
+	<xsd:sequence>
+		<xsd:element name="Log" type="logType">
+			 <xsd:complexType> 
+        		<xsd:attribute name="l_id" type="lIdRestriction"/> 
+       	 	 </xsd:complexType>  
+		</xsd:element>
+	</xsd:sequence>
+</xsd:complexType>  -->
+
+
+<!--  TEST -->
+<xsd:complexType name="LogsType">
+	<xsd:sequence>
+		<xsd:element name="Log">
+ 			<xsd:simpleContent>
+				<xsd:extension base="logType">
+					<xsd:attribute name="l_id" type="lIdRestriction"/> 
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:element>
+	</xsd:sequence>
+</xsd:complexType>  
 
 <!-- log
 	gefunden_von
 	gefunden_datum
 	Kommentar -->
 	
-<xsd:complexType name="LogType">
+<xsd:complexType name="logType">
 	<xsd:sequence>
 		<xsd:element name="gefundenVon" type="xsd:string">
 			<xsd:complexType>
