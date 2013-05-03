@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.w3schools.com"
+xmlns="http://www.w3schools.com"
+elementFormDefault="qualified">
 
 <!--  
 TODO:
@@ -75,15 +78,23 @@ alle name -> kamelSchreibWeise
 		<xsd:element name="Name" type="xsd:string"/>
 		<xsd:element name="Datum" type="dateRestriction"/>
 		<xsd:element name="Typ" type="cacheTypeEnum"/>
-		<xsd:element name="Owner" type="xsd:string">
+		<xsd:element name="Owner">
 			<xsd:complexType>
-    			<xsd:attribute name="b_id" type="bIdRestriction" />
+				<xsd:simpleContent>
+					<xsd:extension base="xsd:string">
+    					<xsd:attribute name="b_id" type="bIdRestriction" />
+    				</xsd:extension>
+    			</xsd:simpleContent>
     		</xsd:complexType>
     	</xsd:element>
-		<xsd:element name="Parkplatz" type="xsd:string">
+		<xsd:element name="Parkplatz">
 			<xsd:complexType>
-        		<xsd:attribute name="lat" type="latRestriction"/>
-        		<xsd:attribute name="lon" type="lonRestriction"/>
+				<xsd:simpleContent>
+					<xsd:extension base="xsd:string">
+        				<xsd:attribute name="lat" type="latRestriction"/>
+        				<xsd:attribute name="lon" type="lonRestriction"/>
+        			</xsd:extension>
+        		</xsd:simpleContent>
    			</xsd:complexType>
 		</xsd:element>
 		<xsd:element name="Informationen" type="InformationenType"/>
@@ -107,7 +118,7 @@ alle name -> kamelSchreibWeise
    
 <xsd:simpleType name="dateRestriction">
 	<xsd:restriction base="xsd:decimal"> 
-		<xsd:pattern value=" [0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}"/> <!-- kein minus, 1-2 zeichen vor punkt, 0-6 nach punkt -->
+		<xsd:pattern value=" [0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}"/> 
     </xsd:restriction> 
 </xsd:simpleType>
   
@@ -199,26 +210,17 @@ alle name -> kamelSchreibWeise
 <!-- logs
 	log -->
 	
-<!-- <xsd:complexType name="LogsType">
-	<xsd:sequence>
-		<xsd:element name="Log" type="logType">
-			 <xsd:complexType> 
-        		<xsd:attribute name="l_id" type="lIdRestriction"/> 
-       	 	 </xsd:complexType>  
-		</xsd:element>
-	</xsd:sequence>
-</xsd:complexType>  -->
-
-
 <!--  TEST -->
 <xsd:complexType name="LogsType">
 	<xsd:sequence>
 		<xsd:element name="Log">
- 			<xsd:simpleContent>
-				<xsd:extension base="logType">
-					<xsd:attribute name="l_id" type="lIdRestriction"/> 
-				</xsd:extension>
-			</xsd:simpleContent>
+			<xsd:complexType>
+ 				<xsd:complexContent>
+					<xsd:extension base="logType">
+						<xsd:attribute name="l_id" type="lIdRestriction"/> 
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
 		</xsd:element>
 	</xsd:sequence>
 </xsd:complexType>  
@@ -230,9 +232,13 @@ alle name -> kamelSchreibWeise
 	
 <xsd:complexType name="logType">
 	<xsd:sequence>
-		<xsd:element name="gefundenVon" type="xsd:string">
+		<xsd:element name="gefundenVon">
 			<xsd:complexType>
-        		<xsd:attribute name="b_id" type="bIdRestriction"/> 
+				<xsd:simpleContent>
+					<xsd:extension base="xsd:string">
+        				<xsd:attribute name="b_id" type="bIdRestriction"/> 
+        			</xsd:extension>
+        		</xsd:simpleContent>
         	</xsd:complexType>
 		</xsd:element>
 		<xsd:element name="gefundenDatum" type="dateRestriction"/>
@@ -244,19 +250,27 @@ alle name -> kamelSchreibWeise
 	kommentar -->
 
 <xsd:complexType name="KommentareType">
-	<xsd:element name="Kommentar" type="KommentarType">
+<xsd:sequence>
+	<xsd:element name="Kommentar">
 		<xsd:complexType>
-        	<xsd:attribute name="k_id" type="kIdRestriction"/> 
+			<xsd:complexContent>
+				<xsd:extension base="KommentarType">
+        			<xsd:attribute name="k_id" type="kIdRestriction"/> 
+        		</xsd:extension>
+        	</xsd:complexContent>
         </xsd:complexType>
 	</xsd:element>
-</xsd:complexType>
+	</xsd:sequence>
+</xsd:complexType>  
+
+
 
 <!-- kommentar
 	Autor
 	Datum
 	text -->
 
-<xsd:complexType name="KommentarType">
+<!--  <xsd:complexType name="KommentarType">
 	<xsd:sequence>
 		<xsd:element name="Autor" type="xsd:string">
 			<xsd:complexType>
@@ -266,6 +280,23 @@ alle name -> kamelSchreibWeise
 		<xsd:element name="Datum" type="dateRestriction"/>
 		<xsd:element name="Text" type="xsd:string"/>
 	</xsd:sequence>
+</xsd:complexType>-->
+
+<!-- TEST -->
+<xsd:complexType name="KommentarType">
+	<xsd:sequence>
+		<xsd:element name="Autor">
+			<xsd:complexType>
+				<xsd:simpleContent>
+					<xsd:extension base="xsd:string">
+						<xsd:attribute name="b_id" type="bIdRestriction" />
+					</xsd:extension>
+				</xsd:simpleContent>
+			</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="Datum" type="dateRestriction"/>
+		<xsd:element name="Text" type="xsd:string"/>
+	</xsd:sequence>
 </xsd:complexType>
 	
-</schema>
+</xsd:schema>
