@@ -118,7 +118,7 @@ alle name -> kamelSchreibWeise
    
 <xsd:simpleType name="dateRestriction">
 	<xsd:restriction base="xsd:decimal"> 
-		<xsd:pattern value=" [0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}"/> 
+		<xsd:pattern value=" [0-9]{1,2}.[0-9]{1,2}.[0-9]{4}"/> 
     </xsd:restriction> 
 </xsd:simpleType>
   

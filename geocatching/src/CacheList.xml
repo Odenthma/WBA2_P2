@@ -5,7 +5,7 @@
 		<name>Mein erster Geocache</name>
 		<datum>22.10.1987 </datum> --> Datum als Attribut
 		<typ>traditional cache</typ> --> Typ als Attribut
-		<Owner b_id="b0001">Malte Odenthal</Owner>
+		<Owner b_id="a0001">Malte Odenthal</Owner>
 		<parkplatz lat="50.98834" lon="7.83556"></parkplatz>
 		<informationen>
 			<schwierigkeit>mittel</schwierigkeit> --> als attribut wegen enumeration??
