@@ -3,12 +3,18 @@
 <!--  einige ver- und entschlüsselungsverfahren für strings: http://www.javatips.net/blog/2011/08/how-to-encode-and-decode-in-base64-using-java -->
 
 <user>
-	<information>
-		<lastName></lastName>
-		<firstName></firstName>
-		<street></street>
-		<zipCode></zipCode>
-	</information>
+	<userInformation>
+		<name>
+			<lastName></lastName>
+			<firstName></firstName>
+		</name>
+		<adress>
+			<state></state>
+			<street></street>
+			<zipCode></zipCode>
+			<ort></ort>
+		</adress>	
+	</userInformation>
 	<account>
 		<logInName></logInName>
 		<logInPW></logInPW>
