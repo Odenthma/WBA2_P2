@@ -8,10 +8,10 @@ elementFormDefault="qualified">
 TODO:
 use:required wann und wo?
 alle name -> kamelSchreibWeise
-
+Evtl Foto vom Cache und Umgebung
 
  -->
- 
+
  
  
 <!-- cachelist 
@@ -57,22 +57,22 @@ alle name -> kamelSchreibWeise
 
 
 <!--  cache
-	location
-	name
-	datum
-	typ
-	owner
-	parkplatz
-	informationen
-	logs
-	kommentare -->       
+		location
+		name
+		datum
+		typ
+		owner
+		parkplatz
+		informationen
+		logs
+		kommentare -->       
 	
 <xsd:complexType name="CacheType">
 	<xsd:sequence>
 		<xsd:element name="location">
 			<xsd:complexType>
         		<xsd:attribute name="lat" type="latRestriction" use="required"/>
-        		<xsd:attribute name="lon" type="lonRestriction"/>
+        		<xsd:attribute name="lon" type="lonRestriction" use="required"/>
    			</xsd:complexType>
 		</xsd:element> 
 		<xsd:element name="Name" type="xsd:string"/>
@@ -82,7 +82,7 @@ alle name -> kamelSchreibWeise
 			<xsd:complexType>
 				<xsd:simpleContent>
 					<xsd:extension base="xsd:string">
-    					<xsd:attribute name="b_id" type="bIdRestriction" />
+    					<xsd:attribute name="b_id" type="bIdRestriction" use="required"/>
     				</xsd:extension>
     			</xsd:simpleContent>
     		</xsd:complexType>
@@ -91,8 +91,8 @@ alle name -> kamelSchreibWeise
 			<xsd:complexType>
 				<xsd:simpleContent>
 					<xsd:extension base="xsd:string">
-        				<xsd:attribute name="lat" type="latRestriction"/>
-        				<xsd:attribute name="lon" type="lonRestriction"/>
+        				<xsd:attribute name="lat" type="latRestriction" use="required"/>
+        				<xsd:attribute name="lon" type="lonRestriction" use="required"/>
         			</xsd:extension>
         		</xsd:simpleContent>
    			</xsd:complexType>
@@ -217,7 +217,7 @@ alle name -> kamelSchreibWeise
 			<xsd:complexType>
  				<xsd:complexContent>
 					<xsd:extension base="logType">
-						<xsd:attribute name="l_id" type="lIdRestriction"/> 
+						<xsd:attribute name="l_id" type="lIdRestriction" use="required"/> 
 					</xsd:extension>
 				</xsd:complexContent>
 			</xsd:complexType>
@@ -236,7 +236,7 @@ alle name -> kamelSchreibWeise
 			<xsd:complexType>
 				<xsd:simpleContent>
 					<xsd:extension base="xsd:string">
-        				<xsd:attribute name="b_id" type="bIdRestriction"/> 
+        				<xsd:attribute name="b_id" type="bIdRestriction" use="required"/> 
         			</xsd:extension>
         		</xsd:simpleContent>
         	</xsd:complexType>
@@ -255,7 +255,7 @@ alle name -> kamelSchreibWeise
 		<xsd:complexType>
 			<xsd:complexContent>
 				<xsd:extension base="KommentarType">
-        			<xsd:attribute name="k_id" type="kIdRestriction"/> 
+        			<xsd:attribute name="k_id" type="kIdRestriction" use="required"/> 
         		</xsd:extension>
         	</xsd:complexContent>
         </xsd:complexType>
@@ -289,7 +289,7 @@ alle name -> kamelSchreibWeise
 			<xsd:complexType>
 				<xsd:simpleContent>
 					<xsd:extension base="xsd:string">
-						<xsd:attribute name="b_id" type="bIdRestriction" />
+						<xsd:attribute name="b_id" type="bIdRestriction" use="required"/>
 					</xsd:extension>
 				</xsd:simpleContent>
 			</xsd:complexType>
