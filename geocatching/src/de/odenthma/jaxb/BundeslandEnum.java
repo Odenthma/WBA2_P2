@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlEnumValue;
  * &lt;/simpleType>
  * </pre>
  * 
- */
+ */asdasdasd
 @XmlEnum
 public enum BundeslandEnum {
 
