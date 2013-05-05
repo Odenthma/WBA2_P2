@@ -49,8 +49,19 @@ elementFormDefault="qualified">
 					</xsd:simpleContent>
 				</xsd:complexType>
 			</xsd:element> 
-			<xsd:element name="ortsListe" /> <!--  erweitern -->
+			<xsd:element name="ortsListe" type="ortsListeType"/>
 		 </xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ortsListeType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+        		<xsd:attribute name="lat" type="latRestriction" use="required"/>
+        		<xsd:attribute name="lon" type="lonRestriction" use="required"/>
+        		<xsd:attribute name="postal" type="postalRestriction" use="required"/>
+        		<xsd:attribute name="umkreis" type="rangeRestriction" use="required"/>
+        	</xsd:extension>
+        </xsd:simpleContent>
 	</xsd:complexType>
 	
 	<xsd:complexType name="nameType">
@@ -87,5 +98,23 @@ elementFormDefault="qualified">
 		<xsd:pattern value="[0-9]{5}"/> 
     </xsd:restriction> 
 </xsd:simpleType>	
+
+<xsd:simpleType name="latRestriction">
+	<xsd:restriction base="xsd:decimal"> 
+		<xsd:pattern value="[\d]{1,2}\.[\d]{0,6}"/> <!-- kein minus, 1-2 zeichen vor punkt, 0-6 nach punkt -->
+    </xsd:restriction> 
+</xsd:simpleType>
+
+<xsd:simpleType name="lonRestriction">
+	<xsd:restriction base="xsd:decimal"> 
+		<xsd:pattern value="-?[\d]{1,3}\.[\d]{0,6}"/> <!-- optionales minus, 1-3 zeichen vor punkt, 0-6 nach punkt -->
+    </xsd:restriction> 
+</xsd:simpleType>
+
+<xsd:simpleType name="rangeRestriction">
+	<xsd:restriction base="xsd:token"> 
+		<xsd:pattern value="[0-9]{0,2}.?[0-9]{0,2}(m|km)"/> 
+    </xsd:restriction> 
+</xsd:simpleType>
 		
 </xsd:schema>

@@ -23,8 +23,9 @@
 	<optional>
 		<news wanted="yes"/>
 		<benachrichtigung wanted="yes"/>
-		<ortsListe>
-			<!-- Liste mit Orten -->
+		<ortsListe>	
+			<ort postal="51645" umkreis="10km" lat="33.12" lon="123.12">Gummersbach-Vollmerhausen</ort>
+			<ort postal="33501" umkreis="30km" lat="73.12" lon="193.62">Teutoburger Wald</ort>
 		</ortsListe>
 	</optional>
 </user>
