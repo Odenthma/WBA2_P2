@@ -25,7 +25,7 @@ elementFormDefault="qualified">
 		<xsd:sequence>
 			<xsd:element name="logInName" type="xsd:string"/>
 			<xsd:element name="logInPW" type="xsd:string"/> 
-			<xsd:element name="email" type="mailRestriction"/> <!--  restriction für Mail --> 
+			<xsd:element name="email" type="mailRestriction"/> 
 		 </xsd:sequence>
 	</xsd:complexType>
 	
@@ -64,7 +64,7 @@ elementFormDefault="qualified">
 		<xsd:sequence>
 			<xsd:element name="state" type="xsd:string"/>
 			<xsd:element name="street" type="xsd:string"/>
-			<xsd:element name="zipCode" type="xsd:string"/> <!-- postalcode restriction -->
+			<xsd:element name="zipCode" type="postalRestriction"/>
 			<xsd:element name="ort" type="xsd:string"/>
 		 </xsd:sequence>
 	</xsd:complexType>
@@ -79,6 +79,12 @@ elementFormDefault="qualified">
 <xsd:simpleType name="mailRestriction">
 	<xsd:restriction base="xsd:token"> 
 		<xsd:pattern value="[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}"/> <!-- emailadressengültigkeit -->
+    </xsd:restriction> 
+</xsd:simpleType>	
+
+<xsd:simpleType name="postalRestriction">
+	<xsd:restriction base="xsd:token"> 
+		<xsd:pattern value="[0-9]{5}"/> 
     </xsd:restriction> 
 </xsd:simpleType>	
 		
