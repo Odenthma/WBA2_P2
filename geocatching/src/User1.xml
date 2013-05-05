@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:user xmlns:p="http://www.w3schools.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3schools.com User.xsd ">
+  <p:userInformation>
+    <p:name>
+      <p:lastName>p:lastName</p:lastName>
+      <p:firstName>p:firstName</p:firstName>
+    </p:name>
+    <p:adress>
+      <p:state>p:state</p:state>
+      <p:street>p:street</p:street>
+      <p:zipCode>token</p:zipCode>
+      <p:ort>p:ort</p:ort>
+    </p:adress>
+  </p:userInformation>
+  <p:account>
+    <p:logInName>p:logInName</p:logInName>
+    <p:logInPW>p:logInPW</p:logInPW>
+    <p:email>token</p:email>
+  </p:account>
+  <p:optional>
+    <p:news wanted="ja">p:news</p:news>
+    <p:benachrichtigung wanted="ja">p:benachrichtigung</p:benachrichtigung>
+    <p:ortsListe lat="0.0" lon="0.0" postal="token" umkreis="token">p:ortsListe</p:ortsListe>
+  </p:optional>
+</p:user>

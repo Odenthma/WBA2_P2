@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.w3schools.com"
+xmlns="http://www.w3schools.com"
+elementFormDefault="qualified">
+
+<!--  
+<userInformation>
+	<user b_id="b0001">Kalle</user>
+	<accountName>kalle01</accountName>
+	<anzGefundenerCaches>5</anzCaches>
+	<anzErstellterCaches>2</anzErstellterCaches>
+	<cachesGefunden>
+		<cache c_id="c0001">Mein Rundgang</cache>
+		<cache c_id="c0002">Erinnerungen</cache>
+		<cache c_id="c0301">Über</cache>
+		<cache c_id="c1006">Vergangenheit</cache>
+		<cache c_id="c0021">Trauer</cache>
+	</cachesGefunden>
+	<cachesErstellt>
+		<cache c_id="c0502">Karlhorst</cache>
+		<cache c_id="c2301">Am Weidenkätzchen</cache>
+	</cachesErstellt>
+	<optional>
+		<news wanted="yes"/>
+		<benachrichtigung wanted="yes"/>
+		<ortsListe>
+			<ort postal="51645" umkreis="10km" lat="33.12" lon="123.12">Gummersbach-Vollmerhausen</ort>
+			<ort postal="33501" umkreis="30km" lat="73.12" lon="193.62">Teutoburger Wald</ort>
+		</ortsListe>
+	</optional>
+</userInformation>
+ -->
+
+<xsd:element name="userInformation" type="userInformationType"/>
+
+<xsd:complexType name="userInformationType">
+	 	<xsd:sequence>
+			<xsd:element name="user">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:string">
+        					<xsd:attribute name="b_id" type="bIdRestriction" use="required"/>
+        				</xsd:extension>
+        			</xsd:simpleContent>
+   				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="accountName" type="xsd:string"/>
+			<xsd:element name="anzGefundenerCaches" type="xsd:decimal"/> 
+			<xsd:element name="anzErstellterCaches" type="xsd:decimal"/> 
+			<xsd:element name="cachesGefunden" type="cachesGefundenType"/>
+			<xsd:element name="cachesErstellt" type="cachesErstelltType"/>
+			<xsd:element name="optional" type="optionalType"/>
+		 </xsd:sequence>
+	</xsd:complexType>
+
+
+<xsd:complexType name="cachesType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+        		<xsd:attribute name="c_id" type="cIdRestriction" use="required"/>
+        	</xsd:extension>
+        </xsd:simpleContent>
+	</xsd:complexType>
+
+<xsd:complexType name="cachesGefundenType">
+	<xsd:sequence>
+		<xsd:element name="cache" type="cachesType"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="cachesErstelltType">
+	<xsd:sequence>
+		<xsd:element name="cache" type="cachesType"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:simpleType name="cIdRestriction">
+	<xsd:restriction base="xsd:token"> 
+		<xsd:pattern value="[c][0-9]{4}"/> <!--  nur c+4stellige zahl -->
+    </xsd:restriction> 
+</xsd:simpleType>
+
+<xsd:simpleType name="bIdRestriction">
+	<xsd:restriction base="xsd:token"> 
+		<xsd:pattern value="[b][0-9]{4}"/> <!--  nur b+4stellige zahl -->
+    </xsd:restriction> 
+</xsd:simpleType>
+
+
+<xsd:complexType name="optionalType">
+		<xsd:sequence>
+			<xsd:element name="news">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:string">
+							<xsd:attribute name="wanted" type="yesNoEnum" use="required"/> 
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="benachrichtigung">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:string">
+							<xsd:attribute name="wanted" type="yesNoEnum" use="required"/> 
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element> 
+			<xsd:element name="ortsListe" type="ortsListeType"/>
+		 </xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ortsListeType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+        		<xsd:attribute name="lat" type="latRestriction" use="required"/>
+        		<xsd:attribute name="lon" type="lonRestriction" use="required"/>
+        		<xsd:attribute name="postal" type="postalRestriction" use="required"/>
+        		<xsd:attribute name="umkreis" type="rangeRestriction" use="required"/>
+        	</xsd:extension>
+        </xsd:simpleContent>
+	</xsd:complexType>
+	
+<xsd:simpleType name="yesNoEnum">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="ja" />
+		<xsd:enumeration value="nein" />
+	</xsd:restriction>
+</xsd:simpleType>
+		
+<xsd:simpleType name="postalRestriction">
+	<xsd:restriction base="xsd:token"> 
+		<xsd:pattern value="[0-9]{5}"/> 
+    </xsd:restriction> 
+</xsd:simpleType>	
+
+<xsd:simpleType name="latRestriction">
+	<xsd:restriction base="xsd:decimal"> 
+		<xsd:pattern value="[\d]{1,2}\.[\d]{0,6}"/> <!-- kein minus, 1-2 zeichen vor punkt, 0-6 nach punkt -->
+    </xsd:restriction> 
+</xsd:simpleType>
+
+<xsd:simpleType name="lonRestriction">
+	<xsd:restriction base="xsd:decimal"> 
+		<xsd:pattern value="-?[\d]{1,3}\.[\d]{0,6}"/> <!-- optionales minus, 1-3 zeichen vor punkt, 0-6 nach punkt -->
+    </xsd:restriction> 
+</xsd:simpleType>
+
+<xsd:simpleType name="rangeRestriction">
+	<xsd:restriction base="xsd:token"> 
+		<xsd:pattern value="[0-9]{0,2}.?[0-9]{0,2}(m|km)"/> 
+    </xsd:restriction> 
+</xsd:simpleType>
+</xsd:schema>

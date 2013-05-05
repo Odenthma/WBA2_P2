@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:userInformation xmlns:p="http://www.w3schools.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3schools.com UserInformation.xsd ">
+  <p:user b_id="token">p:user</p:user>
+  <p:accountName>p:accountName</p:accountName>
+  <p:anzGefundenerCaches>0.0</p:anzGefundenerCaches>
+  <p:anzErstellterCaches>0.0</p:anzErstellterCaches>
+  <p:cachesGefunden>
+    <p:cache c_id="token">p:cache</p:cache>
+  </p:cachesGefunden>
+  <p:cachesErstellt>
+    <p:cache c_id="token">p:cache</p:cache>
+  </p:cachesErstellt>
+  <p:optional>
+    <p:news wanted="ja">p:news</p:news>
+    <p:benachrichtigung wanted="ja">p:benachrichtigung</p:benachrichtigung>
+    <p:ortsListe lat="0.0" lon="0.0" postal="token" umkreis="token">p:ortsListe</p:ortsListe>
+  </p:optional>
+</p:userInformation>
