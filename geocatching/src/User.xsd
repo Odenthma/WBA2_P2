@@ -4,4 +4,82 @@ targetNamespace="http://www.w3schools.com"
 xmlns="http://www.w3schools.com"
 elementFormDefault="qualified">
 
+	<xsd:element name="user" type="userType"/>
+
+	<xsd:complexType name="userType">
+	 	<xsd:sequence>
+			<xsd:element name="userInformation" type="userInformationType"/>
+			<xsd:element name="account" type="accountType"/>
+			<xsd:element name="optional" type="optionalType"/>
+		 </xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="userInformationType">
+		<xsd:sequence>
+			<xsd:element name="name" type="nameType"/>
+			<xsd:element name="adress" type="adressType"/>
+		 </xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="accountType">
+		<xsd:sequence>
+			<xsd:element name="logInName" type="xsd:string"/>
+			<xsd:element name="logInPW" type="xsd:string"/> 
+			<xsd:element name="email" type="mailRestriction"/> <!--  restriction für Mail --> 
+		 </xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="optionalType">
+		<xsd:sequence>
+			<xsd:element name="news">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:string">
+							<xsd:attribute name="wanted" type="yesNoEnum" use="required"/> 
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="benachrichtigung">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:string">
+							<xsd:attribute name="wanted" type="yesNoEnum" use="required"/> 
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element> 
+			<xsd:element name="ortsListe" /> <!--  erweitern -->
+		 </xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="nameType">
+		<xsd:sequence>
+			<xsd:element name="lastName" type="xsd:string"/>
+			<xsd:element name="firstName" type="xsd:string"/>
+		 </xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="adressType">
+		<xsd:sequence>
+			<xsd:element name="state" type="xsd:string"/>
+			<xsd:element name="street" type="xsd:string"/>
+			<xsd:element name="zipCode" type="xsd:string"/> <!-- postalcode restriction -->
+			<xsd:element name="ort" type="xsd:string"/>
+		 </xsd:sequence>
+	</xsd:complexType>
+	
+<xsd:simpleType name="yesNoEnum">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="ja" />
+		<xsd:enumeration value="nein" />
+	</xsd:restriction>
+</xsd:simpleType>
+	
+<xsd:simpleType name="mailRestriction">
+	<xsd:restriction base="xsd:token"> 
+		<xsd:pattern value="[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}"/> <!-- emailadressengültigkeit -->
+    </xsd:restriction> 
+</xsd:simpleType>	
+		
 </xsd:schema>
