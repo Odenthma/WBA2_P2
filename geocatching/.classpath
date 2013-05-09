@@ -10,5 +10,14 @@
 	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jaxbw-plugin/lib/jaxbw-plugin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jaxbw-plugin/lib/jaxb-xjc.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jaxbw-plugin/lib/jsr173_1.0_api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Downloads/grizzly-servlet-webserver-1.9.18.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jersey-archive-1.1.5.1/lib/asm-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jersey-archive-1.1.5.1/lib/jackson-core-asl-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jersey-archive-1.1.5.1/lib/jersey-client-1.1.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jersey-archive-1.1.5.1/lib/jersey-core-1.1.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jersey-archive-1.1.5.1/lib/jersey-json-1.1.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jersey-archive-1.1.5.1/lib/jersey-server-1.1.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jersey-archive-1.1.5.1/lib/jettison-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/jersey-archive-1.1.5.1/lib/jsr311-api-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
