@@ -17,7 +17,7 @@ public class GeoCatchingServer {
 
 	    	Location location = new Location();
 	    	location.setLat(20);
-	    	location.setLon(20);
+//	    	location.setLon(20);
 	    	
 	    	CacheList cl = new CacheList();
 	    	cl.setCachess(Arrays.asList( c ));

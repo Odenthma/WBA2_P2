@@ -16,21 +16,20 @@ public class Cache {
 	
 	public String getName(){ return name; }
 	public void setName(String name){ this.name = name; }
-	s
+	
 	public Location getLocation() {return location;}
     public void setLocation(Location value) {this.location = value;}
 	
 	 public static class Location {
-	        @XmlAttribute(required = true)
-	        int lat;
-	        @XmlAttribute(required = true)
-	        int lon;
+		 @XmlAttribute
+	     int lat;
+
 
 	        public int getLat() { return lat;}
-	        public void setLat(int i) {this.lat = i;}
+	        public void setLat(int lat) {this.lat = lat;}
 
-	        public int getLon() {return lon;}
-	        public void setLon(int i) {this.lon = i;}
+//	        public int getLon() {return lon;}
+//	        public void setLon(int i) {this.lon = i;}
 
 	    }
 }
