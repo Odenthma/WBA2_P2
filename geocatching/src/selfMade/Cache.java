@@ -1,16 +1,21 @@
 package selfMade;
 
-import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
 
 public class Cache {
 
+	
 	private String id;
 	private String name;
-	Location location;
+	private Location location;
+	private Date datum;
+	private String typ;
 	
+	@XmlAttribute
 	public String getId(){ return id; }
 	public void setId(String id){ this.id = id; }
 	
@@ -19,17 +24,12 @@ public class Cache {
 	
 	public Location getLocation() {return location;}
     public void setLocation(Location value) {this.location = value;}
+    
+    public Date getDatum(){ return datum; }
+    public void setDatum(Date datum){ this.datum = datum; }
+    
+    public String getTyp(){ return typ; }
+    public void setTyp(String typ){ this.typ = typ; }
 	
-	 public static class Location {
-		 @XmlAttribute
-	     int lat;
-
-
-	        public int getLat() { return lat;}
-	        public void setLat(int lat) {this.lat = lat;}
-
-//	        public int getLon() {return lon;}
-//	        public void setLon(int i) {this.lon = i;}
-
-	    }
+	
 }
