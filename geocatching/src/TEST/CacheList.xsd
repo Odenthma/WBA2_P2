@@ -1,31 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-elementFormDefault="qualified">
-
-<!--  
-TODO:
-use:required wann und wo?
-alle name -> kamelSchreibWeise
-Evtl Foto vom Cache und Umgebung
-
- -->
-
- 
- 
-<!-- cachelist 
-	cache -->
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
 <xsd:element name="CacheList" type="CacheListType"/>
 
 <xsd:complexType name="CacheListType">
 	 <xsd:sequence>
-	<xsd:element name="Cache" type="CacheType">
-	
-		<!--<xsd:complexType>
-        	<xsd:attribute name="c_id" type="cIdRestriction"/> 
-        </xsd:complexType>   -->
-        
-	</xsd:element>
+	<xsd:element name="Cache" type="CacheType"/>
 	 </xsd:sequence>
 </xsd:complexType>
 
@@ -53,18 +33,6 @@ Evtl Foto vom Cache und Umgebung
     </xsd:restriction> 
 </xsd:simpleType>
 
-
-<!--  cache
-		location
-		name
-		datum
-		typ
-		owner
-		parkplatz
-		informationen
-		logs
-		kommentare -->       
-	
 <xsd:complexType name="CacheType">
 	<xsd:sequence>
 		<xsd:element name="location">
@@ -129,25 +97,6 @@ Evtl Foto vom Cache und Umgebung
 		<xsd:enumeration value="Unknown Cache" />
 	</xsd:restriction>
 </xsd:simpleType>
-
-<!-- <xsd:simpleType name="cType">
-	<xsd:restriction base="xsd:string">
-		<xs:pattern value="[c][0-9][0-9][0-+9][0-9]"/>
-		<xs:Length value="5"/>
-	</xsd:restriction>
-</xsd:simpleType> -->
-
-<!-- informationen
-	schwierigkeit
-	terrain
-	land
-	Bundesland
-	provinz
-	beschreibung_klein
-	beschreibung_lang
-	Hinweise
-	geschätze_zeit
-	Travelbug -->
 	
 <xsd:complexType name="InformationenType">
 	<xsd:sequence>
@@ -205,10 +154,6 @@ Evtl Foto vom Cache und Umgebung
 	</xsd:restriction>
 </xsd:simpleType>
 
-<!-- logs
-	log -->
-	
-<!--  TEST -->
 <xsd:complexType name="LogsType">
 	<xsd:sequence>
 		<xsd:element name="Log">
@@ -222,11 +167,6 @@ Evtl Foto vom Cache und Umgebung
 		</xsd:element>
 	</xsd:sequence>
 </xsd:complexType>  
-
-<!-- log
-	gefunden_von
-	gefunden_datum
-	Kommentar -->
 	
 <xsd:complexType name="logType">
 	<xsd:sequence>
@@ -244,9 +184,6 @@ Evtl Foto vom Cache und Umgebung
 	</xsd:sequence>
 </xsd:complexType>
 	
-<!-- Kommentare
-	kommentar -->
-
 <xsd:complexType name="KommentareType">
 <xsd:sequence>
 	<xsd:element name="Kommentar">
@@ -261,26 +198,6 @@ Evtl Foto vom Cache und Umgebung
 	</xsd:sequence>
 </xsd:complexType>  
 
-
-
-<!-- kommentar
-	Autor
-	Datum
-	text -->
-
-<!--  <xsd:complexType name="KommentarType">
-	<xsd:sequence>
-		<xsd:element name="Autor" type="xsd:string">
-			<xsd:complexType>
-        		<xsd:attribute name="b_id" type="bIdRestriction"/> 
-        	</xsd:complexType>
-		</xsd:element>
-		<xsd:element name="Datum" type="dateRestriction"/>
-		<xsd:element name="Text" type="xsd:string"/>
-	</xsd:sequence>
-</xsd:complexType>-->
-
-<!-- TEST -->
 <xsd:complexType name="KommentarType">
 	<xsd:sequence>
 		<xsd:element name="Autor">
