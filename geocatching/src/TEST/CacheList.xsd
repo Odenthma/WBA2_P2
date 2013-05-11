@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+elementFormDefault="qualified">
+
+<!--  
+TODO:
+use:required wann und wo?
+alle name -> kamelSchreibWeise
+Evtl Foto vom Cache und Umgebung
+
+ -->
+
+ 
+ 
+<!-- cachelist 
+	cache -->
+
+<xsd:element name="CacheList" type="CacheListType"/>
+
+<xsd:complexType name="CacheListType">
+	 <xsd:sequence>
+	<xsd:element name="Cache" type="CacheType">
+	
+		<!--<xsd:complexType>
+        	<xsd:attribute name="c_id" type="cIdRestriction"/> 
+        </xsd:complexType>   -->
+        
+	</xsd:element>
+	 </xsd:sequence>
+</xsd:complexType>
+
+<xsd:simpleType name="cIdRestriction">
+	<xsd:restriction base="xsd:token"> 
+		<xsd:pattern value="[c][0-9]{4}"/> <!--  nur c+4stellige zahl -->
+    </xsd:restriction> 
+</xsd:simpleType>
+
+<xsd:simpleType name="bIdRestriction">
+	<xsd:restriction base="xsd:token"> 
+		<xsd:pattern value="[b][0-9]{4}"/> <!--  nur b+4stellige zahl -->
+    </xsd:restriction> 
+</xsd:simpleType>
+
+<xsd:simpleType name="lIdRestriction">
+	<xsd:restriction base="xsd:token"> 
+		<xsd:pattern value="[l][0-9]{4}"/> <!--  nur l+4stellige zahl -->
+    </xsd:restriction> 
+</xsd:simpleType>
+
+<xsd:simpleType name="kIdRestriction">
+	<xsd:restriction base="xsd:token"> 
+		<xsd:pattern value="[k][0-9]{4}"/> <!--  nur k+4stellige zahl -->
+    </xsd:restriction> 
+</xsd:simpleType>
+
+
+<!--  cache
+		location
+		name
+		datum
+		typ
+		owner
+		parkplatz
+		informationen
+		logs
+		kommentare -->       
+	
+<xsd:complexType name="CacheType">
+	<xsd:sequence>
+		<xsd:element name="location">
+			<xsd:complexType>
+        		<xsd:attribute name="lat" type="latRestriction" use="required"/>
+        		<xsd:attribute name="lon" type="lonRestriction" use="required"/>
+   			</xsd:complexType>
+		</xsd:element> 
+		<xsd:element name="Name" type="xsd:string"/>
+		<xsd:element name="Datum" type="xsd:date"/> <!--  testweise date, sonst dateRestriction -->
+		<xsd:element name="Typ" type="cacheTypeEnum"/>
+		<xsd:element name="Owner">
+			<xsd:complexType>
+				<xsd:simpleContent>
+					<xsd:extension base="xsd:string">
+    					<xsd:attribute name="b_id" type="bIdRestriction" use="required"/>
+    				</xsd:extension>
+    			</xsd:simpleContent>
+    		</xsd:complexType>
+    	</xsd:element>
+		<xsd:element name="Parkplatz">
+			<xsd:complexType>
+				<xsd:simpleContent>
+					<xsd:extension base="xsd:string">
+        				<xsd:attribute name="lat" type="latRestriction" use="required"/>
+        				<xsd:attribute name="lon" type="lonRestriction" use="required"/>
+        			</xsd:extension>
+        		</xsd:simpleContent>
+   			</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="Informationen" type="InformationenType"/>
+		<xsd:element name="Logs" type="LogsType"/>
+		<xsd:element name="Kommentare" type="KommentareType"/>
+	</xsd:sequence>
+	<!-- <xsd:attribute name"c_id" type="cType" use="required"/> -->
+</xsd:complexType>
+
+<xsd:simpleType name="latRestriction">
+	<xsd:restriction base="xsd:decimal"> 
+		<xsd:pattern value="[\d]{1,2}\.[\d]{0,6}"/> <!-- kein minus, 1-2 zeichen vor punkt, 0-6 nach punkt -->
+    </xsd:restriction> 
+</xsd:simpleType>
+
+<xsd:simpleType name="lonRestriction">
+	<xsd:restriction base="xsd:decimal"> 
+		<xsd:pattern value="-?[\d]{1,3}\.[\d]{0,6}"/> <!-- optionales minus, 1-3 zeichen vor punkt, 0-6 nach punkt -->
+    </xsd:restriction> 
+</xsd:simpleType>
+   
+<xsd:simpleType name="dateRestriction">
+	<xsd:restriction base="xsd:decimal"> 
+		<xsd:pattern value=" [0-9]{1,2}.[0-9]{1,2}.[0-9]{4}"/> 
+    </xsd:restriction> 
+</xsd:simpleType>
+  
+<xsd:simpleType name="cacheTypeEnum">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="Traditional Cache" />
+		<xsd:enumeration value="Multi Cache" />
+		<xsd:enumeration value="Puzzle Cache" />
+		<xsd:enumeration value="Mystery Cache" />
+		<xsd:enumeration value="Unknown Cache" />
+	</xsd:restriction>
+</xsd:simpleType>
+
+<!-- <xsd:simpleType name="cType">
+	<xsd:restriction base="xsd:string">
+		<xs:pattern value="[c][0-9][0-9][0-+9][0-9]"/>
+		<xs:Length value="5"/>
+	</xsd:restriction>
+</xsd:simpleType> -->
+
+<!-- informationen
+	schwierigkeit
+	terrain
+	land
+	Bundesland
+	provinz
+	beschreibung_klein
+	beschreibung_lang
+	Hinweise
+	geschätze_zeit
+	Travelbug -->
+	
+<xsd:complexType name="InformationenType">
+	<xsd:sequence>
+		<xsd:element name="Schwierigkeit" type="doubleValueEnum"/>
+		<xsd:element name="Terrain" type="doubleValueEnum"/>
+		<xsd:element name="Land" type="xsd:string"/>
+		<xsd:element name="Bundesland" type="bundeslandEnum"/>
+		<xsd:element name="Provinz" type="xsd:string"/>
+		<xsd:element name="BeschreibungKlein" type="xsd:string"/>
+		<xsd:element name="BeschreibungGross" type="xsd:string"/>
+		<xsd:element name="Hinweise" type="xsd:string"/>
+		<xsd:element name="GeschaetzteZeit" type="xsd:decimal"/>
+		<xsd:element name="TravelBug" type="yesNoEnum"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:simpleType name="doubleValueEnum">
+	<xsd:restriction base="xsd:double">
+		<xsd:enumeration value="1.0" />
+		<xsd:enumeration value="1.5" />
+		<xsd:enumeration value="2.0" />
+		<xsd:enumeration value="2.5" />
+		<xsd:enumeration value="3.0" />
+		<xsd:enumeration value="3.5" />
+		<xsd:enumeration value="4.0" />
+		<xsd:enumeration value="4.5" />
+		<xsd:enumeration value="5.0" />
+	</xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="bundeslandEnum">
+    <xsd:restriction base="xsd:string">
+    	<xsd:enumeration value="Baden-Württemberg"/>
+ 		<xsd:enumeration value="Bayern"/>
+ 		<xsd:enumeration value="Berlin"/>
+		<xsd:enumeration value="Brandenburg"/>
+ 		<xsd:enumeration value="Bremen"/>
+ 		<xsd:enumeration value="Hamburg"/>
+ 		<xsd:enumeration value="Hessen"/>
+ 		<xsd:enumeration value="Mecklenburg-Vorpommern"/>
+ 		<xsd:enumeration value="Niedersachsen"/>
+ 		<xsd:enumeration value="Nordrhein-Westfalen"/>
+ 		<xsd:enumeration value="Rheinland-Pfalz"/>
+ 		<xsd:enumeration value="Saarland"/>
+ 		<xsd:enumeration value="Sachsen"/>
+ 		<xsd:enumeration value="Schleswig-Holstein"/>
+ 		<xsd:enumeration value="Thüringen"/>
+    </xsd:restriction>
+</xsd:simpleType>
+
+<xsd:simpleType name="yesNoEnum">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="ja" />
+		<xsd:enumeration value="nein" />
+	</xsd:restriction>
+</xsd:simpleType>
+
+<!-- logs
+	log -->
+	
+<!--  TEST -->
+<xsd:complexType name="LogsType">
+	<xsd:sequence>
+		<xsd:element name="Log">
+			<xsd:complexType>
+ 				<xsd:complexContent>
+					<xsd:extension base="logType">
+						<xsd:attribute name="l_id" type="lIdRestriction" use="required"/> 
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:sequence>
+</xsd:complexType>  
+
+<!-- log
+	gefunden_von
+	gefunden_datum
+	Kommentar -->
+	
+<xsd:complexType name="logType">
+	<xsd:sequence>
+		<xsd:element name="gefundenVon">
+			<xsd:complexType>
+				<xsd:simpleContent>
+					<xsd:extension base="xsd:string">
+        				<xsd:attribute name="b_id" type="bIdRestriction" use="required"/> 
+        			</xsd:extension>
+        		</xsd:simpleContent>
+        	</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="gefundenDatum" type="xsd:date"/> <!--  testweise date, sonst dateRestriction -->
+		<xsd:element name="kommentar" type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>
+	
+<!-- Kommentare
+	kommentar -->
+
+<xsd:complexType name="KommentareType">
+<xsd:sequence>
+	<xsd:element name="Kommentar">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="KommentarType">
+        			<xsd:attribute name="k_id" type="kIdRestriction" use="required"/> 
+        		</xsd:extension>
+        	</xsd:complexContent>
+        </xsd:complexType>
+	</xsd:element>
+	</xsd:sequence>
+</xsd:complexType>  
+
+
+
+<!-- kommentar
+	Autor
+	Datum
+	text -->
+
+<!--  <xsd:complexType name="KommentarType">
+	<xsd:sequence>
+		<xsd:element name="Autor" type="xsd:string">
+			<xsd:complexType>
+        		<xsd:attribute name="b_id" type="bIdRestriction"/> 
+        	</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="Datum" type="dateRestriction"/>
+		<xsd:element name="Text" type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>-->
+
+<!-- TEST -->
+<xsd:complexType name="KommentarType">
+	<xsd:sequence>
+		<xsd:element name="Autor">
+			<xsd:complexType>
+				<xsd:simpleContent>
+					<xsd:extension base="xsd:string">
+						<xsd:attribute name="b_id" type="bIdRestriction" use="required"/>
+					</xsd:extension>
+				</xsd:simpleContent>
+			</xsd:complexType>
+		</xsd:element>
+		<xsd:element name="Datum" type="xsd:date"/> <!--  testweise date, sonst dateRestriction -->
+		<xsd:element name="Text" type="xsd:string"/>
+	</xsd:sequence>
+</xsd:complexType>
+	
+</xsd:schema>
