@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<p:CacheList xmlns:p="http://www.w3schools.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3schools.com CacheList.xsd ">
-  <p:Cache>
-    <p:location lat="0.0" lon="0.0"/>
-    <p:Name>p:Name</p:Name>
-    <p:Datum>2001-01-01</p:Datum>
-    <p:Typ>Traditional Cache</p:Typ>
-    <p:Owner b_id="token">p:Owner</p:Owner>
-    <p:Parkplatz lat="0.0" lon="0.0">p:Parkplatz</p:Parkplatz>
-    <p:Informationen>
-      <p:Schwierigkeit>1.0</p:Schwierigkeit>
-      <p:Terrain>1.0</p:Terrain>
-      <p:Land>p:Land</p:Land>
-      <p:Bundesland>Baden-Württemberg</p:Bundesland>
-      <p:Provinz>p:Provinz</p:Provinz>
-      <p:BeschreibungKlein>p:BeschreibungKlein</p:BeschreibungKlein>
-      <p:BeschreibungGross>p:BeschreibungGross</p:BeschreibungGross>
-      <p:Hinweise>p:Hinweise</p:Hinweise>
-      <p:GeschaetzteZeit>0.0</p:GeschaetzteZeit>
-      <p:TravelBug>ja</p:TravelBug>
-    </p:Informationen>
-    <p:Logs>
-      <p:Log l_id="token">
-        <p:gefundenVon b_id="token">p:gefundenVon</p:gefundenVon>
-        <p:gefundenDatum>2001-01-01</p:gefundenDatum>
-        <p:kommentar>p:kommentar</p:kommentar>
-      </p:Log>
-    </p:Logs>
-    <p:Kommentare>
-      <p:Kommentar k_id="token">
-        <p:Autor b_id="token">p:Autor</p:Autor>
-        <p:Datum>2001-01-01</p:Datum>
-        <p:Text>p:Text</p:Text>
-      </p:Kommentar>
-    </p:Kommentare>
-  </p:Cache>
-</p:CacheList>
+<CacheList>
+  <Cache>
+    <location lat="0.0" lon="0.0"/>
+    <Name>Name</Name>
+    <Datum>2001-01-01</Datum>
+    <Typ>Traditional Cache</Typ>
+    <Owner b_id="token">Owner</Owner>
+    <Parkplatz lat="0.0" lon="0.0">Parkplatz</Parkplatz>
+    <Informationen>
+      <Schwierigkeit>1.0</Schwierigkeit>
+      <Terrain>1.0</Terrain>
+      <Land>Land</Land>
+      <Bundesland>Baden-Württemberg</Bundesland>
+      <Provinz>Provinz</Provinz>
+      <BeschreibungKlein>BeschreibungKlein</BeschreibungKlein>
+      <BeschreibungGross>BeschreibungGross</BeschreibungGross>
+      <Hinweise>Hinweise</Hinweise>
+      <GeschaetzteZeit>0.0</GeschaetzteZeit>
+      <TravelBug>ja</TravelBug>
+    </Informationen>
+    <Logs>
+      <Log l_id="token">
+        <gefundenVon b_id="token">gefundenVon</gefundenVon>
+        <gefundenDatum>2001-01-01</gefundenDatum>
+        <kommentar>kommentar</kommentar>
+      </Log>
+    </Logs>
+    <Kommentare>
+      <Kommentar k_id="token">
+        <Autor b_id="token">Autor</Autor>
+        <Datum>2001-01-01</Datum>
+        <Text>Text</Text>
+      </Kommentar>
+    </Kommentare>
+  </Cache>
+</CacheList>

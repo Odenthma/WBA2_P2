@@ -39,7 +39,7 @@ import de.odenthma.geocache.CacheClasses.LogsType.Log;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _CacheList_QNAME = new QName("http://www.w3schools.com", "CacheList");
+    private final static QName _CacheList_QNAME = new QName("", "CacheList");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: de.odenthma.geocache
@@ -164,7 +164,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link CacheListType }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://www.w3schools.com", name = "CacheList")
+    @XmlElementDecl( name = "CacheList")
     public JAXBElement<CacheListType> createCacheList(CacheListType value) {
         return new JAXBElement<CacheListType>(_CacheList_QNAME, CacheListType.class, null, value);
     }

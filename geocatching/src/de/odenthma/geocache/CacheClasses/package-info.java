@@ -5,5 +5,5 @@
 // Generated on: 2013.05.09 at 09:00:25 PM MESZ 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.w3schools.com")
+
 package de.odenthma.geocache.CacheClasses;

@@ -11,6 +11,7 @@ package de.odenthma.geocache.CacheClasses;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -33,13 +34,15 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
+@XmlRootElement() 
+@XmlType(propOrder = {})
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "CacheListType", propOrder = {
-    "cache"
-})
+//@XmlType(name = "CacheListType", propOrder = {
+//    "cache"
+//})
 public class CacheListType {
 
-    @XmlElement(name = "Cache", namespace = "http://www.w3schools.com", required = true)
+    @XmlElement(name = "Cache", required = true)
     protected CacheType cache;
 
     /**

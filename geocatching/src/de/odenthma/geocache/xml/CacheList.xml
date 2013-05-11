@@ -16,7 +16,7 @@
 			<beschreibung_klein>Sehr einfacher Cache</beschreibung_klein>
 			<beschreibung_lang>Mein erster Cache, einfach zu meistern</beschreibung_lang>
 			<Hinweise>Gute Schuhe ist ein Muss!</Hinweise>
-			<geschätze_zeit>mittel</geschätze_zeit>
+			<geschaetze_zeit>mittel</geschaetze_zeit>
 			<Travelbug t_id="t0001">ja</Travelbug> --> als attribut wegen enumeration??
 		</informationen>
 		<logs>

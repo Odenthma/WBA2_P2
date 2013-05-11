@@ -20,10 +20,6 @@ import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import de.odenthma.geocache.CacheClasses.CacheType.Location;
-import de.odenthma.geocache.CacheClasses.CacheType.Owner;
-import de.odenthma.geocache.CacheClasses.CacheType.Parkplatz;
-
 
 /**
  * <p>Java class for CacheType complex type.
