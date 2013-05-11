@@ -4,6 +4,8 @@ import java.util.Arrays;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
+import selfMade.Cache.Location;
+
 
 public class GeoCatchingServer {
 	public static void main( String[] args ) throws Exception
@@ -11,6 +13,12 @@ public class GeoCatchingServer {
 	    	Cache c = new Cache();
 	    	c.setId("eins");
 	    	c.setName("keine ahnung");
+
+
+	    	Location location = new Location();
+	    	location.setLat(20);
+	    	location.setLon(20);
+	    	
 	    	CacheList cl = new CacheList();
 	    	cl.setCachess(Arrays.asList( c ));
 	    	
