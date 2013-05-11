@@ -16,7 +16,7 @@ public class Cache {
 	
 	public String getName(){ return name; }
 	public void setName(String name){ this.name = name; }
-	
+	s
 	public Location getLocation() {return location;}
     public void setLocation(Location value) {this.location = value;}
 	
