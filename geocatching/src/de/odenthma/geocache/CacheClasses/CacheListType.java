@@ -35,11 +35,11 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlRootElement() 
-@XmlType(propOrder = {})
+//@XmlType(propOrder = {})
 @XmlAccessorType(XmlAccessType.FIELD)
-//@XmlType(name = "CacheListType", propOrder = {
-//    "cache"
-//})
+@XmlType(name = "CacheListType", propOrder = {
+    "cache"
+})
 public class CacheListType {
 
     @XmlElement(name = "Cache", required = true)
