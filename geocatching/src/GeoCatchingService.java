@@ -33,7 +33,8 @@ public class GeoCatchingService {
 		Unmarshaller um = context.createUnmarshaller();
 		clt = (CacheListType)((JAXBElement)um.unmarshal(new FileReader("C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/CacheList1.xml"))).getValue();
 		//user.jaxb.Type myType = (user.jaxb.Type)((javax.xml.bind.JAXBElement) unmarshaller.unmarshal(new File("myXML.xml"))).getValue();
-		
+//		clt = (CacheListType)um.unmarshal(new FileReader("C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/CacheList1.xml"));
+
 		return clt;
 	}
 }
