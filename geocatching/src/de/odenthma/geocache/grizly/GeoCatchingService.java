@@ -1,17 +1,19 @@
 package de.odenthma.geocache.grizly;
 
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import javax.ws.rs.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import de.odenthma.geocache.CacheClasses.CacheListType;
-import de.odenthma.geocache.CacheClasses.ObjectFactory;
+
+import de.odenthma.geocache.CacheClasses.*;
 
 @Path( "/test" )
 public class GeoCatchingService {

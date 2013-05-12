@@ -19,7 +19,7 @@ Evtl Foto vom Cache und Umgebung
 
 <xsd:complexType name="CacheListType">
 	 <xsd:sequence>
-	<xsd:element name="Cache" type="CacheType">
+	<xsd:element name="Cache" type="CacheType" minOccurs="1" maxOccurs="unbounded">
 	
 		<!--<xsd:complexType>
         	<xsd:attribute name="c_id" type="cIdRestriction"/> 
@@ -96,10 +96,10 @@ Evtl Foto vom Cache und Umgebung
    			</xsd:complexType>
 		</xsd:element>
 		<xsd:element name="Informationen" type="InformationenType"/>
-		<xsd:element name="Logs" type="LogsType"/>
-		<xsd:element name="Kommentare" type="KommentareType"/>
+		<xsd:element name="Logs" type="LogsType" minOccurs="0" maxOccurs="unbounded"/>
+		<xsd:element name="Kommentare" type="KommentareType" minOccurs="0" maxOccurs="unbounded"/>
 	</xsd:sequence>
-	<!-- <xsd:attribute name"c_id" type="cType" use="required"/> -->
+	<xsd:attribute name="c_id" type="cIdRestriction" use="required"/> 
 </xsd:complexType>
 
 <xsd:simpleType name="latRestriction">
