@@ -2,25 +2,28 @@
 <userInformation>
 	<user b_id="b0001">Kalle</user>
 	<accountName>kalle01</accountName>
-	<anzGefundenerCaches>5</anzCaches>
-	<anzErstellterCaches>2</anzErstellterCaches>
-	<cachesGefunden>
-		<cache c_id="c0001">Mein Rundgang</cache>
-		<cache c_id="c0002">Erinnerungen</cache>
-		<cache c_id="c0301">Über</cache>
-		<cache c_id="c1006">Vergangenheit</cache>
-		<cache c_id="c0021">Trauer</cache>
-	</cachesGefunden>
-	<cachesErstellt>
-		<cache c_id="c0502">Karlhorst</cache>
-		<cache c_id="c2301">Am Weidenkätzchen</cache>
-	</cachesErstellt>
-	<optional>
-		<news wanted="yes"/>
-		<benachrichtigung wanted="yes"/>
-		<ortsListe>
-			<ort postal="51645" umkreis="10km" lat="33.12" lon="123.12">Gummersbach-Vollmerhausen</ort>
-			<ort postal="33501" umkreis="30km" lat="73.12" lon="193.62">Teutoburger Wald</ort>
-		</ortsListe>
-	</optional>
+	<anzGefundenerCaches>
+		5
+	</anzCaches>
+		<anzErstellterCaches>2</anzErstellterCaches>
+		<cachesGefunden>
+			<cache c_id="c0001">Mein Rundgang</cache>
+			<cache c_id="c0002">Erinnerungen</cache>
+			<cache c_id="c0301">Über</cache>
+			<cache c_id="c1006">Vergangenheit</cache>
+			<cache c_id="c0021">Trauer</cache>
+		</cachesGefunden>
+		<cachesErstellt>
+			<cache c_id="c0502">Karlhorst</cache>
+			<cache c_id="c2301">Am Weidenkätzchen</cache>
+		</cachesErstellt>
+		<optional>
+			<news wanted="yes" />
+			<benachrichtigung wanted="yes" />
+			<ortsListe>
+				<ort postal="51645" umkreis="10km" lat="33.12" lon="123.12">Gummersbach-Vollmerhausen</ort>
+				<ort postal="33501" umkreis="30km" lat="73.12" lon="193.62">Teutoburger
+					Wald</ort>
+			</ortsListe>
+		</optional>
 </userInformation>

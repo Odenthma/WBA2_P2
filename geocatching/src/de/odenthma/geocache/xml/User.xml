@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--  wir brauchen noch einen verschlüsselungsmechanismus für das Passwort!! -->
-<!--  einige ver- und entschlüsselungsverfahren für strings: http://www.javatips.net/blog/2011/08/how-to-encode-and-decode-in-base64-using-java -->
+<!-- wir brauchen noch einen verschlüsselungsmechanismus für das Passwort!! -->
+<!-- einige ver- und entschlüsselungsverfahren für strings: http://www.javatips.net/blog/2011/08/how-to-encode-and-decode-in-base64-using-java -->
 
 <user>
 	<userInformation>
@@ -13,7 +13,7 @@
 			<street></street>
 			<zipCode></zipCode>
 			<ort></ort>
-		</adress>	
+		</adress>
 	</userInformation>
 	<account>
 		<logInName></logInName>
@@ -21,11 +21,12 @@
 		<email></email>
 	</account>
 	<optional>
-		<news wanted="yes"/>
-		<benachrichtigung wanted="yes"/>
-		<ortsListe>	
+		<news wanted="yes" />
+		<benachrichtigung wanted="yes" />
+		<ortsListe>
 			<ort postal="51645" umkreis="10km" lat="33.12" lon="123.12">Gummersbach-Vollmerhausen</ort>
-			<ort postal="33501" umkreis="30km" lat="73.12" lon="193.62">Teutoburger Wald</ort>
+			<ort postal="33501" umkreis="30km" lat="73.12" lon="193.62">Teutoburger
+				Wald</ort>
 		</ortsListe>
 	</optional>
 </user>

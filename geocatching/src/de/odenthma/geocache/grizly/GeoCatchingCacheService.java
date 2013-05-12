@@ -15,8 +15,8 @@ import javax.xml.bind.Unmarshaller;
 
 import de.odenthma.geocache.CacheClasses.*;
 
-@Path( "/test" )
-public class GeoCatchingUserService {
+@Path( "/cachelist" )
+public class GeoCatchingCacheService {
 
 	private static String ORIGINALPATH = "C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/testList.xml";
 	private static String NEWPATH = "C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/CacheListNew.xml";
@@ -86,6 +86,22 @@ public class GeoCatchingUserService {
 	   @Path("/delete")
 	   @Produces("application/xml")
 	   public CacheListType delete( @QueryParam("id") int id) throws JAXBException, IOException {   
+		   CacheListType caches = getAllNew();
+		   caches.getCache().remove(id);
+
+		   JAXBContext context= JAXBContext.newInstance(CacheListType.class);
+		   Marshaller m = context.createMarshaller();
+		   m.marshal(caches, new FileWriter(NEWPATH));        
+
+		return caches;
+	   }
+	   
+	   @DELETE
+	   @Path("{id}:{name}")
+	   @Produces("application/xml")
+	   public CacheListType deletePath( @PathParam("id") int id, @PathParam("name") String name) throws JAXBException, IOException {   
+		  System.out.println("ID: "+id+" Name: "+name);
+		   
 		   CacheListType caches = getAllNew();
 		   caches.getCache().remove(id);
 
