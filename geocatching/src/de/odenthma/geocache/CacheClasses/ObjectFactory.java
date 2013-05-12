@@ -13,6 +13,14 @@ import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
+import de.odenthma.geocache.CacheClasses.CacheType.Location;
+import de.odenthma.geocache.CacheClasses.CacheType.Owner;
+import de.odenthma.geocache.CacheClasses.CacheType.Parkplatz;
+import de.odenthma.geocache.CacheClasses.KommentarType.Autor;
+import de.odenthma.geocache.CacheClasses.KommentareType.Kommentar;
+import de.odenthma.geocache.CacheClasses.LogType.GefundenVon;
+import de.odenthma.geocache.CacheClasses.LogsType.Log;
+
 
 
 /**
