@@ -1,3 +1,4 @@
+package de.odenthma.geocache.grizly;
 import com.sun.jersey.api.client.*;
 
 

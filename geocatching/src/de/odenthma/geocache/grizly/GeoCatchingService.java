@@ -1,3 +1,4 @@
+package de.odenthma.geocache.grizly;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
