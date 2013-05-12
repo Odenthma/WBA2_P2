@@ -1,40 +1,96 @@
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-
+import java.io.FileWriter;
+import java.io.IOException;
 import javax.ws.rs.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import de.odenthma.geocache.CacheClasses.CacheListType;
+import de.odenthma.geocache.CacheClasses.ObjectFactory;
 
-import de.odenthma.geocache.CacheClasses.*;
 @Path( "/test" )
 public class GeoCatchingService {
+
+	private static String ORIGINALPATH = "C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/CacheList1.xml";
+	private static String NEWPATH = "C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/CacheListNew.xml";
+	ObjectFactory ob;
+	CacheListType  clt;
 	
-//	@GET @Produces( "text/plain" )
-//	public String halloText( @QueryParam("name") String name )
-//	{
-//		return "Hallo " + name;
-//	}
-//
-//	@GET @Produces( "text/html" )
-//	public String halloHtml( @QueryParam("name") String name )
-//	{
-//	    return "<html><title>HelloWorld</title><body><h2>Html: Hallo asdasdasdasd" + name + "</h2></body></html>";
-//	}
-//	
+	//alle original Caches
 	@GET
 	@Produces( "application/xml" )
-	public CacheListType getAll() throws JAXBException, FileNotFoundException{
-		ObjectFactory ob = new ObjectFactory();
-		CacheListType clt = ob.createCacheListType();
-//		JAXBContext context = JAXBContext.newInstance(CacheListType.class.getPackage().getName());
+	public CacheListType getAll() throws JAXBException, IOException{
+		ob = new ObjectFactory();
+		clt = ob.createCacheListType();
 		JAXBContext context = JAXBContext.newInstance(CacheListType.class.getPackage().getName());
 		Unmarshaller um = context.createUnmarshaller();
-		clt = (CacheListType)((JAXBElement)um.unmarshal(new FileReader("C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/CacheList1.xml"))).getValue();
-		//user.jaxb.Type myType = (user.jaxb.Type)((javax.xml.bind.JAXBElement) unmarshaller.unmarshal(new File("myXML.xml"))).getValue();
-//		clt = (CacheListType)um.unmarshal(new FileReader("C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/CacheList1.xml"));
-
+		clt = (CacheListType)((JAXBElement<?>)um.unmarshal(new FileReader(ORIGINALPATH))).getValue();
+		
+		
+		Marshaller m = context.createMarshaller();
+		m.marshal(clt, new FileWriter(NEWPATH));  
+		
 		return clt;
 	}
+	//alle Originalcaches anhand ID gefiltert
+	   @GET
+	   @Path("/filter")
+	   @Produces("application/xml")
+	   public CacheListType filter( @QueryParam("id") int id) throws JAXBException, IOException {   
+		   CacheListType caches = getAll();
+		   CacheListType ergebnisse = new CacheListType();
+		   ergebnisse.getCache().add(caches.getCache().get(id));
+		return ergebnisse;
+	   }
+	   
+	 //alle Testcaches
+	@GET
+	@Path("/new")
+	@Produces( "application/xml" )
+	public CacheListType getAllNew() throws JAXBException, FileNotFoundException{
+		JAXBContext context = JAXBContext.newInstance(CacheListType.class.getPackage().getName());
+		Unmarshaller um = context.createUnmarshaller();
+		clt = (CacheListType)((JAXBElement<?>)um.unmarshal(new FileReader(NEWPATH))).getValue();
+		Marshaller m = context.createMarshaller();
+		m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
+		m.marshal( clt, System.out );
+		
+		return clt;
+	}
+	
+	//neuen Cache zu Testcaches
+		@POST
+	   @Path("/new")
+	   @Produces("application/xml")
+	   public CacheListType postNew( @QueryParam("id") int id) throws JAXBException, IOException {   
+		   CacheListType caches = getAllNew();
+		   
+		   caches.getCache().add(caches.getCache().get(id));
+		   
+		   JAXBContext context= JAXBContext.newInstance(CacheListType.class);
+		   Marshaller m = context.createMarshaller();
+		   m.marshal(caches, new FileWriter(NEWPATH));        
+		   
+		return caches;
+	   }
+	
+		//Cache in Testcaches anhand ID löschen
+	   @DELETE
+	   @Path("/delete")
+	   @Produces("application/xml")
+	   public CacheListType delete( @QueryParam("id") int id) throws JAXBException, IOException {   
+		   CacheListType caches = getAllNew();
+		   caches.getCache().remove(id);
+
+		   JAXBContext context= JAXBContext.newInstance(CacheListType.class);
+		   Marshaller m = context.createMarshaller();
+		   m.marshal(caches, new FileWriter(NEWPATH));        
+
+		return caches;
+	   }
+
 }
