@@ -19,7 +19,7 @@ Evtl Foto vom Cache und Umgebung
 
 <xsd:complexType name="CacheListType">
 	 <xsd:sequence>
-	<xsd:element name="Cache" type="CacheType" minOccurs="1" maxOccurs="unbounded">
+	<xsd:element name="Cache" type="CacheType" minOccurs="0" maxOccurs="unbounded">
 	
 		<!--<xsd:complexType>
         	<xsd:attribute name="c_id" type="cIdRestriction"/> 

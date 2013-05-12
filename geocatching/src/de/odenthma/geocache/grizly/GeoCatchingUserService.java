@@ -16,9 +16,9 @@ import javax.xml.bind.Unmarshaller;
 import de.odenthma.geocache.CacheClasses.*;
 
 @Path( "/test" )
-public class GeoCatchingService {
+public class GeoCatchingUserService {
 
-	private static String ORIGINALPATH = "C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/CacheList1.xml";
+	private static String ORIGINALPATH = "C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/testCache.xml";
 	private static String NEWPATH = "C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/CacheListNew.xml";
 	ObjectFactory ob;
 	CacheListType  clt;
