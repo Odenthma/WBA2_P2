@@ -28,9 +28,9 @@ import javax.xml.bind.annotation.XmlType;
 public class CacheListType {
 
     @XmlElement(name = "Cache", required = true)
-    protected List<CacheType> cache;
+    protected ArrayList<CacheType> cache;
 
-    public List<CacheType> getCache() {
+    public ArrayList<CacheType> getCache() {
         if (cache == null) {
             cache = new ArrayList<CacheType>();
         }

@@ -3,11 +3,13 @@ package de.odenthma.geocache.client;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.xml.bind.JAXBException;
 
 public class GeoCatchingClient implements ActionListener{
 	public static String MENU = "Menu";
@@ -28,7 +30,7 @@ public class GeoCatchingClient implements ActionListener{
 	CardLayout cl = new CardLayout();
 	
 	
-	public GeoCatchingClient(){
+	public GeoCatchingClient() throws FileNotFoundException, JAXBException{
 		jpMenu = new MenuPanel(this);
 		jpShowCache = new ShowCachePanel(this);
 		jpNewUser = new CreateUserPanel(cl,panels,frame);
@@ -53,7 +55,15 @@ public class GeoCatchingClient implements ActionListener{
 		SwingUtilities.invokeLater(new Runnable(){
 			@Override
 			public void run() {
-				new GeoCatchingClient();	
+				try {
+					new GeoCatchingClient();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JAXBException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
 			}	
 		});
 		
