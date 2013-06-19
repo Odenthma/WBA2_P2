@@ -26,15 +26,13 @@ public class GeoCatchingClient implements ActionListener{
 	CreateUserPanel jpNewUser;
 	CreateCachePanel jpCreateCache;
 	NewsPanel jpNews;
-	
 	CardLayout cl = new CardLayout();
-	
 	
 	public GeoCatchingClient() throws FileNotFoundException, JAXBException{
 		jpMenu = new MenuPanel(this);
 		jpShowCache = new ShowCachePanel(this);
 		jpNewUser = new CreateUserPanel(cl,panels,frame);
-		jpCreateCache = new CreateCachePanel(cl,panels,frame);
+		jpCreateCache = new CreateCachePanel(this);
 		jpNews = new NewsPanel(cl, panels,frame);
 		
 		panels.setLayout(cl);
@@ -51,6 +49,7 @@ public class GeoCatchingClient implements ActionListener{
 		frame.pack();
 		frame.setVisible(true);
 	}
+	
 	public static void  main(String[] args){
 		SwingUtilities.invokeLater(new Runnable(){
 			@Override
@@ -58,22 +57,21 @@ public class GeoCatchingClient implements ActionListener{
 				try {
 					new GeoCatchingClient();
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (JAXBException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}	
 			}	
 		});
-		
-		
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton o = (JButton)e.getSource();
-		String name = o.getName();
+		String name = o.getText();
+		System.out.println(name);
 		frame.setTitle(name);
+		
 		cl.show(panels, name);
 	}
 }

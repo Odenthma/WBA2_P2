@@ -1,7 +1,15 @@
 package de.odenthma.geocache.client;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.List;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.rmi.server.UID;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -10,9 +18,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.Border;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
@@ -22,86 +35,138 @@ import de.odenthma.geocache.CacheClasses.CacheType;
 
 
 @SuppressWarnings("serial")
-public class ShowCachePanel extends JPanel{
+public class ShowCachePanel extends JPanel implements ComponentListener, ActionListener{
 	public static String MENU = "Menu";
 	public static String SCACHE = "Show Caches";
 	public static String NUSER = "Create User";
 	public static String NEWS = "Feeds anzeigen";
 	public static String CCACHE = "Create Cache";
-	CacheUnmarshaller cu = new CacheUnmarshaller();
-	Border emptyBorder = BorderFactory.createEmptyBorder();
-	JButton btnMenu = new JButton(MENU);
-	ActionListener listener;
-	JTable cacheTable;
-	CacheListType clt;
-	ArrayList caches = new ArrayList();
-	String columnName = "Cache";
-	public ShowCachePanel(ActionListener listener) throws FileNotFoundException, JAXBException{
-		this.listener = listener;
-		clt = cu.getCaches();
-		String url = "http://localhost:4434";
-	      url = url + "/cachelist";
-	      for (CacheType s : cu.getCaches().getCache()){
-	    	  System.out.println( s.getOwner().getValue() + " " + s.getCId() + " " + s.getLocation().getLat());
-	    	  caches.add(s.getName());
-	      }
+	private Border emptyBorder = BorderFactory.createEmptyBorder();
+	private static String NEWPATH = "C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/CacheListNew.xml";
 
-	      WebResource wrs = Client.create().resource( url );
-	      
-		btnMenu.setName(MENU);
-		btnMenu.addActionListener(listener);
-		this.add(btnMenu);
-		this.setBorder(emptyBorder);
-		cacheTable = new JTable(new CacheTableModel(clt.getCache()));
-		JScrollPane scrollPane = new JScrollPane(cacheTable);
-		this.add(scrollPane);
-//		cacheTable.add(caches);
+	private JButton btnMenu;
+	JButton btnDelete;
+	
+	
+	private ActionListener listener;
+	private JTable cacheTable;
+	CacheListType clt;
+//	ArrayList<String> caches = new ArrayList<String>();
+//	String url = "http://localhost:4434/cachelist/new";
+//	String columnName = "Cache";
+	private CacheTableModel cacheData;
+ 
+	private JPanel n_panel;
+	private JPanel s_panel;
+	private JPanel e_panel;
+	private JPanel c_panel;
+	    
+	private void initPanelsAndComponents(){
+	    	n_panel = new JPanel(new FlowLayout());
+	    	s_panel = new JPanel(new FlowLayout());
+	    	e_panel = new JPanel(new FlowLayout());
+	    	c_panel = new JPanel(new FlowLayout());
+	    	
+	    	n_panel.setBorder(BorderFactory.createTitledBorder("North Panel"));	  
+		    s_panel.setBorder(BorderFactory.createTitledBorder("Menü"));
+		    e_panel.setBorder(BorderFactory.createTitledBorder("Ausgewählter Cache"));  
+		    c_panel.setBorder(BorderFactory.createTitledBorder("Cacheliste"));
+		    
+		    btnMenu = new JButton(MENU);
+		    btnMenu.setName(MENU);
+			btnMenu.addActionListener(listener);
+		    
+			btnDelete = new JButton("Delete");
+			btnDelete.addActionListener(this);
+			
+			this.setBorder(emptyBorder);
+			this.setLayout(new BorderLayout());
+			
+			this.add(c_panel,BorderLayout.CENTER);
+			this.add(e_panel,BorderLayout.EAST);
+			this.add(s_panel,BorderLayout.SOUTH);
+			this.addComponentListener(this);
+			
+			c_panel.add(new JScrollPane(cacheTable));
+		    s_panel.add(btnMenu);
+		    s_panel.add(btnDelete);
+	}
+	
+	private void createTable() throws FileNotFoundException, JAXBException{
+	    	cacheData = new CacheTableModel(getCaches());
+			cacheTable = new JTable(cacheData);
+			
+	}
+	
+	public ArrayList<CacheType> getCaches() throws FileNotFoundException, JAXBException{
+			return new MarshallUnmarshall().getCaches(NEWPATH);
+	}
+	
+	public ShowCachePanel(ActionListener listener) throws FileNotFoundException, JAXBException{
+		this.listener = listener;  
+		createTable();
+		initPanelsAndComponents();
 		
 	}
-	class CacheTableModel extends AbstractTableModel {
-        private String[] columnNames = { "Cachename", "ID", "Owner",
-                  "Datum"};
-        ArrayList<CacheType> list = null;
+	
+	private void updateTable() throws FileNotFoundException, JAXBException{
+		cacheData = new CacheTableModel(getCaches());
+		cacheTable.setModel(cacheData);
+		
+	}
+	
+	@Override
+	public void componentHidden(ComponentEvent e) {
+	}
+	
+	@Override
+	public void componentMoved(ComponentEvent e) {
+	}
+	
+	@Override
+	public void componentResized(ComponentEvent e) {	
+	}
+	
+	@Override
+	public void componentShown(ComponentEvent e) {
+		try {
+			updateTable();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (JAXBException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
 
-        CacheTableModel(ArrayList<CacheType> list) {
-             this.list = list;
-        }
-
-        public int getColumnCount() {
-             return columnNames.length;
-        }
-
-        public int getRowCount() {
-             return list.size();
-        }
-
-        public String getColumnName(int col) {
-             return columnNames[col];
-        }
-
-        public Object getValueAt(int row, int col) {
-
-
-        	CacheType object = list.get(row);
-//             return object;
-             switch (col) {
-             case 0:
-                  return object.getName();
-             case 1:
-                  return object.getCId();
-             case 2:
-                  return object.getOwner().getValue();
-             case 3:
-                  return object.getDatum();
-             default:
-                  return "unknown";
-             }
-        }
-
-        public Class getColumnClass(int c) {
-             return getValueAt(0, c).getClass();
-        }
-   }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton o = (JButton)e.getSource();
+		String name = o.getText();
+		if(name == "Delete"){
+					try {
+						new Connector().sendRequestAndDeleteCache(getCaches().get(cacheTable.getSelectedRow()).getCId());
+						updateTable();
+						
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (JAXBException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+		}
+		if(name == "Show"){
+			
+		}
+		
+	}
 
 
+	
 }

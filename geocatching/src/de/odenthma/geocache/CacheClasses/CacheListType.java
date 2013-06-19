@@ -36,5 +36,9 @@ public class CacheListType {
         }
         return this.cache;
     }
+    public void addCache(CacheType cacheNew){
+    	this.cache.add(cacheNew);
+    	System.out.println("added Cache:");
+    }
 }
 

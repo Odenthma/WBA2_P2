@@ -9,5 +9,20 @@
 	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/WBA_2_Phase_2_jars/jersey/jersey-server-1.1.5.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/WBA_2_Phase_2_jars/jersey/jsr311-api-1.1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Mel_T/Desktop/WBA_2_Phase_2_jars/jersey/jersey-core-1.1.5.1.jar"/>
+	<classpathentry kind="lib" path="lib/jgoodies-forms.jar" sourcepath="lib/jgoodies-forms-src.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/geocatching/lib/jgoodies-forms-javadoc.zip!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/jgoodies-common.jar" sourcepath="lib/jgoodies-common-src.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/geocatching/lib/jgoodies-common-javadoc.zip!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/TableLayout.jar" sourcepath="lib/TableLayout-src.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/geocatching/lib/TableLayout-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

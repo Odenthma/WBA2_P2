@@ -1,10 +1,12 @@
 package de.odenthma.geocache.grizly;
 
 
+import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringReader;
 
 import javax.ws.rs.*;
 import javax.xml.bind.JAXBContext;
@@ -12,6 +14,7 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
 
 import de.odenthma.geocache.CacheClasses.*;
 
@@ -65,29 +68,35 @@ public class GeoCatchingCacheService {
 		return clt;
 	}
 	
-	//neuen Cache zu Testcaches
-		@POST
-	   @Path("/new")
-	   @Produces("application/xml")
-	   public CacheListType postNew( @QueryParam("id") int id) throws JAXBException, IOException {   
-		   CacheListType caches = getAllNew();
-		   
-		   caches.getCache().add(caches.getCache().get(id));
-		   
-		   JAXBContext context= JAXBContext.newInstance(CacheListType.class);
-		   Marshaller m = context.createMarshaller();
-		   m.marshal(caches, new FileWriter(NEWPATH));        
-		   
-		return caches;
-	   }
-	
+
+				@POST
+			   @Path("/new")
+			   @Produces("application/xml")
+			   public CacheType postNew(String incomingXML) throws JAXBException, IOException {   
+				   CacheListType caches = getAllNew();
+				   CacheType ct = (CacheType)unmarshall(incomingXML, CacheType.class);
+				   caches.addCache(ct);
+					
+					   JAXBContext contexts= JAXBContext.newInstance(CacheListType.class);
+					   Marshaller m = contexts.createMarshaller();
+					   m.marshal(caches, new FileWriter(NEWPATH));   
+				return ct;
+			   }
 		//Cache in Testcaches anhand ID löschen
-	   @DELETE
-	   @Path("/delete")
+	   
+	@DELETE
+	   @Path("/new/delete/{id}")
 	   @Produces("application/xml")
-	   public CacheListType delete( @QueryParam("id") int id) throws JAXBException, IOException {   
+	   public CacheListType delete( @PathParam("id") String id) throws JAXBException, IOException {   
+		   System.out.println("DELETE: ID: "+id);
+		   CacheType delete = new CacheType();
 		   CacheListType caches = getAllNew();
-		   caches.getCache().remove(id);
+		   for(CacheType ct : caches.getCache()){
+			   if(id.equals(ct.getCId()))
+				   delete = ct;
+				   
+		   }
+		   caches.getCache().remove(delete);
 
 		   JAXBContext context= JAXBContext.newInstance(CacheListType.class);
 		   Marshaller m = context.createMarshaller();
@@ -95,6 +104,18 @@ public class GeoCatchingCacheService {
 
 		return caches;
 	   }
+	   private Object unmarshall(String str, Class<?> c) {
+			Object element = null;
+			try {
+				JAXBContext context = JAXBContext.newInstance(c);
+				Unmarshaller um = context.createUnmarshaller();
+				element = um.unmarshal(new StreamSource(new StringReader(str)), c).getValue();
+			} catch (JAXBException e) {
+				e.printStackTrace();
+			}
+
+			return element;
+		}
 	   
 	   @DELETE
 	   @Path("{id}:{name}")

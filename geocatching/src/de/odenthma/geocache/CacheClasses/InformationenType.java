@@ -65,7 +65,8 @@ public class InformationenType {
     @XmlElement(name = "Land", required = true)
     protected String land;
     @XmlElement(name = "Bundesland", required = true)
-    protected BundeslandEnum bundesland;
+//    protected BundeslandEnum bundesland;
+    protected String bundesland;
     @XmlElement(name = "Provinz", required = true)
     protected String provinz;
     @XmlElement(name = "BeschreibungKlein", required = true)
@@ -75,7 +76,7 @@ public class InformationenType {
     @XmlElement(name = "Hinweise", required = true)
     protected String hinweise;
     @XmlElement(name = "GeschaetzteZeit", required = true)
-    protected BigDecimal geschaetzteZeit;
+    protected double geschaetzteZeit;
     @XmlElement(name = "TravelBug", required = true)
     protected YesNoEnum travelBug;
 
@@ -143,7 +144,10 @@ public class InformationenType {
      *     {@link BundeslandEnum }
      *     
      */
-    public BundeslandEnum getBundesland() {
+//    public BundeslandEnum getBundesland() {
+//        return bundesland;
+//    }
+    public String getBundesland() {
         return bundesland;
     }
 
@@ -155,7 +159,10 @@ public class InformationenType {
      *     {@link BundeslandEnum }
      *     
      */
-    public void setBundesland(BundeslandEnum value) {
+//    public void setBundesland(BundeslandEnum value) {
+//        this.bundesland = value;
+//    }
+    public void setBundesland(String value) {
         this.bundesland = value;
     }
 
@@ -263,7 +270,7 @@ public class InformationenType {
      *     {@link BigDecimal }
      *     
      */
-    public BigDecimal getGeschaetzteZeit() {
+    public double getGeschaetzteZeit() {
         return geschaetzteZeit;
     }
 
@@ -275,7 +282,7 @@ public class InformationenType {
      *     {@link BigDecimal }
      *     
      */
-    public void setGeschaetzteZeit(BigDecimal value) {
+    public void setGeschaetzteZeit(double value) {
         this.geschaetzteZeit = value;
     }
 

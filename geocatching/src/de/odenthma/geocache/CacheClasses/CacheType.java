@@ -10,11 +10,14 @@ package de.odenthma.geocache.CacheClasses;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
@@ -77,6 +80,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  * 
  */
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CacheType", propOrder = {
     "location",
@@ -96,7 +100,7 @@ public class CacheType {
     @XmlElement(name = "Name", required = true)
     protected String name;
     @XmlElement(name = "Datum", required = true)
-    protected XMLGregorianCalendar datum;
+    protected GregorianCalendar datum;
     @XmlElement(name = "Typ", required = true)
     protected CacheTypeEnum typ;
     @XmlElement(name = "Owner", required = true)
@@ -169,7 +173,7 @@ public class CacheType {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getDatum() {
+    public GregorianCalendar getDatum() {
         return datum;
     }
 
@@ -181,7 +185,7 @@ public class CacheType {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setDatum(XMLGregorianCalendar value) {
+    public void setDatum(GregorianCalendar value) {
         this.datum = value;
     }
 
@@ -387,9 +391,9 @@ public class CacheType {
     public static class Location {
 
         @XmlAttribute(required = true)
-        protected BigDecimal lat;
+        protected double lat;
         @XmlAttribute(required = true)
-        protected BigDecimal lon;
+        protected double lon;
 
         /**
          * Gets the value of the lat property.
@@ -399,7 +403,7 @@ public class CacheType {
          *     {@link BigDecimal }
          *     
          */
-        public BigDecimal getLat() {
+        public double getLat() {
             return lat;
         }
 
@@ -411,7 +415,7 @@ public class CacheType {
          *     {@link BigDecimal }
          *     
          */
-        public void setLat(BigDecimal value) {
+        public void setLat(double value) {
             this.lat = value;
         }
 
@@ -423,7 +427,7 @@ public class CacheType {
          *     {@link BigDecimal }
          *     
          */
-        public BigDecimal getLon() {
+        public double getLon() {
             return lon;
         }
 
@@ -435,7 +439,7 @@ public class CacheType {
          *     {@link BigDecimal }
          *     
          */
-        public void setLon(BigDecimal value) {
+        public void setLon(double value) {
             this.lon = value;
         }
 
@@ -549,9 +553,9 @@ public class CacheType {
         @XmlValue
         protected String value;
         @XmlAttribute(required = true)
-        protected BigDecimal lat;
+        protected double lat;
         @XmlAttribute(required = true)
-        protected BigDecimal lon;
+        protected double lon;
 
         /**
          * Gets the value of the value property.
@@ -585,7 +589,7 @@ public class CacheType {
          *     {@link BigDecimal }
          *     
          */
-        public BigDecimal getLat() {
+        public double getLat() {
             return lat;
         }
 
@@ -597,7 +601,7 @@ public class CacheType {
          *     {@link BigDecimal }
          *     
          */
-        public void setLat(BigDecimal value) {
+        public void setLat(double value) {
             this.lat = value;
         }
 
@@ -609,7 +613,7 @@ public class CacheType {
          *     {@link BigDecimal }
          *     
          */
-        public BigDecimal getLon() {
+        public double getLon() {
             return lon;
         }
 
@@ -621,7 +625,7 @@ public class CacheType {
          *     {@link BigDecimal }
          *     
          */
-        public void setLon(BigDecimal value) {
+        public void setLon(double value) {
             this.lon = value;
         }
 
