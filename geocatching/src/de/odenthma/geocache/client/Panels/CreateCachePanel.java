@@ -1,4 +1,4 @@
-package de.odenthma.geocache.client;
+package de.odenthma.geocache.client.Panels;
 
 import info.clearthought.layout.TableLayout;
 import info.clearthought.layout.TableLayoutConstraints;
@@ -37,6 +37,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 
+
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 
@@ -50,6 +51,8 @@ import de.odenthma.geocache.CacheClasses.InformationenType;
 import de.odenthma.geocache.CacheClasses.PointEnum;
 import de.odenthma.geocache.CacheClasses.YesNoEnum;
 //import info.clearthought.layout.*;
+import de.odenthma.geocache.client.Connector;
+import de.odenthma.geocache.client.MarshallUnmarshall;
 
 
 @SuppressWarnings("serial")

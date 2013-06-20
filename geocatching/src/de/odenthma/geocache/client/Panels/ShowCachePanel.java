@@ -1,4 +1,4 @@
-package de.odenthma.geocache.client;
+package de.odenthma.geocache.client.Panels;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.List;
@@ -32,6 +32,9 @@ import com.sun.jersey.api.client.WebResource;
 
 import de.odenthma.geocache.CacheClasses.CacheListType;
 import de.odenthma.geocache.CacheClasses.CacheType;
+import de.odenthma.geocache.client.CacheTableModel;
+import de.odenthma.geocache.client.Connector;
+import de.odenthma.geocache.client.MarshallUnmarshall;
 
 
 @SuppressWarnings("serial")
@@ -41,6 +44,7 @@ public class ShowCachePanel extends JPanel implements ComponentListener, ActionL
 	public static String NUSER = "Create User";
 	public static String NEWS = "Feeds anzeigen";
 	public static String CCACHE = "Create Cache";
+	
 	private Border emptyBorder = BorderFactory.createEmptyBorder();
 	private static String NEWPATH = "C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/CacheListNew.xml";
 

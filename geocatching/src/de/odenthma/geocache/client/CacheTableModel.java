@@ -6,12 +6,12 @@ import javax.swing.table.AbstractTableModel;
 
 import de.odenthma.geocache.CacheClasses.CacheType;
 
-class CacheTableModel extends AbstractTableModel {
+public class CacheTableModel extends AbstractTableModel {
     private String[] columnNames = { "Cachename", "ID", "Owner",
               "Datum"};
     private ArrayList<CacheType> list = null;
 
-    CacheTableModel(ArrayList<CacheType> list) {
+    public CacheTableModel(ArrayList<CacheType> list) {
          this.list = list;
     }
     public void setData(ArrayList<CacheType> list){

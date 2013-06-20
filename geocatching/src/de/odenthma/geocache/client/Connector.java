@@ -61,28 +61,11 @@ public class Connector {
 			 rc.setDoOutput( true );    
 			 rc.setRequestProperty( "Content-Type", "text/xml; charset=utf-8" );  
 			 rc.setRequestMethod("DELETE"); 
-//			 reqStr = sw.toString();  // the entire payload in a single String  
-//			 len = reqStr.length();  
-//			 rc.setRequestProperty( "Content-Length", Integer.toString( len ) );  
-			 rc.connect();      
-//			 out = new OutputStreamWriter( rc.getOutputStream() );   
-//			 out.write( reqStr, 0, len );  
-//			 out.flush();  
-//			 System.out.println("Request sent, reading response ");  
-//			 read = new InputStreamReader( rc.getInputStream() );  
+  
 			     int responseCode = rc.getResponseCode();
 			     System.out.println("CODE: "+responseCode);
-//			 ch = read.read();
-//			 
-//			 while( ch != -1 ){  
-//				 sb.append((char)ch);  
-//				 ch = read.read();  
-//			 }  
-//			 
-//			 response = sb.toString(); // entire response ends up in String  
-//			 read.close();  
+
 			 rc.disconnect();  
-//			 System.out.println("response: "+response);
 	  }
 
 }

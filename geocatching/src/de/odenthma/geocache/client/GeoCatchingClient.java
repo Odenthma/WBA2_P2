@@ -11,13 +11,21 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.xml.bind.JAXBException;
 
-public class GeoCatchingClient implements ActionListener{
-	public static String MENU = "Menu";
-	public static String SCACHE = "Show Caches";
-	public static String NUSER = "Create User";
-	public static String NEWS = "Feeds anzeigen";
-	public static String CCACHE = "Create Cache";
+import de.odenthma.geocache.client.Panels.CreateCachePanel;
+import de.odenthma.geocache.client.Panels.CreateUserPanel;
+import de.odenthma.geocache.client.Panels.LoginPanel;
+import de.odenthma.geocache.client.Panels.MenuPanel;
+import de.odenthma.geocache.client.Panels.NewsPanel;
+import de.odenthma.geocache.client.Panels.ShowCachePanel;
 
+public class GeoCatchingClient implements ActionListener{
+	private static String MENU = "Menu";
+	private static String SCACHE = "Show Caches";
+	private static String NUSER = "Create User";
+	private static String NEWS = "Feeds anzeigen";
+	private static String CCACHE = "Create Cache";
+	private static String LUSER = "Login";
+	
 	JFrame frame = new JFrame("CardLayout");
 	JPanel panels  = new JPanel();
 	
@@ -26,6 +34,7 @@ public class GeoCatchingClient implements ActionListener{
 	CreateUserPanel jpNewUser;
 	CreateCachePanel jpCreateCache;
 	NewsPanel jpNews;
+	LoginPanel jpLogin;
 	CardLayout cl = new CardLayout();
 	
 	public GeoCatchingClient() throws FileNotFoundException, JAXBException{
@@ -34,14 +43,16 @@ public class GeoCatchingClient implements ActionListener{
 		jpNewUser = new CreateUserPanel(cl,panels,frame);
 		jpCreateCache = new CreateCachePanel(this);
 		jpNews = new NewsPanel(cl, panels,frame);
-		
+		jpLogin = new LoginPanel();
 		panels.setLayout(cl);
 		panels.add(jpMenu,MENU);
 		panels.add(jpShowCache,SCACHE);
 		panels.add(jpNewUser, NUSER);
 		panels.add(jpNews, NEWS);
 		panels.add(jpCreateCache, CCACHE);
+		panels.add(jpLogin,LUSER);
 		
+//		cl.show(panels, LUSER);
 		cl.show(panels, MENU);
 		
 		frame.add(panels);

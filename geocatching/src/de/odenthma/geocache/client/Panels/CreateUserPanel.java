@@ -1,4 +1,4 @@
-package de.odenthma.geocache.client;
+package de.odenthma.geocache.client.Panels;
 import java.awt.CardLayout;
 
 import javax.swing.JFrame;
