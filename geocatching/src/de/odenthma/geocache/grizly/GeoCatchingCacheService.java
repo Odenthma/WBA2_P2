@@ -2,6 +2,7 @@ package de.odenthma.geocache.grizly;
 
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -21,8 +22,10 @@ import de.odenthma.geocache.CacheClasses.*;
 @Path( "/cachelist" )
 public class GeoCatchingCacheService {
 
-	private static String ORIGINALPATH = "C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/testList.xml";
-	private static String NEWPATH = "C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/CacheListNew.xml";
+	private static String ORIGINALPATH = "../geocatching/src/de/odenthma/geocache/xml/testList.xml";
+	private static String NEWPATH = "../geocatching/src/de/odenthma/geocache/xml/CacheListNew.xml";
+	File relativeNew = new File(NEWPATH);
+	File relativeOld = new File(ORIGINALPATH);
 	ObjectFactory ob;
 	CacheListType  clt;
 	
@@ -34,7 +37,8 @@ public class GeoCatchingCacheService {
 		clt = ob.createCacheListType();
 		JAXBContext context = JAXBContext.newInstance(CacheListType.class.getPackage().getName());
 		Unmarshaller um = context.createUnmarshaller();
-		clt = (CacheListType)((JAXBElement<?>)um.unmarshal(new FileReader(ORIGINALPATH))).getValue();
+//		clt = (CacheListType)((JAXBElement<?>)um.unmarshal(new FileReader(ORIGINALPATH))).getValue();
+		clt = (CacheListType)((JAXBElement<?>)um.unmarshal(new FileReader(relativeOld.getPath()))).getValue();
 		
 		
 		Marshaller m = context.createMarshaller();
@@ -60,7 +64,7 @@ public class GeoCatchingCacheService {
 	public CacheListType getAllNew() throws JAXBException, FileNotFoundException{
 		JAXBContext context = JAXBContext.newInstance(CacheListType.class.getPackage().getName());
 		Unmarshaller um = context.createUnmarshaller();
-		clt = (CacheListType)((JAXBElement<?>)um.unmarshal(new FileReader(NEWPATH))).getValue();
+		clt = (CacheListType)((JAXBElement<?>)um.unmarshal(new FileReader(relativeNew.getPath()))).getValue();
 		Marshaller m = context.createMarshaller();
 		m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
 		m.marshal( clt, System.out );
@@ -79,7 +83,7 @@ public class GeoCatchingCacheService {
 					
 					   JAXBContext contexts= JAXBContext.newInstance(CacheListType.class);
 					   Marshaller m = contexts.createMarshaller();
-					   m.marshal(caches, new FileWriter(NEWPATH));   
+					   m.marshal(caches, new FileWriter(relativeNew.getPath()));   
 				return ct;
 			   }
 		//Cache in Testcaches anhand ID löschen
@@ -100,7 +104,7 @@ public class GeoCatchingCacheService {
 
 		   JAXBContext context= JAXBContext.newInstance(CacheListType.class);
 		   Marshaller m = context.createMarshaller();
-		   m.marshal(caches, new FileWriter(NEWPATH));        
+		   m.marshal(caches, new FileWriter(relativeNew.getPath()));        
 
 		return caches;
 	   }
@@ -128,7 +132,7 @@ public class GeoCatchingCacheService {
 
 		   JAXBContext context= JAXBContext.newInstance(CacheListType.class);
 		   Marshaller m = context.createMarshaller();
-		   m.marshal(caches, new FileWriter(NEWPATH));        
+		   m.marshal(caches, new FileWriter(relativeNew.getPath()));        
 
 		return caches;
 	   }

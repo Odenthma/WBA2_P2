@@ -43,7 +43,7 @@ public class GeoCatchingClient implements ActionListener{
 		jpNewUser = new CreateUserPanel(cl,panels,frame);
 		jpCreateCache = new CreateCachePanel(this);
 		jpNews = new NewsPanel(cl, panels,frame);
-		jpLogin = new LoginPanel();
+		jpLogin = new LoginPanel(this);
 		panels.setLayout(cl);
 		panels.add(jpMenu,MENU);
 		panels.add(jpShowCache,SCACHE);
