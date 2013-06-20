@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlType;
 public class UserListType {
 
     @XmlElement(required = true)
-    protected List<UserType> user;
+    protected ArrayList<UserType> user;
 
     /**
      * Gets the value of the user property.
@@ -69,11 +69,16 @@ public class UserListType {
      * 
      * 
      */
-    public List<UserType> getUser() {
+    public ArrayList<UserType> getUser() {
         if (user == null) {
             user = new ArrayList<UserType>();
         }
         return this.user;
     }
+
+	public void addUser(UserType ut) {
+		this.user.add(ut);
+		
+	}
 
 }

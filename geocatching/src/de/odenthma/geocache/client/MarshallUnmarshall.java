@@ -13,10 +13,13 @@ import javax.xml.bind.Unmarshaller;
 
 import de.odenthma.geocache.CacheClasses.CacheListType;
 import de.odenthma.geocache.CacheClasses.CacheType;
+import de.odenthma.geocache.UserInformation.Classes.UserListType;
+import de.odenthma.geocache.UserInformation.Classes.UserType;
 
 public class MarshallUnmarshall {
 	private StringWriter sw = new StringWriter();
 	private CacheListType clt;
+	private UserListType ult;
 	private JAXBContext context;
 	private Marshaller marshaller;
 	private Unmarshaller um;
@@ -43,5 +46,12 @@ public class MarshallUnmarshall {
 		um = context.createUnmarshaller();
 		clt = (CacheListType)((JAXBElement<?>)um.unmarshal(new FileReader(path))).getValue();
 		return clt.getCache();
+	}
+	
+	public ArrayList<UserType> getUser(String path) throws JAXBException, FileNotFoundException{
+		context = JAXBContext.newInstance(UserListType.class.getPackage().getName());
+		um = context.createUnmarshaller();
+		ult = (UserListType)(um.unmarshal(new FileReader(path)));
+		return ult.getUser();
 	}
 }
