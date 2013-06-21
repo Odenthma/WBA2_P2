@@ -15,7 +15,6 @@ import javax.xml.bind.JAXBException;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
-import de.odenthma.geocache.UserInformation.Classes.UserType;
 import de.odenthma.geocache.client.Connector;
 import de.odenthma.geocache.client.Globals;
 

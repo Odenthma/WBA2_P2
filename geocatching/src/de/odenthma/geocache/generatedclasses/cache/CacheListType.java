@@ -6,7 +6,7 @@
 //
 
 
-package de.odenthma.geocache.CacheClasses;
+package de.odenthma.geocache.generatedclasses.cache;
 
 import java.util.ArrayList;
 import java.util.List;

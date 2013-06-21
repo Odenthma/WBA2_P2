@@ -6,7 +6,7 @@
 //
 
 
-package de.odenthma.geocache.CacheClasses;
+package de.odenthma.geocache.generatedclasses.cache;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,22 +17,21 @@ import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
-
 /**
- * <p>Java class for LogsType complex type.
+ * <p>Java class for KommentareType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="LogsType">
+ * &lt;complexType name="KommentareType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Log">
+ *         &lt;element name="Kommentar">
  *           &lt;complexType>
  *             &lt;complexContent>
- *               &lt;extension base="{}logType">
- *                 &lt;attribute name="l_id" use="required" type="{}lIdRestriction" />
+ *               &lt;extension base="{}KommentarType">
+ *                 &lt;attribute name="k_id" use="required" type="{}kIdRestriction" />
  *               &lt;/extension>
  *             &lt;/complexContent>
  *           &lt;/complexType>
@@ -46,36 +45,36 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "LogsType", propOrder = {
-    "log"
+@XmlType(name = "KommentareType", propOrder = {
+    "kommentar"
 })
-public class LogsType {
+public class KommentareType {
 
-    @XmlElement(name = "Log", required = true)
-    protected Log log;
+    @XmlElement(name = "Kommentar", required = true)
+    protected Kommentar kommentar;
 
     /**
-     * Gets the value of the log property.
+     * Gets the value of the kommentar property.
      * 
      * @return
      *     possible object is
-     *     {@link Log }
+     *     {@link Kommentar }
      *     
      */
-    public Log getLog() {
-        return log;
+    public Kommentar getKommentar() {
+        return kommentar;
     }
 
     /**
-     * Sets the value of the log property.
+     * Sets the value of the kommentar property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Log }
+     *     {@link Kommentar }
      *     
      */
-    public void setLog(Log value) {
-        this.log = value;
+    public void setKommentar(Kommentar value) {
+        this.kommentar = value;
     }
 
 
@@ -87,8 +86,8 @@ public class LogsType {
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
-     *     &lt;extension base="{}logType">
-     *       &lt;attribute name="l_id" use="required" type="{}lIdRestriction" />
+     *     &lt;extension base="{}KommentarType">
+     *       &lt;attribute name="k_id" use="required" type="{}kIdRestriction" />
      *     &lt;/extension>
      *   &lt;/complexContent>
      * &lt;/complexType>
@@ -98,36 +97,36 @@ public class LogsType {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "")
-    public static class Log
-        extends LogType
+    public static class Kommentar
+        extends KommentarType
     {
 
-        @XmlAttribute(name = "l_id", required = true)
+        @XmlAttribute(name = "k_id", required = true)
         @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-        protected String lId;
+        protected String kId;
 
         /**
-         * Gets the value of the lId property.
+         * Gets the value of the kId property.
          * 
          * @return
          *     possible object is
          *     {@link String }
          *     
          */
-        public String getLId() {
-            return lId;
+        public String getKId() {
+            return kId;
         }
 
         /**
-         * Sets the value of the lId property.
+         * Sets the value of the kId property.
          * 
          * @param value
          *     allowed object is
          *     {@link String }
          *     
          */
-        public void setLId(String value) {
-            this.lId = value;
+        public void setKId(String value) {
+            this.kId = value;
         }
 
     }

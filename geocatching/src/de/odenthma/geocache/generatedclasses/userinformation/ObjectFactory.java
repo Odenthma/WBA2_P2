@@ -6,15 +6,15 @@
 //
 
 
-package de.odenthma.geocache.UserInformation.Classes;
+package de.odenthma.geocache.generatedclasses.userinformation;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
-import de.odenthma.geocache.UserInformation.Classes.OptionalType.Benachrichtigung;
-import de.odenthma.geocache.UserInformation.Classes.OptionalType.News;
+import de.odenthma.geocache.generatedclasses.userinformation.OptionalType.Benachrichtigung;
+import de.odenthma.geocache.generatedclasses.userinformation.OptionalType.News;
 
 
 /**

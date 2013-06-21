@@ -6,7 +6,7 @@
 //
 
 
-package de.odenthma.geocache.UserInformation.Classes;
+package de.odenthma.geocache.generatedclasses.userinformation;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,17 +15,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for nameType complex type.
+ * <p>Java class for userInformationType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="nameType">
+ * &lt;complexType name="userInformationType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="lastName" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="firstName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="name" type="{}nameType"/>
+ *         &lt;element name="adress" type="{}adressType"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,63 +35,63 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "nameType", propOrder = {
-    "lastName",
-    "firstName"
+@XmlType(name = "userInformationType", propOrder = {
+    "name",
+    "adress"
 })
-public class NameType {
+public class UserInformationType {
 
     @XmlElement(required = true)
-    protected String lastName;
+    protected NameType name;
     @XmlElement(required = true)
-    protected String firstName;
+    protected AdressType adress;
 
     /**
-     * Gets the value of the lastName property.
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link NameType }
      *     
      */
-    public String getLastName() {
-        return lastName;
+    public NameType getName() {
+        return name;
     }
 
     /**
-     * Sets the value of the lastName property.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link NameType }
      *     
      */
-    public void setLastName(String value) {
-        this.lastName = value;
+    public void setName(NameType value) {
+        this.name = value;
     }
 
     /**
-     * Gets the value of the firstName property.
+     * Gets the value of the adress property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link AdressType }
      *     
      */
-    public String getFirstName() {
-        return firstName;
+    public AdressType getAdress() {
+        return adress;
     }
 
     /**
-     * Sets the value of the firstName property.
+     * Sets the value of the adress property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link AdressType }
      *     
      */
-    public void setFirstName(String value) {
-        this.firstName = value;
+    public void setAdress(AdressType value) {
+        this.adress = value;
     }
 
 }

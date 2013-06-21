@@ -6,46 +6,37 @@
 //
 
 
-package de.odenthma.geocache.CacheClasses;
+package de.odenthma.geocache.generatedclasses.cache;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
 
 /**
- * <p>Java class for cacheTypeEnum.
+ * <p>Java class for yesNoEnum.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <pre>
- * &lt;simpleType name="cacheTypeEnum">
+ * &lt;simpleType name="yesNoEnum">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="Traditional Cache"/>
- *     &lt;enumeration value="Multi Cache"/>
- *     &lt;enumeration value="Puzzle Cache"/>
- *     &lt;enumeration value="Mystery Cache"/>
- *     &lt;enumeration value="Unknown Cache"/>
+ *     &lt;enumeration value="ja"/>
+ *     &lt;enumeration value="nein"/>
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
  * 
  */
 @XmlEnum
-public enum CacheTypeEnum {
+public enum YesNoEnum {
 
-    @XmlEnumValue("Multi Cache")
-    MULTI_CACHE("Multi Cache"),
-    @XmlEnumValue("Mystery Cache")
-    MYSTERY_CACHE("Mystery Cache"),
-    @XmlEnumValue("Puzzle Cache")
-    PUZZLE_CACHE("Puzzle Cache"),
-    @XmlEnumValue("Traditional Cache")
-    TRADITIONAL_CACHE("Traditional Cache"),
-    @XmlEnumValue("Unknown Cache")
-    UNKNOWN_CACHE("Unknown Cache");
+    @XmlEnumValue("ja")
+    JA("ja"),
+    @XmlEnumValue("nein")
+    NEIN("nein");
     private final String value;
 
-    CacheTypeEnum(String v) {
+    YesNoEnum(String v) {
         value = v;
     }
 
@@ -53,8 +44,8 @@ public enum CacheTypeEnum {
         return value;
     }
 
-    public static CacheTypeEnum fromValue(String v) {
-        for (CacheTypeEnum c: CacheTypeEnum.values()) {
+    public static YesNoEnum fromValue(String v) {
+        for (YesNoEnum c: YesNoEnum.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

@@ -6,7 +6,7 @@
 //
 
 
-package de.odenthma.geocache.UserInformation.Classes;
+package de.odenthma.geocache.generatedclasses.userinformation;
 
 import java.util.ArrayList;
 import java.util.List;

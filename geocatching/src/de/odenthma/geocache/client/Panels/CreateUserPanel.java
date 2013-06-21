@@ -34,25 +34,22 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 
-import de.odenthma.geocache.CacheClasses.CacheType;
-import de.odenthma.geocache.CacheClasses.CacheType.Location;
-import de.odenthma.geocache.CacheClasses.CacheType.Owner;
-import de.odenthma.geocache.CacheClasses.CacheType.Parkplatz;
-import de.odenthma.geocache.CacheClasses.CacheListType;
-import de.odenthma.geocache.CacheClasses.CacheTypeEnum;
-import de.odenthma.geocache.CacheClasses.InformationenType;
-import de.odenthma.geocache.CacheClasses.PointEnum;
-import de.odenthma.geocache.CacheClasses.YesNoEnum;
-import de.odenthma.geocache.UserInformation.Classes.AccountType;
-import de.odenthma.geocache.UserInformation.Classes.AdressType;
-import de.odenthma.geocache.UserInformation.Classes.NameType;
-import de.odenthma.geocache.UserInformation.Classes.OptionalType;
-import de.odenthma.geocache.UserInformation.Classes.OrtsListeType;
-import de.odenthma.geocache.UserInformation.Classes.UserInformationType;
-import de.odenthma.geocache.UserInformation.Classes.UserType;
+
+
+
+
+
+
 //import info.clearthought.layout.*;
 import de.odenthma.geocache.client.Connector;
 import de.odenthma.geocache.client.MarshallUnmarshall;
+import de.odenthma.geocache.generatedclasses.userinformation.AccountType;
+import de.odenthma.geocache.generatedclasses.userinformation.AdressType;
+import de.odenthma.geocache.generatedclasses.userinformation.NameType;
+import de.odenthma.geocache.generatedclasses.userinformation.OptionalType;
+import de.odenthma.geocache.generatedclasses.userinformation.OrtsListeType;
+import de.odenthma.geocache.generatedclasses.userinformation.UserInformationType;
+import de.odenthma.geocache.generatedclasses.userinformation.UserType;
 import de.odenthma.geocache.utils.SpringUtilities;
 
 

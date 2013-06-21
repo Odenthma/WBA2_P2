@@ -11,7 +11,8 @@ import java.net.URL;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
-import de.odenthma.geocache.UserInformation.Classes.UserType;
+import de.odenthma.geocache.generatedclasses.userinformation.UserType;
+
 
 public class Connector {
 	private URL url;

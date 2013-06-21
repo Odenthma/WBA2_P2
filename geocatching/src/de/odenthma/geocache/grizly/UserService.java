@@ -19,11 +19,9 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 
-import de.odenthma.geocache.CacheClasses.CacheListType;
-import de.odenthma.geocache.CacheClasses.CacheType;
-import de.odenthma.geocache.UserInformation.Classes.ObjectFactory;
-import de.odenthma.geocache.UserInformation.Classes.UserListType;
-import de.odenthma.geocache.UserInformation.Classes.UserType;
+import de.odenthma.geocache.generatedclasses.userinformation.*;
+
+
 
 //TODO: Marshalling in eigene Klasse, damit Code übersichtlicher wird
 
@@ -66,17 +64,7 @@ public class UserService {
 			m.marshal( ult, System.out );
 			
 			return ult;
-			
-//			JAXBContext context = JAXBContext.newInstance(CacheListType.class.getPackage().getName());
-//			Unmarshaller um = context.createUnmarshaller();
-//			clt = (CacheListType)((JAXBElement<?>)um.unmarshal(new FileReader(relativeNew.getPath()))).getValue();
-//			Marshaller m = context.createMarshaller();
-//			m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
-//			m.marshal( clt, System.out );
-//			
-//			return clt;
 		}
-		
 		
 		/*
 		 * Username and password check

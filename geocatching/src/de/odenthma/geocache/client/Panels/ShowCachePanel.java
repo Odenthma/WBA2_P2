@@ -30,11 +30,10 @@ import javax.xml.bind.Unmarshaller;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 
-import de.odenthma.geocache.CacheClasses.CacheListType;
-import de.odenthma.geocache.CacheClasses.CacheType;
 import de.odenthma.geocache.client.CacheTableModel;
 import de.odenthma.geocache.client.Connector;
 import de.odenthma.geocache.client.MarshallUnmarshall;
+import de.odenthma.geocache.generatedclasses.cache.CacheType;
 import de.odenthma.geocache.utils.FilterCaches;
 
 //TODO: Tabelle mit einem Cache implementieren

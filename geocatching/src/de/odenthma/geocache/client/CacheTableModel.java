@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import de.odenthma.geocache.CacheClasses.CacheType;
+import de.odenthma.geocache.generatedclasses.cache.CacheType;
+
+
+
 
 @SuppressWarnings("serial")
 public class CacheTableModel extends AbstractTableModel {

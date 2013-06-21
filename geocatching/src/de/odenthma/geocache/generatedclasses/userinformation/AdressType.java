@@ -6,33 +6,31 @@
 //
 
 
-package de.odenthma.geocache.UserInformation.Classes;
+package de.odenthma.geocache.generatedclasses.userinformation;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
- * <p>Java class for userType complex type.
+ * <p>Java class for adressType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="userType">
+ * &lt;complexType name="adressType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="userInformation" type="{}userInformationType"/>
- *         &lt;element name="account" type="{}accountType"/>
- *         &lt;element name="optional" type="{}optionalType"/>
+ *         &lt;element name="state" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="street" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="zipCode" type="{}postalRestriction"/>
+ *         &lt;element name="ort" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
- *       &lt;attribute name="b_id" use="required" type="{}bIdRestriction" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -40,119 +38,119 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  * 
  */
-@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "userType", propOrder = {
-    "userInformation",
-    "account",
-    "optional"
+@XmlType(name = "adressType", propOrder = {
+    "state",
+    "street",
+    "zipCode",
+    "ort"
 })
-public class UserType {
+public class AdressType {
 
     @XmlElement(required = true)
-    protected UserInformationType userInformation;
+    protected String state;
     @XmlElement(required = true)
-    protected AccountType account;
+    protected String street;
     @XmlElement(required = true)
-    protected OptionalType optional;
-    @XmlAttribute(name = "b_id", required = true)
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String bId;
+    protected String zipCode;
+    @XmlElement(required = true)
+    protected String ort;
 
     /**
-     * Gets the value of the userInformation property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link UserInformationType }
-     *     
-     */
-    public UserInformationType getUserInformation() {
-        return userInformation;
-    }
-
-    /**
-     * Sets the value of the userInformation property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link UserInformationType }
-     *     
-     */
-    public void setUserInformation(UserInformationType value) {
-        this.userInformation = value;
-    }
-
-    /**
-     * Gets the value of the account property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AccountType }
-     *     
-     */
-    public AccountType getAccount() {
-        return account;
-    }
-
-    /**
-     * Sets the value of the account property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AccountType }
-     *     
-     */
-    public void setAccount(AccountType value) {
-        this.account = value;
-    }
-
-    /**
-     * Gets the value of the optional property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link OptionalType }
-     *     
-     */
-    public OptionalType getOptional() {
-        return optional;
-    }
-
-    /**
-     * Sets the value of the optional property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link OptionalType }
-     *     
-     */
-    public void setOptional(OptionalType value) {
-        this.optional = value;
-    }
-
-    /**
-     * Gets the value of the bId property.
+     * Gets the value of the state property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getBId() {
-        return bId;
+    public String getState() {
+        return state;
     }
 
     /**
-     * Sets the value of the bId property.
+     * Sets the value of the state property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setBId(String value) {
-        this.bId = value;
+    public void setState(String value) {
+        this.state = value;
+    }
+
+    /**
+     * Gets the value of the street property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getStreet() {
+        return street;
+    }
+
+    /**
+     * Sets the value of the street property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setStreet(String value) {
+        this.street = value;
+    }
+
+    /**
+     * Gets the value of the zipCode property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    /**
+     * Sets the value of the zipCode property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setZipCode(String value) {
+        this.zipCode = value;
+    }
+
+    /**
+     * Gets the value of the ort property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getOrt() {
+        return ort;
+    }
+
+    /**
+     * Sets the value of the ort property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setOrt(String value) {
+        this.ort = value;
     }
 
 }

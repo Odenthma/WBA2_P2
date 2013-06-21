@@ -11,10 +11,11 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import de.odenthma.geocache.CacheClasses.CacheListType;
-import de.odenthma.geocache.CacheClasses.CacheType;
-import de.odenthma.geocache.UserInformation.Classes.UserListType;
-import de.odenthma.geocache.UserInformation.Classes.UserType;
+import de.odenthma.geocache.generatedclasses.cache.CacheListType;
+import de.odenthma.geocache.generatedclasses.cache.CacheType;
+import de.odenthma.geocache.generatedclasses.userinformation.UserListType;
+import de.odenthma.geocache.generatedclasses.userinformation.UserType;
+
 
 public class MarshallUnmarshall {
 	private StringWriter sw = new StringWriter();

@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.xml.bind.JAXBException;
 
-import de.odenthma.geocache.UserInformation.Classes.UserType;
+
 import de.odenthma.geocache.client.Globals;
 import de.odenthma.geocache.client.MarshallUnmarshall;
 import de.odenthma.geocache.client.PathHandler;
@@ -85,7 +85,7 @@ public class UserPanel extends JPanel implements ActionListener{
 			c_panel.add(new CreateUserPanel(listener));
 		}
 		if(name.equals(ULOGIN)){
-			c_panel.add(new LoginPanel(this, listener));
+			c_panel.add(new LoginPanel(this, listener,globals));
 		}
 		this.updateUI();
 	}

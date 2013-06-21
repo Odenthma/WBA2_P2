@@ -6,20 +6,21 @@
 //
 
 
-package de.odenthma.geocache.CacheClasses;
+package de.odenthma.geocache.generatedclasses.cache;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
-import de.odenthma.geocache.CacheClasses.CacheType.Location;
-import de.odenthma.geocache.CacheClasses.CacheType.Owner;
-import de.odenthma.geocache.CacheClasses.CacheType.Parkplatz;
-import de.odenthma.geocache.CacheClasses.KommentarType.Autor;
-import de.odenthma.geocache.CacheClasses.KommentareType.Kommentar;
-import de.odenthma.geocache.CacheClasses.LogType.GefundenVon;
-import de.odenthma.geocache.CacheClasses.LogsType.Log;
+import de.odenthma.geocache.generatedclasses.cache.CacheType.Location;
+import de.odenthma.geocache.generatedclasses.cache.CacheType.Owner;
+import de.odenthma.geocache.generatedclasses.cache.CacheType.Parkplatz;
+import de.odenthma.geocache.generatedclasses.cache.KommentarType.Autor;
+import de.odenthma.geocache.generatedclasses.cache.KommentareType.Kommentar;
+import de.odenthma.geocache.generatedclasses.cache.LogType.GefundenVon;
+import de.odenthma.geocache.generatedclasses.cache.LogsType.Log;
+
 
 
 

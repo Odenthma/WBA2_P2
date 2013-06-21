@@ -17,7 +17,9 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 
-import de.odenthma.geocache.CacheClasses.*;
+import de.odenthma.geocache.generatedclasses.cache.*;
+
+
 
 @Path( "/cachelist" )
 public class GeoCatchingCacheService {

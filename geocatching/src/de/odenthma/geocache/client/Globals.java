@@ -1,6 +1,8 @@
 package de.odenthma.geocache.client;
 
-import de.odenthma.geocache.UserInformation.Classes.UserType;
+import de.odenthma.geocache.generatedclasses.userinformation.UserType;
+
+
 
 public class Globals {
 	private UserType activeUser;

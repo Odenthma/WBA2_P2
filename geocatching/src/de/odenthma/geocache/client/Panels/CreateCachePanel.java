@@ -28,32 +28,15 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-
-
-
-
-
-
-
-
-
-
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 
-import de.odenthma.geocache.CacheClasses.CacheType;
-import de.odenthma.geocache.CacheClasses.CacheType.Location;
-import de.odenthma.geocache.CacheClasses.CacheType.Owner;
-import de.odenthma.geocache.CacheClasses.CacheType.Parkplatz;
-import de.odenthma.geocache.CacheClasses.CacheListType;
-import de.odenthma.geocache.CacheClasses.CacheTypeEnum;
-import de.odenthma.geocache.CacheClasses.InformationenType;
-import de.odenthma.geocache.CacheClasses.PointEnum;
-import de.odenthma.geocache.CacheClasses.YesNoEnum;
-//import info.clearthought.layout.*;
 import de.odenthma.geocache.client.Connector;
 import de.odenthma.geocache.client.MarshallUnmarshall;
-
+import de.odenthma.geocache.generatedclasses.cache.*;
+import de.odenthma.geocache.generatedclasses.cache.CacheType.Location;
+import de.odenthma.geocache.generatedclasses.cache.CacheType.Owner;
+import de.odenthma.geocache.generatedclasses.cache.CacheType.Parkplatz;
 
 @SuppressWarnings("serial")
 public class CreateCachePanel extends JPanel implements ActionListener{

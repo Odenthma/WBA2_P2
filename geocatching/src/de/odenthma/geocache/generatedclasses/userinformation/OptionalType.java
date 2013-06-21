@@ -6,7 +6,7 @@
 //
 
 
-package de.odenthma.geocache.UserInformation.Classes;
+package de.odenthma.geocache.generatedclasses.userinformation;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,8 +15,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
-import de.odenthma.geocache.UserInformation.Classes.OptionalType.Benachrichtigung;
-import de.odenthma.geocache.UserInformation.Classes.OptionalType.News;
 
 
 /**
