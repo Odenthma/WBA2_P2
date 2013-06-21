@@ -154,7 +154,7 @@ public class CreateCachePanel extends JPanel implements ActionListener{
 	}
 	private void send() throws IOException{
 		try {
-			new Connector().sendRequestAndData(new MarshallUnmarshall().writeCache("",ct));
+			new Connector().sendRequestAndData(new MarshallUnmarshall().writeCache(ct));
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -55,7 +55,37 @@ public class Connector {
 		rc.disconnect();  
 		System.out.println("response: "+response);
 	}
-	  
+	public void createUser(StringWriter sw) throws IOException{
+		System.out.println("Start sending  request");  
+		url = new URL( "http://localhost:4434/user/new" ); 
+		rc = (HttpURLConnection)url.openConnection();
+		   
+		rc.setRequestMethod("POST");  
+		rc.setDoOutput( true );  
+		rc.setDoInput( true );   
+		rc.setRequestProperty( "Content-Type", "text/xml; charset=utf-8" );  
+		reqStr = sw.toString();
+		len = reqStr.length();  
+		rc.setRequestProperty( "Content-Length", Integer.toString( len ) );  
+		rc.connect();      
+		out = new OutputStreamWriter( rc.getOutputStream() );   
+		out.write( reqStr, 0, len );  
+		out.flush();  
+		System.out.println("Request sent, reading response ");  
+		read = new InputStreamReader( rc.getInputStream() );  
+		System.out.println("response:/n/n/n/n/n/n ");
+		ch = read.read();
+		 
+		while( ch != -1 ){  
+			sb.append((char)ch);  
+			ch = read.read();  
+		}  
+		 
+		response = sb.toString(); 
+		read.close();  
+		rc.disconnect();  
+		System.out.println("response: "+response);
+	}
 	  public UserType getUser(String user, String password) throws IOException, JAXBException{
 		  String uri =
 				    "http://localhost:4434/user/"+user+"/"+password;

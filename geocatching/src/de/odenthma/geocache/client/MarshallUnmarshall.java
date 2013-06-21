@@ -29,12 +29,13 @@ public class MarshallUnmarshall {
 		return true;
 	}
 	
-	public StringWriter writeCache(String path,  CacheType ct){
+	public StringWriter writeCache(CacheType ct){
 		try {
 			context = JAXBContext.newInstance(CacheListType.class.getPackage().getName());
 			marshaller = context.createMarshaller();
 		    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
 		    marshaller.marshal(ct, sw);
+		   
 		    return sw;
 		} 
 		catch (JAXBException e) {
@@ -42,6 +43,20 @@ public class MarshallUnmarshall {
 		}
 	}
 
+	public StringWriter writeUser(UserType ut){
+		try {
+			context = JAXBContext.newInstance(UserType.class.getPackage().getName());
+			marshaller = context.createMarshaller();
+		    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
+		    marshaller.marshal(ut, sw);
+		    System.out.println(sw.toString());
+		    return sw;
+		} 
+		catch (JAXBException e) {
+			return null;
+		}
+	}
+	
 	public ArrayList<CacheType> getCaches(String path) throws JAXBException, FileNotFoundException{
 		context = JAXBContext.newInstance(CacheListType.class.getPackage().getName());
 		um = context.createUnmarshaller();

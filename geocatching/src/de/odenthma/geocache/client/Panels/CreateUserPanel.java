@@ -43,6 +43,13 @@ import de.odenthma.geocache.CacheClasses.CacheTypeEnum;
 import de.odenthma.geocache.CacheClasses.InformationenType;
 import de.odenthma.geocache.CacheClasses.PointEnum;
 import de.odenthma.geocache.CacheClasses.YesNoEnum;
+import de.odenthma.geocache.UserInformation.Classes.AccountType;
+import de.odenthma.geocache.UserInformation.Classes.AdressType;
+import de.odenthma.geocache.UserInformation.Classes.NameType;
+import de.odenthma.geocache.UserInformation.Classes.OptionalType;
+import de.odenthma.geocache.UserInformation.Classes.OrtsListeType;
+import de.odenthma.geocache.UserInformation.Classes.UserInformationType;
+import de.odenthma.geocache.UserInformation.Classes.UserType;
 //import info.clearthought.layout.*;
 import de.odenthma.geocache.client.Connector;
 import de.odenthma.geocache.client.MarshallUnmarshall;
@@ -51,61 +58,25 @@ import de.odenthma.geocache.utils.SpringUtilities;
 
 @SuppressWarnings("serial")
 public class CreateUserPanel extends JPanel implements ActionListener{
-	private static String MENU = "Menu";
 	public static String SCACHE = "Show Caches";
 	public static String NUSER = "Create User";
 	public static String NEWS = "Feeds anzeigen";
 	public static String CCACHE = "Create Cache";
-	private ActionListener listener;
 	
-	//UserInformation
-	private JLabel lblLastName;
 	private JTextField txtLastName;
-	private JLabel lblFirstName;
 	private JTextField txtFirstName;
 	
-	//Adress
-	private JLabel lblState;
-	private JTextField txtState;
-	private JLabel lblStreet;
 	private JTextField txtStreet;
-	private JLabel lblZip;
 	private JTextField txtZip;
-	private JLabel lblOrt;
 	private JTextField txtOrt;
 	
-	//Account
-	private JLabel lblLoginName;
 	private JTextField txtLoginName;
-	private JLabel lblLoginPw;
 	private JTextField txtLoginPw;
-	private JLabel lblEmail;
 	private JTextField txtEmail;
 
-	
+	UserType newUser;
 	public CreateUserPanel(ActionListener listener) {
-		this.listener = listener;
 		initComponents();
-	}
-
-	private void createCache() throws Exception{
-		
-	    send();
-	}
-	private void send() throws IOException{
-		try {
-//			new Connector().sendRequestAndData(new MarshallUnmarshall().writeCache("",ct));
-		} 
-		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	private void initComponents() {
-		this.add(new CreateUserPanel());
-	}
-	public CreateUserPanel(){
 		DefaultFormBuilder builder = new DefaultFormBuilder(new FormLayout(""));
 		builder.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		builder.appendColumn("right:pref");
@@ -119,49 +90,120 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 		//Adresse
 		builder.appendSeparator("Informationen");
     
-		builder.append("Vorname:", new JTextField());
+		builder.append("Vorname:",txtFirstName);
 
-		builder.append("Nachname:", new JTextField());
+		builder.append("Nachname:", txtLastName);
 		builder.nextLine();
 
 		//Adresse
 		builder.appendSeparator("Adresse");
     
-		builder.append("Straße", new JTextField());
+		builder.append("Straße", txtStreet);
 		builder.nextLine();
 
-		builder.append("ZIP:", new JTextField());
+		builder.append("PLZ:", txtZip);
 //    	builder.nextLine();
 
-		builder.append("Ort:", new JTextField());
+		builder.append("Ort:", txtOrt);
 		builder.nextLine();
 
     
 		builder.appendSeparator("Account");
 
-		builder.append("LoginName:", new JTextField());
+		builder.append("LoginName:", txtLoginName);
 		builder.nextLine();
 
-		builder.append("Passwort:", new JTextField());
+		builder.append("Passwort:",txtLoginPw);
 		builder.nextLine();
 
-		builder.append("Email:", new JTextField());
+		builder.append("Email:", txtEmail);
 		builder.nextLine();
 
 		builder.appendSeparator("Menü");
     
 		JButton btnSave = new JButton("Erstellen");
+		btnSave.addActionListener(this);
 		JButton btnAddOptionals = new JButton("Abonieren");
-
+		JTextField bla = new JTextField(); // damit die unteren Buttons in der Mitte sind. Dient als Platzhalter
+		bla.setVisible(false);
+		builder.append(bla);
 		builder.append(btnAddOptionals);
     
 		builder.append(btnSave);
 		add(builder.getPanel());
 	}
+
+	private void send() throws IOException{
+		try {
+			new Connector().createUser(new MarshallUnmarshall().writeUser(newUser));
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
+	public void buildUserType(){
+		newUser = new UserType();
+		UserInformationType ui = new UserInformationType();
+		NameType nt = new NameType();
+		AdressType at = new AdressType();
+		AccountType act = new AccountType();
+		OptionalType ot = new OptionalType();
+		UID userId = new UID();
+		OrtsListeType olt = new OrtsListeType();
+		
+		nt.setFirstName(txtFirstName.getText());
+		nt.setLastName(txtLastName.getText());
+		
+		at.setOrt(txtOrt.getText());
+		at.setState("");
+		at.setStreet(txtStreet.getText());
+		at.setZipCode(txtZip.getText());
+		
+		ui.setAdress(at);
+		ui.setName(nt);
+		
+		act.setLogInName(txtLoginName.getText());
+		act.setLogInPW(txtLoginPw.getText());
+		act.setEmail(txtEmail.getText());
+		
+		ot.setOrtsListe(olt);
+		newUser.setUserInformation(ui);
+		newUser.setAccount(act);
+		
+		newUser.setOptional(ot);
+		
+		newUser.setBId(userId.toString());
+	}
+	
+	private void initComponents() {
+//		this.add(new CreateUserPanel());
+		
+		//UserInformation
+		txtLastName = new JTextField();
+		txtFirstName = new JTextField();
+		
+		//Adress
+		txtStreet = new JTextField();
+		txtZip = new JTextField();
+		txtOrt = new JTextField();
+		
+		//Account
+		txtLoginName = new JTextField();
+		txtLoginPw = new JTextField();
+		txtEmail = new JTextField();
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		try {
+			buildUserType();
+			send();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 	}
 }

@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -83,7 +84,7 @@ public class GeoCatchingClient implements ActionListener{
 		JButton o = (JButton)e.getSource();
 		String name = o.getText();
 //		System.out.println(name);
-		
+		System.out.println(name);
 		if(name ==  ULOGIN){ name = MENU;}
 		
 		frame.setTitle(name);

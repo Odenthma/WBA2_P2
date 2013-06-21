@@ -66,6 +66,15 @@ public class UserService {
 			m.marshal( ult, System.out );
 			
 			return ult;
+			
+//			JAXBContext context = JAXBContext.newInstance(CacheListType.class.getPackage().getName());
+//			Unmarshaller um = context.createUnmarshaller();
+//			clt = (CacheListType)((JAXBElement<?>)um.unmarshal(new FileReader(relativeNew.getPath()))).getValue();
+//			Marshaller m = context.createMarshaller();
+//			m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
+//			m.marshal( clt, System.out );
+//			
+//			return clt;
 		}
 		
 		
@@ -98,10 +107,11 @@ public class UserService {
 			   UserType ut = (UserType)unmarshall(incomingXML, UserType.class);
 			   user.addUser(ut);
 				
-				   JAXBContext contexts= JAXBContext.newInstance(CacheListType.class);
+				   JAXBContext contexts= JAXBContext.newInstance(UserListType.class);
 				   Marshaller m = contexts.createMarshaller();
 				   m.marshal(user, new FileWriter(relativeNew.getPath()));   
 			return ut;
+//			return null;
 		   }
 		
 		private Object unmarshall(String str, Class<?> c) {

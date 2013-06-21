@@ -1,11 +1,13 @@
 package de.odenthma.geocache.client.Panels;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.xml.bind.JAXBException;
@@ -19,18 +21,24 @@ import de.odenthma.geocache.client.Connector;
 public class LoginPanel extends JPanel implements ActionListener{
 	public static String LOGIN = "Login";
 	public static String ULOGIN = "User Login";
-	private ActionListener listener;
-	private JButton pseudoButton = new JButton(ULOGIN);
+	public static String ABORT = "Abbrechen";
+	private static String LUSER = "Login";
+	private static String MENU = "Menu";
+	private ActionListener parentListener;
+	private ActionListener mainListener;
+	private JButton btnPseudoLogin = new JButton(ULOGIN);
+	private JButton btnPseudoAbort = new JButton(LUSER);
 	JButton btnLogin;
+	JButton btnAbort;
 	JTextField txtName = new JTextField();
 	JTextField txtPass = new JTextField();
-	private void initComponents() {
-		this.add(new LoginPanel(null));
-	}
+
 	
-	public LoginPanel( ActionListener listener){
-		this.listener = listener;
+	public LoginPanel( ActionListener parentListener, ActionListener mainListener){
+		this.parentListener = parentListener;
+		this.mainListener = mainListener;
 		DefaultFormBuilder builder = new DefaultFormBuilder(new FormLayout(""));
+		
 		builder.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		builder.appendColumn("right:pref");
 		builder.appendColumn("3dlu");
@@ -44,31 +52,47 @@ public class LoginPanel extends JPanel implements ActionListener{
 		builder.nextLine();
 		
 		btnLogin = new JButton(LOGIN);
+		btnAbort = new JButton(ABORT);
 		btnLogin.addActionListener(this);
-		JButton btnAbort = new JButton("Abbrechen");
-		btnLogin.addActionListener(this);
+		btnAbort.addActionListener(this);
+		
+		JTextField bla = new JTextField(); // damit die unteren Buttons in der Mitte sind. Dient als Platzhalter
+		bla.setVisible(false);
+		builder.append(bla);
+		
 		builder.append(btnAbort);
     
 		builder.append(btnLogin);
-		pseudoButton.addActionListener(listener);
+		btnPseudoLogin.addActionListener(mainListener);
+		btnPseudoAbort.addActionListener(parentListener);
 		add(builder.getPanel());
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		UserType ut = null;
 		boolean account = false;
+		JButton o = (JButton)e.getSource();
+		String name = o.getText();
+		
+		if(name == LOGIN){
 			try {
 				ut= new Connector().getUser(txtName.getText(),txtPass.getText());
 				account = true;
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (JAXBException e) {
-				e.printStackTrace();
+			} 
+			catch (IOException ex) {
+				System.out.println("Login fehlgeschlafen");
+			} 
+			catch (JAXBException ex) {
+				ex.printStackTrace();
 			}
 	
-		if(account){
-			pseudoButton.doClick();
+			if(account){
+				btnPseudoLogin.doClick();
+			}
+		}
+		if(name == ABORT){
+			btnPseudoAbort.doClick();
 		}
 	}
 }

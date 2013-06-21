@@ -34,9 +34,9 @@ public class UserPanel extends JPanel implements ActionListener{
 
 	public UserPanel(ActionListener listener) throws FileNotFoundException, JAXBException{
 		this.listener = listener;
-		ArrayList<UserType> users = new ArrayList<UserType>();
-		users = getUsers();
-		System.out.println("User: "+users.get(1).getAccount().getLogInName());
+//		ArrayList<UserType> users = new ArrayList<UserType>();
+//		users = getUsers();
+//		System.out.println("User: "+users.get(1).getAccount().getLogInName());
 		initComponents();
 	}
 	
@@ -60,12 +60,13 @@ public class UserPanel extends JPanel implements ActionListener{
 		this.setPreferredSize(new Dimension(200, 120));
 	}
 	
-	public ArrayList<UserType> getUsers() throws FileNotFoundException, JAXBException{
-		return new MarshallUnmarshall().getUsers(new PathHandler().getPath("/UserListNew.xml"));
-	}
+//	public ArrayList<UserType> getUsers() throws FileNotFoundException, JAXBException{
+////		return new MarshallUnmarshall().getUsers(new PathHandler().getPath("/UserListNew.xml"));
+//	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		JButton o = (JButton)e.getSource();
 		String name = o.getText();
 		c_panel.removeAll();
@@ -74,7 +75,7 @@ public class UserPanel extends JPanel implements ActionListener{
 			c_panel.add(new CreateUserPanel(listener));
 		}
 		if(name.equals(ULOGIN)){
-			c_panel.add(new LoginPanel(listener));
+			c_panel.add(new LoginPanel(this, listener));
 		}
 		this.updateUI();
 	}
