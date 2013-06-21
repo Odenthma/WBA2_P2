@@ -17,26 +17,23 @@ import com.jgoodies.forms.layout.FormLayout;
 
 import de.odenthma.geocache.UserInformation.Classes.UserType;
 import de.odenthma.geocache.client.Connector;
+import de.odenthma.geocache.client.Globals;
 
 public class LoginPanel extends JPanel implements ActionListener{
 	public static String LOGIN = "Login";
 	public static String ULOGIN = "User Login";
 	public static String ABORT = "Abbrechen";
 	private static String LUSER = "Login";
-	private static String MENU = "Menu";
-	private ActionListener parentListener;
-	private ActionListener mainListener;
 	private JButton btnPseudoLogin = new JButton(ULOGIN);
 	private JButton btnPseudoAbort = new JButton(LUSER);
 	JButton btnLogin;
 	JButton btnAbort;
 	JTextField txtName = new JTextField();
 	JTextField txtPass = new JTextField();
-
+	Globals globals;
 	
-	public LoginPanel( ActionListener parentListener, ActionListener mainListener){
-		this.parentListener = parentListener;
-		this.mainListener = mainListener;
+	public LoginPanel( ActionListener parentListener, ActionListener mainListener, Globals globals){
+		this.globals = globals;
 		DefaultFormBuilder builder = new DefaultFormBuilder(new FormLayout(""));
 		
 		builder.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -70,14 +67,13 @@ public class LoginPanel extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		UserType ut = null;
 		boolean account = false;
 		JButton o = (JButton)e.getSource();
 		String name = o.getText();
 		
 		if(name == LOGIN){
 			try {
-				ut= new Connector().getUser(txtName.getText(),txtPass.getText());
+				globals.setActiveUser(new Connector().getUser(txtName.getText(),txtPass.getText()));
 				account = true;
 			} 
 			catch (IOException ex) {

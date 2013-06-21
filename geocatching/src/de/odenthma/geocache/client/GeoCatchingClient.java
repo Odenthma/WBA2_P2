@@ -13,6 +13,7 @@ import javax.xml.bind.JAXBException;
 
 import de.odenthma.geocache.client.Panels.CreateCachePanel;
 import de.odenthma.geocache.client.Panels.CreateUserPanel;
+import de.odenthma.geocache.client.Panels.ServerPanel;
 import de.odenthma.geocache.client.Panels.UserPanel;
 import de.odenthma.geocache.client.Panels.MenuPanel;
 import de.odenthma.geocache.client.Panels.NewsPanel;
@@ -26,7 +27,7 @@ public class GeoCatchingClient implements ActionListener{
 	private static String CCACHE = "Create Cache";
 	private static String LUSER = "Login";
 	public static String ULOGIN = "User Login";
-	
+	private static String SERVER ="Connect";
 	private JFrame frame = new JFrame("CardLayout");
 	private JPanel panels  = new JPanel();
 	
@@ -36,7 +37,10 @@ public class GeoCatchingClient implements ActionListener{
 	private CreateCachePanel jpCreateCache;
 	private NewsPanel jpNews;
 	private UserPanel jpLogin;
+	private ServerPanel jpServer;
 	private CardLayout cl = new CardLayout();
+	
+	private Globals globals = new Globals();
 	
 	public GeoCatchingClient() throws JAXBException, IOException{
 		jpMenu = new MenuPanel(this);
@@ -44,7 +48,8 @@ public class GeoCatchingClient implements ActionListener{
 		jpNewUser = new CreateUserPanel(this);
 		jpCreateCache = new CreateCachePanel(this);
 		jpNews = new NewsPanel(cl, panels,frame);
-		jpLogin = new UserPanel(this);
+		jpLogin = new UserPanel(this,globals);
+		
 		panels.setLayout(cl);
 		panels.add(jpMenu,MENU);
 		panels.add(jpShowCache,SCACHE);
@@ -52,7 +57,6 @@ public class GeoCatchingClient implements ActionListener{
 		panels.add(jpNews, NEWS);
 		panels.add(jpCreateCache, CCACHE);
 		panels.add(jpLogin, LUSER);
-		
 		cl.show(panels, LUSER);
 //		cl.show(panels, MENU);
 		

@@ -15,6 +15,7 @@ import javax.swing.border.Border;
 import javax.xml.bind.JAXBException;
 
 import de.odenthma.geocache.UserInformation.Classes.UserType;
+import de.odenthma.geocache.client.Globals;
 import de.odenthma.geocache.client.MarshallUnmarshall;
 import de.odenthma.geocache.client.PathHandler;
 
@@ -22,18 +23,21 @@ import de.odenthma.geocache.client.PathHandler;
 public class UserPanel extends JPanel implements ActionListener{
 	public static String ULOGIN = "User Login";
 	public static String LOGIN = "Login";
+	private static String SERVEROK ="Server OK";
 	ActionListener listener;
 	private JPanel s_panel;
 	private JPanel c_panel;
 	private Border emptyBorder = BorderFactory.createEmptyBorder();
 	private static String MENU = "Menu";
-
+	private static String SERVER ="Connect";
 	JButton btnCreateUser = new JButton("User erstellen");
 	JButton btnLogin = new JButton(ULOGIN);
 	JButton btnOk = new JButton(MENU);
-
-	public UserPanel(ActionListener listener) throws FileNotFoundException, JAXBException{
+	private ServerPanel jpServer;
+	Globals globals;
+	public UserPanel(ActionListener listener, Globals globals) throws FileNotFoundException, JAXBException{
 		this.listener = listener;
+		this.globals = globals;
 //		ArrayList<UserType> users = new ArrayList<UserType>();
 //		users = getUsers();
 //		System.out.println("User: "+users.get(1).getAccount().getLogInName());
@@ -43,11 +47,14 @@ public class UserPanel extends JPanel implements ActionListener{
 	public void initComponents(){
     	s_panel = new JPanel(new FlowLayout());
     	c_panel = new JPanel(new FlowLayout());
-    		  
+    	jpServer = new ServerPanel(this,globals);
+    	c_panel.add(jpServer);
 	    s_panel.setBorder(BorderFactory.createTitledBorder("Menü")); 
 	    c_panel.setBorder(BorderFactory.createTitledBorder("User Login"));
 
 	    btnCreateUser.addActionListener(this);
+	    btnCreateUser.setEnabled(false);
+	    btnLogin.setEnabled(false);
 	    s_panel.add(btnCreateUser);
 	    s_panel.add(btnLogin);
 	    btnLogin.addActionListener(this);
@@ -70,7 +77,10 @@ public class UserPanel extends JPanel implements ActionListener{
 		JButton o = (JButton)e.getSource();
 		String name = o.getText();
 		c_panel.removeAll();
-		
+		if(name.equals(SERVEROK)){
+			  btnCreateUser.setEnabled(true);
+			    btnLogin.setEnabled(true);
+		}
 		if(name.equals("User erstellen")){
 			c_panel.add(new CreateUserPanel(listener));
 		}

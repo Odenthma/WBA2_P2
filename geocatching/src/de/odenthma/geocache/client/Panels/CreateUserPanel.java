@@ -138,7 +138,6 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 			new Connector().createUser(new MarshallUnmarshall().writeUser(newUser));
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -197,13 +196,25 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		try {
-			buildUserType();
-			send();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		if(		txtLastName.getText().trim().equals("")||
+				txtFirstName.getText().trim().equals("")||
+				txtStreet.getText().trim().equals("")||
+				txtZip.getText().trim().equals("")||
+				txtOrt.getText().trim().equals("")||
+				txtLoginName.getText().trim().equals("")||
+				txtLoginPw.getText().trim().equals("")||
+				txtEmail.getText().trim().equals("")){
+			JOptionPane.showMessageDialog(this, "Alle Felder müssen ausgefüllt sein!");
 		}
-		
+		else{
+			try {
+				buildUserType();
+				send();
+				JOptionPane.showMessageDialog(this, "Benutzer wurde angelegt!");
+			} 
+			catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 }
