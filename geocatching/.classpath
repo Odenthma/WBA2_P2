@@ -28,5 +28,11 @@
 	<classpathentry kind="lib" path="lib/smackx-debug.jar"/>
 	<classpathentry kind="lib" path="lib/smackx-jingle.jar"/>
 	<classpathentry kind="lib" path="lib/smackx.jar"/>
+	<classpathentry kind="lib" path="lib/javaGeom-0.11.1.jar"/>
+	<classpathentry kind="lib" path="lib/groovy-1.8.8.jar"/>
+	<classpathentry kind="lib" path="lib/geoscript-groovy-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl.jar"/>
+	<classpathentry kind="lib" path="lib/slick.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

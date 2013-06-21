@@ -10,6 +10,7 @@ import java.io.StringReader;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -24,7 +25,7 @@ import de.odenthma.geocache.UserInformation.Classes.ObjectFactory;
 import de.odenthma.geocache.UserInformation.Classes.UserListType;
 import de.odenthma.geocache.UserInformation.Classes.UserType;
 
-
+//TODO: Marshalling in eigene Klasse, damit Code übersichtlicher wird
 
 @Path( "/user" )
 public class UserService {
@@ -66,6 +67,29 @@ public class UserService {
 			
 			return ult;
 		}
+		
+		
+		/*
+		 * Username and password check
+		 * UserXML wird zurück gesendet, da diese vom eingeloggten User bearbeitet werden kann
+		 */
+		@GET
+		@Path("/{user}/{password}")
+		@Produces( "application/xml" )
+		public UserType checkUser(@PathParam("user") String user, @PathParam("password") String password) throws JAXBException, FileNotFoundException{
+			JAXBContext context = JAXBContext.newInstance(UserListType.class.getPackage().getName());
+			Unmarshaller um = context.createUnmarshaller();
+			ult = (UserListType)(um.unmarshal(new FileReader(relativeNew.getPath())));
+			UserType ut = null;
+			
+			for(UserType userThis: ult.getUser()){
+				if(user.equals(userThis.getAccount().getLogInName()) && password.equals(userThis.getAccount().getLogInPW()))
+					ut = userThis;
+			}
+
+			return ut;
+		}
+		
 		@POST
 		   @Path("/new")
 		   @Produces("application/xml")

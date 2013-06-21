@@ -35,31 +35,20 @@ import de.odenthma.geocache.CacheClasses.CacheType;
 import de.odenthma.geocache.client.CacheTableModel;
 import de.odenthma.geocache.client.Connector;
 import de.odenthma.geocache.client.MarshallUnmarshall;
+import de.odenthma.geocache.utils.FilterCaches;
 
+//TODO: Tabelle mit einem Cache implementieren
 
 @SuppressWarnings("serial")
 public class ShowCachePanel extends JPanel implements ComponentListener, ActionListener{
-	public static String MENU = "Menu";
-	public static String SCACHE = "Show Caches";
-	public static String NUSER = "Create User";
-	public static String NEWS = "Feeds anzeigen";
-	public static String CCACHE = "Create Cache";
-	
+	private static String MENU = "Menu";
 	private Border emptyBorder = BorderFactory.createEmptyBorder();
 	private static String NEWPATH = "C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/CacheListNew.xml";
-
 	private JButton btnMenu;
-	JButton btnDelete;
-	
-	
+	private JButton btnDelete;
 	private ActionListener listener;
 	private JTable cacheTable;
-	CacheListType clt;
-//	ArrayList<String> caches = new ArrayList<String>();
-//	String url = "http://localhost:4434/cachelist/new";
-//	String columnName = "Cache";
 	private CacheTableModel cacheData;
- 
 	private JPanel n_panel;
 	private JPanel s_panel;
 	private JPanel e_panel;
@@ -99,6 +88,7 @@ public class ShowCachePanel extends JPanel implements ComponentListener, ActionL
 	private void createTable() throws FileNotFoundException, JAXBException{
 	    	cacheData = new CacheTableModel(getCaches());
 			cacheTable = new JTable(cacheData);
+			new FilterCaches().getCachesWithinRange(getCaches().get(3), 1004);
 			
 	}
 	
@@ -110,13 +100,11 @@ public class ShowCachePanel extends JPanel implements ComponentListener, ActionL
 		this.listener = listener;  
 		createTable();
 		initPanelsAndComponents();
-		
 	}
 	
 	private void updateTable() throws FileNotFoundException, JAXBException{
 		cacheData = new CacheTableModel(getCaches());
 		cacheTable.setModel(cacheData);
-		
 	}
 	
 	@Override
@@ -135,10 +123,12 @@ public class ShowCachePanel extends JPanel implements ComponentListener, ActionL
 	public void componentShown(ComponentEvent e) {
 		try {
 			updateTable();
-		} catch (FileNotFoundException e1) {
+		} 
+		catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (JAXBException e1) {
+		} 
+		catch (JAXBException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
@@ -149,28 +139,19 @@ public class ShowCachePanel extends JPanel implements ComponentListener, ActionL
 		JButton o = (JButton)e.getSource();
 		String name = o.getText();
 		if(name == "Delete"){
-					try {
-						new Connector().sendRequestAndDeleteCache(getCaches().get(cacheTable.getSelectedRow()).getCId());
-						updateTable();
-						
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (JAXBException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
+			try {
+				new Connector().sendRequestAndDeleteCache(getCaches().get(cacheTable.getSelectedRow()).getCId());
+				updateTable();
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			} catch (JAXBException e1) {
+				e1.printStackTrace();
+			}			
 		}
 		if(name == "Show"){
 			
 		}
-		
-	}
-
-
-	
+	}	
 }

@@ -23,6 +23,7 @@ public class MarshallUnmarshall {
 	private JAXBContext context;
 	private Marshaller marshaller;
 	private Unmarshaller um;
+	private UserType ut;
 	
 	public boolean writeCacheList(String path, CacheListType clt){
 		return true;
@@ -48,10 +49,17 @@ public class MarshallUnmarshall {
 		return clt.getCache();
 	}
 	
-	public ArrayList<UserType> getUser(String path) throws JAXBException, FileNotFoundException{
+	public ArrayList<UserType> getUsers(String path) throws JAXBException, FileNotFoundException{
 		context = JAXBContext.newInstance(UserListType.class.getPackage().getName());
 		um = context.createUnmarshaller();
 		ult = (UserListType)(um.unmarshal(new FileReader(path)));
 		return ult.getUser();
+	}
+	
+	public UserType getUser(String path) throws JAXBException, FileNotFoundException{
+		context = JAXBContext.newInstance(UserType.class.getPackage().getName());
+		um = context.createUnmarshaller();
+		ut = (UserType)(um.unmarshal(new FileReader(path)));
+		return ut;
 	}
 }
