@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import de.odenthma.geocache.client.Globals;
+
 
 @SuppressWarnings("serial")
 public class MenuPanel extends JPanel {
@@ -27,6 +29,8 @@ public class MenuPanel extends JPanel {
 	public MenuPanel(ActionListener listener){
 		this.listener = listener;
 		initMenu();
+		Globals gl = new Globals();
+		
 	}
 	
 	public void initMenu(){

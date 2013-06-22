@@ -25,7 +25,7 @@ public class ServerPanel extends JPanel implements ActionListener{
 	private static String LUSER = "Login";
 	private static String SERVEROK ="Server OK";
 	private JButton btnPseudoServerOkay = new JButton(SERVEROK);
-
+	private boolean fastLogin = true;
 	JButton btnConnect;
 	JTextField txtServer = new JTextField();
 	JTextField txtPort = new JTextField();
@@ -56,13 +56,19 @@ public class ServerPanel extends JPanel implements ActionListener{
 		builder.append(btnConnect);
 		builder.append(lblStatus);
 		btnPseudoServerOkay.addActionListener(mainListener);
+		
+		
 		add(builder.getPanel());
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String strUrl = txtServer.getText()+":"+txtPort.getText();
-
+		String strUrl;
+		if(fastLogin){
+			strUrl = "http://localhost:4434";
+		}
+		else
+			strUrl = txtServer.getText()+":"+txtPort.getText();
 	    try {
 	        URL url = new URL(strUrl);
 	        HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();

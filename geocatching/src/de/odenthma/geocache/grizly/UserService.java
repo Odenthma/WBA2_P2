@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -19,17 +20,23 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 
+import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smackx.pubsub.Item;
+import org.jivesoftware.smackx.pubsub.ItemPublishEvent;
+import org.jivesoftware.smackx.pubsub.listener.ItemEventListener;
+
 import de.odenthma.geocache.generatedclasses.userinformation.*;
+import de.odenthma.geocache.xmppstuff.PubSub;
 
 
 
 //TODO: Marshalling in eigene Klasse, damit Code übersichtlicher wird
 
 @Path( "/user" )
-public class UserService {
+public class UserService{
 	private static String ORIGINALPATH = "../geocatching/src/de/odenthma/geocache/xml/UserList.xml";
 	private static String NEWPATH = "../geocatching/src/de/odenthma/geocache/xml/UserListNew.xml";
-	
+	PubSub ps = new PubSub();
 	File relativeNew = new File(NEWPATH);
 	File relativeOld = new File(ORIGINALPATH);
 	ObjectFactory ob;
@@ -88,20 +95,36 @@ public class UserService {
 		}
 		
 		@POST
-		   @Path("/new")
-		   @Produces("application/xml")
-		   public UserType postNew(String incomingXML) throws JAXBException, IOException {   
-			   UserListType user = getAllNew();
-			   UserType ut = (UserType)unmarshall(incomingXML, UserType.class);
-			   user.addUser(ut);
+		@Path("/new")
+		@Produces("application/xml")
+		public UserType postNew(String incomingXML) throws JAXBException, IOException {   
+			UserListType user = getAllNew();
+			UserType ut = (UserType)unmarshall(incomingXML, UserType.class);
+			user.addUser(ut);
 				
-				   JAXBContext contexts= JAXBContext.newInstance(UserListType.class);
-				   Marshaller m = contexts.createMarshaller();
-				   m.marshal(user, new FileWriter(relativeNew.getPath()));   
+			JAXBContext contexts= JAXBContext.newInstance(UserListType.class);
+			Marshaller m = contexts.createMarshaller();
+			m.marshal(user, new FileWriter(relativeNew.getPath()));  
+			
+			ArrayList<OrtsType> orte = ut.getOptional().getOrtsListe().getOrt();
+			
+			if(orte.size() > 0){
+				
+				ps.connect("localhost",5222);
+				ps.login("publisher", "publisher");
+				
+			}
+			for(OrtsType ort : orte){
+				try {
+					ps.createNode(ort.getPostal()+":"+ort.getLat()+":"+ort.getLon(), true);
+				} 
+				catch (XMPPException e) {
+					e.printStackTrace();
+				}
+				ps.disconnect();
+			}
 			return ut;
-//			return null;
 		   }
-		
 		private Object unmarshall(String str, Class<?> c) {
 			Object element = null;
 			try {
@@ -114,4 +137,6 @@ public class UserService {
 
 			return element;
 		}
+
+
 }

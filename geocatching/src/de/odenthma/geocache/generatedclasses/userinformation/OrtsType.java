@@ -47,9 +47,9 @@ public class OrtsType {
     @XmlValue
     protected String value;
     @XmlAttribute(required = true)
-    protected BigDecimal lat;
+    protected double lat;
     @XmlAttribute(required = true)
-    protected BigDecimal lon;
+    protected double lon;
     @XmlAttribute(required = true)
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String postal;
@@ -89,7 +89,7 @@ public class OrtsType {
      *     {@link BigDecimal }
      *     
      */
-    public BigDecimal getLat() {
+    public double getLat() {
         return lat;
     }
 
@@ -101,7 +101,7 @@ public class OrtsType {
      *     {@link BigDecimal }
      *     
      */
-    public void setLat(BigDecimal value) {
+    public void setLat(double value) {
         this.lat = value;
     }
 
@@ -113,7 +113,7 @@ public class OrtsType {
      *     {@link BigDecimal }
      *     
      */
-    public BigDecimal getLon() {
+    public double getLon() {
         return lon;
     }
 
@@ -125,7 +125,7 @@ public class OrtsType {
      *     {@link BigDecimal }
      *     
      */
-    public void setLon(BigDecimal value) {
+    public void setLon(double value) {
         this.lon = value;
     }
 
@@ -161,7 +161,7 @@ public class OrtsType {
      *     {@link String }
      *     
      */
-    public String getUmkreis() {
+    public  String getUmkreis() {
         return umkreis;
     }
 
@@ -173,7 +173,7 @@ public class OrtsType {
      *     {@link String }
      *     
      */
-    public void setUmkreis(String value) {
+    public void setUmkreis( String value) {
         this.umkreis = value;
     }
 

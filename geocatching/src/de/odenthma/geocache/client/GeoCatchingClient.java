@@ -70,6 +70,7 @@ public class GeoCatchingClient implements ActionListener{
 		SwingUtilities.invokeLater(new Runnable(){
 			@Override
 			public void run() {
+				
 				try {
 					new GeoCatchingClient();
 				} 

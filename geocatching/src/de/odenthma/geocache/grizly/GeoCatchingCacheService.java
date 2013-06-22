@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 
 import javax.ws.rs.*;
 import javax.xml.bind.JAXBContext;
@@ -17,7 +18,10 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 
+import org.jivesoftware.smack.XMPPException;
+
 import de.odenthma.geocache.generatedclasses.cache.*;
+import de.odenthma.geocache.xmppstuff.PubSub;
 
 
 
@@ -74,20 +78,36 @@ public class GeoCatchingCacheService {
 		return clt;
 	}
 	
+	public void handleNodes(){
+		PubSub ps = new PubSub();
+		ArrayList<String> allNodes = new ArrayList<String>();
+		ps.connect("localhost", 5222);
+		ps.login("publisher", "publisher");			
+		try {
+			allNodes = (ArrayList<String>) ps.getNodes();
+		} catch (XMPPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(String node : allNodes)
+			System.out.println(node);
+	}
 
-				@POST
-			   @Path("/new")
-			   @Produces("application/xml")
-			   public CacheType postNew(String incomingXML) throws JAXBException, IOException {   
-				   CacheListType caches = getAllNew();
-				   CacheType ct = (CacheType)unmarshall(incomingXML, CacheType.class);
-				   caches.addCache(ct);
-					
-					   JAXBContext contexts= JAXBContext.newInstance(CacheListType.class);
-					   Marshaller m = contexts.createMarshaller();
-					   m.marshal(caches, new FileWriter(relativeNew.getPath()));   
-				return ct;
-			   }
+	@POST
+	@Path("/new")
+	@Produces("application/xml")
+	public CacheType postNew(String incomingXML) throws JAXBException, IOException {   
+		CacheListType caches = getAllNew();
+		CacheType ct = (CacheType)unmarshall(incomingXML, CacheType.class);
+		caches.addCache(ct);
+		
+		handleNodes();
+		
+		JAXBContext contexts= JAXBContext.newInstance(CacheListType.class);
+		Marshaller m = contexts.createMarshaller();
+		m.marshal(caches, new FileWriter(relativeNew.getPath()));   
+		return ct;
+	}
 		//Cache in Testcaches anhand ID löschen
 	   
 	@DELETE

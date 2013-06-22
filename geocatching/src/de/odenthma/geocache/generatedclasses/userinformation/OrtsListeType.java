@@ -10,10 +10,13 @@ package de.odenthma.geocache.generatedclasses.userinformation;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import de.odenthma.geocache.generatedclasses.cache.CacheType;
 
 
 /**
@@ -42,7 +45,7 @@ import javax.xml.bind.annotation.XmlType;
 public class OrtsListeType {
 
     @XmlElement(required = true)
-    protected List<OrtsType> ort;
+    protected ArrayList<OrtsType> ort = new ArrayList<OrtsType>();
 
     /**
      * Gets the value of the ort property.
@@ -66,11 +69,12 @@ public class OrtsListeType {
      * 
      * 
      */
-    public List<OrtsType> getOrt() {
-        if (ort == null) {
-            ort = new ArrayList<OrtsType>();
-        }
+    public ArrayList<OrtsType> getOrt() {
         return this.ort;
+    }
+    public void addOrt(OrtsType ort){
+    	this.ort.add(ort);
+    	System.out.println("added Ort:");
     }
 
 }

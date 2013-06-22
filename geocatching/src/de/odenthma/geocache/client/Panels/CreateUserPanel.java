@@ -1,56 +1,18 @@
 package de.odenthma.geocache.client.Panels;
 
-import info.clearthought.layout.TableLayout;
-import info.clearthought.layout.TableLayoutConstraints;
-
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.rmi.server.UID;
-import java.util.GregorianCalendar;
-
+import java.util.ArrayList;
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
-import javax.ws.rs.core.MediaType;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.datatype.XMLGregorianCalendar;
-
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.WebResource;
-
-
-
-
-
-
-
 //import info.clearthought.layout.*;
 import de.odenthma.geocache.client.Connector;
 import de.odenthma.geocache.client.MarshallUnmarshall;
-import de.odenthma.geocache.generatedclasses.userinformation.AccountType;
-import de.odenthma.geocache.generatedclasses.userinformation.AdressType;
-import de.odenthma.geocache.generatedclasses.userinformation.NameType;
-import de.odenthma.geocache.generatedclasses.userinformation.OptionalType;
-import de.odenthma.geocache.generatedclasses.userinformation.OrtsListeType;
-import de.odenthma.geocache.generatedclasses.userinformation.UserInformationType;
-import de.odenthma.geocache.generatedclasses.userinformation.UserType;
-import de.odenthma.geocache.utils.SpringUtilities;
+import de.odenthma.geocache.generatedclasses.userinformation.*;
 
 
 @SuppressWarnings("serial")
@@ -121,6 +83,7 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 		JButton btnSave = new JButton("Erstellen");
 		btnSave.addActionListener(this);
 		JButton btnAddOptionals = new JButton("Abonieren");
+		btnAddOptionals.addActionListener(this);
 		JTextField bla = new JTextField(); // damit die unteren Buttons in der Mitte sind. Dient als Platzhalter
 		bla.setVisible(false);
 		builder.append(bla);
@@ -147,7 +110,7 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 		AccountType act = new AccountType();
 		OptionalType ot = new OptionalType();
 		UID userId = new UID();
-		OrtsListeType olt = new OrtsListeType();
+		
 		
 		nt.setFirstName(txtFirstName.getText());
 		nt.setLastName(txtLastName.getText());
@@ -164,6 +127,18 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 		act.setLogInPW(txtLoginPw.getText());
 		act.setEmail(txtEmail.getText());
 		
+		if(optionals){
+			OptionalType.News news = new OptionalType.News();
+			news.setWanted(YesNoEnum.JA);
+			OptionalType.Benachrichtigung benachrichtigung = new OptionalType.Benachrichtigung();
+			benachrichtigung.setWanted(YesNoEnum.JA);
+			
+			ot.setNews(news);
+			ot.setBenachrichtigung(benachrichtigung);
+//			olt.addOrt(ort);
+		}
+//		olt.addOrte(orte);
+		//bearbeiten
 		ot.setOrtsListe(olt);
 		newUser.setUserInformation(ui);
 		newUser.setAccount(act);
@@ -190,28 +165,72 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 		txtLoginPw = new JTextField();
 		txtEmail = new JTextField();
 	}
+	
+	public void buildOptionalType(String plz, String lat, String lon, String radius){
 
+		OrtsType ort = new OrtsType();
+		ort.setPostal(plz);
+		ort.setLat(Double.parseDouble(lat));
+		ort.setLon(Double.parseDouble(lon));
+		ort.setUmkreis(radius);
+		
+		olt.addOrt(ort);
+	}
+	OrtsListeType olt = new OrtsListeType();
+	ArrayList<OrtsType> orte = new ArrayList<OrtsType>();
+	boolean optionals = false;
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(		txtLastName.getText().trim().equals("")||
-				txtFirstName.getText().trim().equals("")||
-				txtStreet.getText().trim().equals("")||
-				txtZip.getText().trim().equals("")||
-				txtOrt.getText().trim().equals("")||
-				txtLoginName.getText().trim().equals("")||
-				txtLoginPw.getText().trim().equals("")||
-				txtEmail.getText().trim().equals("")){
-			JOptionPane.showMessageDialog(this, "Alle Felder müssen ausgefüllt sein!");
-		}
-		else{
-			try {
-				buildUserType();
-				send();
-				JOptionPane.showMessageDialog(this, "Benutzer wurde angelegt!");
-			} 
-			catch (IOException e1) {
-				e1.printStackTrace();
+		
+		JButton o = (JButton)e.getSource();
+		String name = o.getText();
+		if(name.equals("Erstellen")){
+			if(		txtLastName.getText().trim().equals("")||
+					txtFirstName.getText().trim().equals("")||
+					txtStreet.getText().trim().equals("")||
+					txtZip.getText().trim().equals("")||
+					txtOrt.getText().trim().equals("")||
+					txtLoginName.getText().trim().equals("")||
+					txtLoginPw.getText().trim().equals("")||
+					txtEmail.getText().trim().equals("")){
+				JOptionPane.showMessageDialog(this, "Alle Felder müssen ausgefüllt sein!");
 			}
+			else{
+				try {
+					buildUserType();
+					send();
+					JOptionPane.showMessageDialog(this, "Benutzer wurde angelegt!");
+				} 
+				catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+		if(name.equals("Abonieren")){
+			String[] items = {"One", "Two", "Three", "Four", "Five"};
+//	        JComboBox combo = new JComboBox(items);
+			JTextField txtPLZ = new JTextField("");
+	        JTextField txtLat = new JTextField("");
+	        JTextField txtLon = new JTextField("");
+	        JTextField txtRadius = new JTextField("");
+	        JPanel panel = new JPanel(new GridLayout(0, 1));
+//	        panel.add(combo);
+	        panel.add(new JLabel("PLZ:"));
+	        panel.add(txtPLZ);
+	        panel.add(new JLabel("Latitute:"));
+	        panel.add(txtLat);
+	        panel.add(new JLabel("Longitute:"));
+	        panel.add(txtLon);
+	        panel.add(new JLabel("Umkreis:"));
+	        panel.add(txtRadius);
+	        int result = JOptionPane.showConfirmDialog(null, panel, "Test",
+	            JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+	        if (result == JOptionPane.OK_OPTION) {
+	        	optionals = true;
+	        	buildOptionalType(txtPLZ.getText(), txtLat.getText(), txtLon.getText(), txtRadius.getText());
+	        } else {
+	            System.out.println("Cancelled");
+	        }
 		}
 	}
 }
