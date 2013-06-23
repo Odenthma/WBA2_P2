@@ -50,7 +50,7 @@ public class PubSub {
 //	}
 	
 	 public boolean connect(String hostname, int port) {
-
+		 
 	        if (connection != null && connection.isConnected()) {
 	            return true;
 	        }
@@ -230,10 +230,10 @@ public class PubSub {
 
 	}
 
-	public void addPayloadMessage(String Id, String nodeName, String titel, String datum, String uhr, String lat, String lon, String plz) throws XMPPException {
+	public void addPayloadMessage(String Id, String nodeName, String c_id, String datum,  String lat, String lon) throws XMPPException {
 		
 		LeafNode node = (LeafNode) mgr.getNode(nodeName);
-		SimplePayload payload = new SimplePayload("subs", null, "<location><item><push kategorie=\"" + nodeName + "\" titel=\"" + titel + "\" datum=\"" + datum + "\" uhr=\"" + uhr + "\" lat=\"" + lat + "\" lon=\"" + lon +"\" plz=\"" + plz +"\"></push></item></location>");
+		SimplePayload payload = new SimplePayload("subs", null, "<location><item><push kategorie=\"" + nodeName + "\" titel=\"" + c_id + "\" datum=\"" + datum + "\" lat=\"" + lat + "\" lon=\"" + lon  +"\"></push></item></location>");
 		PayloadItem<SimplePayload> item = new PayloadItem<SimplePayload>(Id, payload);
 		node.publish(item);
 		System.out.println("Item wurde erzeugt");

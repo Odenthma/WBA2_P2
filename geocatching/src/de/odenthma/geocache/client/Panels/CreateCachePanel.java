@@ -16,6 +16,7 @@ import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.rmi.server.UID;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import javax.swing.*;
@@ -105,7 +106,7 @@ public class CreateCachePanel extends JPanel implements ActionListener{
 		inf.setBeschreibungGross(txtDescLarge.getText());
 		inf.setHinweise(txtHints.getText());
 		inf.setGeschaetzteZeit((double)cbTime.getSelectedItem());
-		inf.setTravelBug(YesNoEnum.JA);
+		inf.setTravelBug(YesNoEnum.fromValue(cbTravelBug.getSelectedItem().toString()));
 		ct = new CacheType();
 		
 		Location loc = new Location();
@@ -132,7 +133,6 @@ public class CreateCachePanel extends JPanel implements ActionListener{
 		
 		ct.setInformationen(inf);
 		
-		//Daten marshallen und an Service senden
 	    send();
 	}
 	private void send() throws IOException{
@@ -140,7 +140,6 @@ public class CreateCachePanel extends JPanel implements ActionListener{
 			new Connector().sendRequestAndData(new MarshallUnmarshall().writeCache(ct));
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -184,7 +183,10 @@ public class CreateCachePanel extends JPanel implements ActionListener{
 		lblTime = new JLabel();
 		cbTime = new JComboBox(PointEnum.getAll().toArray());
 		lblTravelBug = new JLabel();
-		cbTravelBug = new JComboBox();
+		ArrayList<String> yesNo = new ArrayList<String>();
+		yesNo.add("ja");
+		yesNo.add("nein");
+		cbTravelBug = new JComboBox(yesNo.toArray());
 		btnSave = new JButton();
 		
 		btnMenu = new JButton(MENU);

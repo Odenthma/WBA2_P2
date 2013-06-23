@@ -38,9 +38,6 @@ public class UserPanel extends JPanel implements ActionListener{
 	public UserPanel(ActionListener listener, Globals globals) throws FileNotFoundException, JAXBException{
 		this.listener = listener;
 		this.globals = globals;
-//		ArrayList<UserType> users = new ArrayList<UserType>();
-//		users = getUsers();
-//		System.out.println("User: "+users.get(1).getAccount().getLogInName());
 		initComponents();
 	}
 	

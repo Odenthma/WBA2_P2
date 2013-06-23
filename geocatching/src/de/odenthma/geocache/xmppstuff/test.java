@@ -11,14 +11,7 @@ import org.jivesoftware.smackx.pubsub.LeafNode;
 import org.jivesoftware.smackx.pubsub.PubSubManager;
 
 public class test {
-	static String hostname = "localhost";
-    static int port = 5222;
-    static String username = "admin";
-    static String password = "fragger";
-	static AccountManager ac;
-	static ConnectionHandler ch;
-//	static boolean deleteAllNodes = false;
-	static boolean deleteAllNodes = false;
+
 	public static void main(String[] args) throws XMPPException{
 		PubSub ps = new PubSub();
 //			ps.connect(hostname, port, username, password);
@@ -39,7 +32,7 @@ public class test {
 //				ps.getAllSubscriptions();
 //				ps.getSubscriptionFromNode("cache");
 ////
-				ps.addPayloadMessage("0", "orte", "MeinOrtGM", "22.06.2013", "14:44", "sdas.2231","21,23412","51645" );
+				ps.addPayloadMessage("0", "orte", "MeinOrtGM", "22.06.2013", "14:44", "sdas.2231" );
 //				ps.addMessage("1","cache");
 //				ps.printMessage("cache", 1);
 //				ps.deleteMessage("1", "TestKnotenSPL");

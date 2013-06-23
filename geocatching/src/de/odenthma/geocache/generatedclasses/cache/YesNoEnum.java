@@ -8,6 +8,8 @@
 
 package de.odenthma.geocache.generatedclasses.cache;
 
+import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
@@ -35,7 +37,7 @@ public enum YesNoEnum {
     @XmlEnumValue("nein")
     NEIN("nein");
     private final String value;
-
+    private static ArrayList<String> values = new ArrayList<String> ();
     YesNoEnum(String v) {
         value = v;
     }
@@ -52,5 +54,11 @@ public enum YesNoEnum {
         }
         throw new IllegalArgumentException(v.toString());
     }
-
+    public static ArrayList<String> getAll(){
+    	values.add(JA.value());
+    	values.add(NEIN.value());
+    	
+    	return values;
+    	
+    }
 }

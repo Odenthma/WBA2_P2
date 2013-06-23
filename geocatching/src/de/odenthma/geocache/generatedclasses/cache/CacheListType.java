@@ -40,5 +40,8 @@ public class CacheListType {
     	this.cache.add(cacheNew);
     	System.out.println("added Cache:");
     }
+    public void setCacheList(ArrayList<CacheType> caches){
+    	this.cache = caches;
+    }
 }
 

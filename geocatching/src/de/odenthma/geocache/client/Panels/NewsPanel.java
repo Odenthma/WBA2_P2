@@ -8,10 +8,8 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class NewsPanel extends JPanel{
 	public static String MENU = "Menu";
-	public static String SCACHE = "Show Caches";
-	public static String NUSER = "Create User";
 	public static String NEWS = "Feeds anzeigen";
-	public static String CCACHE = "Create Cache";
+
 	CardLayout cl;
 	JPanel mainPanel;
 	JFrame frame;

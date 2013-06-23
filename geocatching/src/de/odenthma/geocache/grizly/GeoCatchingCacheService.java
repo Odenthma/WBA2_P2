@@ -21,6 +21,7 @@ import javax.xml.transform.stream.StreamSource;
 import org.jivesoftware.smack.XMPPException;
 
 import de.odenthma.geocache.generatedclasses.cache.*;
+import de.odenthma.geocache.utils.FilterCaches;
 import de.odenthma.geocache.xmppstuff.PubSub;
 
 
@@ -78,7 +79,7 @@ public class GeoCatchingCacheService {
 		return clt;
 	}
 	
-	public void handleNodes(){
+	public void handleNodes(CacheType ct) {
 		PubSub ps = new PubSub();
 		ArrayList<String> allNodes = new ArrayList<String>();
 		ps.connect("localhost", 5222);
@@ -89,9 +90,41 @@ public class GeoCatchingCacheService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for(String node : allNodes)
-			System.out.println(node);
-	}
+		for(String node : allNodes){
+//			System.out.println(node);
+			String[] temp;
+			 
+			  /* delimiter */
+			  String delimiter = ":";
+			  /* given string will be split by the argument delimiter provided. */
+			 
+				  temp = node.split(delimiter);
+				  //wegen nodes die sich nicht löschen lassen
+				  System.out.println(""+temp.length);
+				  if(temp.length==4){
+					  System.out.println("lat: "+temp[1]+" lon:"+temp[2]+" range: "+temp[3]);
+					  
+					  
+					  try {
+						ps.addPayloadMessage("1", node, ""+ct.getCId(), ""+ct.getDatum(), ""+ct.getLocation().getLat(), ""+ct.getLocation().getLon());
+					} 
+					  catch (XMPPException e) {
+						System.out.println("konnte nicht erzeugt werden!");
+					}
+				  }
+						try {
+							ps.printAllMessagesFromNode(node);
+						} catch (XMPPException e) {
+							// TODO Auto-generated catch block
+//							e.printStackTrace();
+							System.out.println("Fehler beim abrufen");
+						}
+			  }
+		ps.disconnect();
+			
+		}
+			
+	
 
 	@POST
 	@Path("/new")
@@ -101,7 +134,7 @@ public class GeoCatchingCacheService {
 		CacheType ct = (CacheType)unmarshall(incomingXML, CacheType.class);
 		caches.addCache(ct);
 		
-		handleNodes();
+//		handleNodes(ct);
 		
 		JAXBContext contexts= JAXBContext.newInstance(CacheListType.class);
 		Marshaller m = contexts.createMarshaller();
@@ -130,6 +163,14 @@ public class GeoCatchingCacheService {
 
 		return caches;
 	   }
+	@GET
+	@Path("/new/filter/{filter}")
+	   @Produces("application/xml")
+	   public CacheListType filterCache( @PathParam("filter") String filter) throws JAXBException, IOException {   
+		   CacheListType caches = new FilterCaches().filter(getAllNew(), filter);     
+		   return caches;
+	   }
+	
 	   private Object unmarshall(String str, Class<?> c) {
 			Object element = null;
 			try {

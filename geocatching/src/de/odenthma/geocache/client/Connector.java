@@ -7,10 +7,13 @@ import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
+import de.odenthma.geocache.generatedclasses.cache.CacheListType;
+import de.odenthma.geocache.generatedclasses.cache.CacheType;
 import de.odenthma.geocache.generatedclasses.userinformation.UserType;
 
 
@@ -106,6 +109,42 @@ public class Connector {
 		  return ut;
 	  }
 	  
+	  public ArrayList<CacheType> getCaches() throws IOException, JAXBException{
+		  String uri =
+				    "http://localhost:4434/cachelist/new";
+		  URL url = new URL(uri);
+		  HttpURLConnection connection =
+				    (HttpURLConnection) url.openConnection();
+		  connection.setRequestMethod("GET");
+		  connection.setRequestProperty("Accept", "application/xml");
+
+		  JAXBContext jc = JAXBContext.newInstance(CacheListType.class);
+		  InputStream xml = connection.getInputStream();
+		  CacheListType ct =
+				  (CacheListType) jc.createUnmarshaller().unmarshal(xml);
+		
+		  connection.disconnect();
+		  
+		  return ct.getCache();
+	  }
+	  public ArrayList<CacheType> filterCaches(String filter) throws IOException, JAXBException{
+		  String uri =
+				    "http://localhost:4434/cachelist/new/filter/"+filter;
+		  URL url = new URL(uri);
+		  HttpURLConnection connection =
+				    (HttpURLConnection) url.openConnection();
+		  connection.setRequestMethod("GET");
+		  connection.setRequestProperty("Accept", "application/xml");
+
+		  JAXBContext jc = JAXBContext.newInstance(CacheListType.class);
+		  InputStream xml = connection.getInputStream();
+		  CacheListType ct =
+				  (CacheListType) jc.createUnmarshaller().unmarshal(xml);
+		
+		  connection.disconnect();
+		  
+		  return ct.getCache();
+	  }
 	  public void sendRequestAndDeleteCache(String id) throws IOException{
 		  System.out.println("Start sending  request");  
 			 url = new URL( "http://localhost:4434/cachelist/new/delete/"+id ); 

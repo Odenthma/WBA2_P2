@@ -116,7 +116,8 @@ public class UserService{
 			}
 			for(OrtsType ort : orte){
 				try {
-					ps.createNode(ort.getPostal()+":"+ort.getLat()+":"+ort.getLon(), true);
+					ps.createNode("CACHE"+":"+ort.getLat()+":"+ort.getLon()+":"+ort.getUmkreis(), true);
+//					ps.subscribe("CACHE"+":"+ort.getLat()+":"+ort.getLon()+":"+ort.getUmkreis());
 				} 
 				catch (XMPPException e) {
 					e.printStackTrace();

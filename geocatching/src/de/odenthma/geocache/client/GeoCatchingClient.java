@@ -57,8 +57,8 @@ public class GeoCatchingClient implements ActionListener{
 		panels.add(jpNews, NEWS);
 		panels.add(jpCreateCache, CCACHE);
 		panels.add(jpLogin, LUSER);
-		cl.show(panels, LUSER);
-//		cl.show(panels, MENU);
+//		cl.show(panels, LUSER);
+		cl.show(panels, MENU);
 		
 		frame.add(panels);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
