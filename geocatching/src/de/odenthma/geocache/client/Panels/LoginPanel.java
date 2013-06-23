@@ -17,6 +17,8 @@ import com.jgoodies.forms.layout.FormLayout;
 
 import de.odenthma.geocache.client.Connector;
 import de.odenthma.geocache.client.Globals;
+import de.odenthma.geocache.xmppstuff.ConnectionHandler;
+import de.odenthma.geocache.xmppstuff.PubSub;
 
 public class LoginPanel extends JPanel implements ActionListener{
 	public static String LOGIN = "Login";
@@ -30,7 +32,9 @@ public class LoginPanel extends JPanel implements ActionListener{
 	JTextField txtName = new JTextField();
 	JTextField txtPass = new JTextField();
 	Globals globals;
-	
+	 String server =  "localhost";
+     int restPort = 4434;
+     int xmppPort = 5222;
 	public LoginPanel( ActionListener parentListener, ActionListener mainListener, Globals globals){
 		this.globals = globals;
 		DefaultFormBuilder builder = new DefaultFormBuilder(new FormLayout(""));
@@ -72,6 +76,14 @@ public class LoginPanel extends JPanel implements ActionListener{
 		
 		if(name == LOGIN){
 			try {
+				try{
+//					PubSub pb = new PubSub();
+					ConnectionHandler pubsub_man = new ConnectionHandler();
+					pubsub_man.connect(server, xmppPort);
+					pubsub_man.login(txtName.getText(), txtPass.getText());
+				}
+				finally{}
+			    
 				globals.setActiveUser(new Connector().getUser(txtName.getText(),txtPass.getText()));
 				account = true;
 			} 

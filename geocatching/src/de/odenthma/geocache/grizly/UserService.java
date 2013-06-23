@@ -26,6 +26,7 @@ import org.jivesoftware.smackx.pubsub.ItemPublishEvent;
 import org.jivesoftware.smackx.pubsub.listener.ItemEventListener;
 
 import de.odenthma.geocache.generatedclasses.userinformation.*;
+import de.odenthma.geocache.xmppstuff.ConnectionHandler;
 import de.odenthma.geocache.xmppstuff.PubSub;
 
 
@@ -36,7 +37,8 @@ import de.odenthma.geocache.xmppstuff.PubSub;
 public class UserService{
 	private static String ORIGINALPATH = "../geocatching/src/de/odenthma/geocache/xml/UserList.xml";
 	private static String NEWPATH = "../geocatching/src/de/odenthma/geocache/xml/UserListNew.xml";
-	PubSub ps = new PubSub();
+//	PubSub ps = new PubSub();
+	ConnectionHandler pubsub_man = new ConnectionHandler();
 	File relativeNew = new File(NEWPATH);
 	File relativeOld = new File(ORIGINALPATH);
 	ObjectFactory ob;
@@ -110,19 +112,14 @@ public class UserService{
 			
 			if(orte.size() > 0){
 				
-				ps.connect("localhost",5222);
-				ps.login("publisher", "publisher");
+				pubsub_man.connect("localhost",5222);
+				pubsub_man.login("publisher", "publisher");
 				
 			}
 			for(OrtsType ort : orte){
-				try {
-					ps.createNode("CACHE"+":"+ort.getLat()+":"+ort.getLon()+":"+ort.getUmkreis(), true);
-//					ps.subscribe("CACHE"+":"+ort.getLat()+":"+ort.getLon()+":"+ort.getUmkreis());
-				} 
-				catch (XMPPException e) {
-					e.printStackTrace();
-				}
-				ps.disconnect();
+				//					ps.createNode("CACHE"+":"+ort.getLat()+":"+ort.getLon()+":"+ort.getUmkreis(), true);
+				pubsub_man.subscribeToNode("CACHE"+":"+ort.getLat()+":"+ort.getLon()+":"+ort.getUmkreis());
+				pubsub_man.disconnect();
 			}
 			return ut;
 		   }

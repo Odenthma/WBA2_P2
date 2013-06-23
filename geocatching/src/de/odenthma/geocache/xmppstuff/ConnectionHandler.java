@@ -15,7 +15,6 @@ import org.jivesoftware.smackx.pubsub.ConfigureForm;
 import org.jivesoftware.smackx.pubsub.FormType;
 import org.jivesoftware.smackx.pubsub.Item;
 import org.jivesoftware.smackx.pubsub.LeafNode;
-import org.jivesoftware.smackx.pubsub.Node;
 import org.jivesoftware.smackx.pubsub.PayloadItem;
 import org.jivesoftware.smackx.pubsub.PubSubManager;
 import org.jivesoftware.smackx.pubsub.PublishModel;
@@ -57,7 +56,6 @@ public class ConnectionHandler {
             xmpp_conn.connect();
             pubsub_man = new PubSubManager(xmpp_conn, "pubsub."
                     + xmpp_conn.getHost());
-
         } catch (XMPPException e) {
             return false;
         }
@@ -136,11 +134,8 @@ public class ConnectionHandler {
      * @param node_id id of the node
      * @param payload_data payload to publish
      * @return Successful or failed
-     * @throws XMPPException 
      */
-    
-    //Geändert
-    public boolean publishWithPayload(String node_id, String payload_data) throws XMPPException  {
+    public boolean publishWithPayload(String node_id, String payload_data) {
         
         LeafNode node = null;
         
@@ -151,8 +146,7 @@ public class ConnectionHandler {
         
         try {
             node = pubsub_man.getNode(node_id);
-        } 
-        catch (XMPPException e) {
+        } catch (XMPPException e) {
 
             // Node was not found
             System.err.println("Node was not found! I am gonna create one now.");
@@ -163,8 +157,8 @@ public class ConnectionHandler {
                     node = pubsub_man.createNode(node_id);
                     node.sendConfigurationForm(createForm(FormType.submit,
                             true, true, PublishModel.open, AccessModel.open));
-                } 
-                catch (XMPPException e1) {
+                    node.unsubscribe(this.username + "@" + this.hostname);
+                } catch (XMPPException e1) {
                     // Node could not be created
                     System.err.println("Node could not be created!");
                     return false;
@@ -178,7 +172,7 @@ public class ConnectionHandler {
 
         if (node != null) {
 
-            SimplePayload payload = new SimplePayload("palette", "",
+            SimplePayload payload = new SimplePayload("subs", "",
                     payload_data);
             PayloadItem<SimplePayload> item = new PayloadItem<SimplePayload>(
                     null, payload);
@@ -192,23 +186,10 @@ public class ConnectionHandler {
                 return false;
             }
         }
-//        ConfigureForm form = new ConfigureForm(FormType.submit);
-//        form.setPersistentItems(false);
-//        form.setDeliverPayloads(true);
-//        form.setAccessModel(AccessModel.open);
-//        Node myNode = pubsub_man.createNode("TestNode", form);
-//        
-//        SimplePayload payload = new SimplePayload("book","pubsub:test:book", "<book xmlns='pubsub:test:book'><title>Lord of the Rings</title></book>");
-//        PayloadItem<SimplePayload> item = new PayloadItem<SimplePayload>("asd", payload);
-// 
-//        // Required to recieve the events being published
-////        myNode.addItemEventListener(myEventHandler);
-// 
-//        // Publish item
-//        ((LeafNode) myNode).publish(item);
+
         return true;
     }
-    
+
     /**
      * Subscribe to a leafnode/topic
      * 
@@ -221,7 +202,7 @@ public class ConnectionHandler {
         try {
             node = pubsub_man.getNode(node_id);
             node.subscribe(this.username + "@" + this.hostname);
-            node.addItemEventListener(listener);
+//            node.addItemEventListener(listener);
         } catch (XMPPException e) {
 
             // Node was not found
@@ -235,7 +216,8 @@ public class ConnectionHandler {
                     node = pubsub_man.createNode(node_id);
                     node.sendConfigurationForm(createForm(FormType.submit,
                             true, true, PublishModel.open, AccessModel.open));
-                    node.addItemEventListener(listener);
+//                    node.addItemEventListener(listener);
+                    System.out.println("Node: "+node.getId());
                     // a user is automatically subscribed to a node he creates
                     return true;
                 } catch (XMPPException e1) {
@@ -386,8 +368,8 @@ public class ConnectionHandler {
         
         for (Subscription curr : subs) {
             
-            if(curr.getJid() == this.username + "@" + this.hostname)
-                continue;
+//            if(curr.getJid() == this.username + "@" + this.hostname)
+//                continue;
             
             try {
                 pubsub_man.getNode(curr.getNode()).addItemEventListener(
@@ -456,5 +438,4 @@ public class ConnectionHandler {
     public void finalize() {
         disconnect();
     }
-   
 }

@@ -47,7 +47,7 @@ public class GeoCatchingClient implements ActionListener{
 		jpShowCache = new ShowCachePanel(this);
 		jpNewUser = new CreateUserPanel(this);
 		jpCreateCache = new CreateCachePanel(this);
-		jpNews = new NewsPanel(cl, panels,frame);
+		jpNews = new NewsPanel(this);
 		jpLogin = new UserPanel(this,globals);
 		
 		panels.setLayout(cl);
@@ -57,8 +57,8 @@ public class GeoCatchingClient implements ActionListener{
 		panels.add(jpNews, NEWS);
 		panels.add(jpCreateCache, CCACHE);
 		panels.add(jpLogin, LUSER);
-//		cl.show(panels, LUSER);
-		cl.show(panels, MENU);
+		cl.show(panels, LUSER);
+//		cl.show(panels, MENU);
 		
 		frame.add(panels);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

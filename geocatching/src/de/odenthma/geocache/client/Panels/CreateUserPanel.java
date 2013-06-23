@@ -6,13 +6,23 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.rmi.server.UID;
 import java.util.ArrayList;
+
 import javax.swing.*;
+
+import org.jivesoftware.smack.XMPPException;
+
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
+
+
+
+
 //import info.clearthought.layout.*;
 import de.odenthma.geocache.client.Connector;
 import de.odenthma.geocache.client.MarshallUnmarshall;
 import de.odenthma.geocache.generatedclasses.userinformation.*;
+import de.odenthma.geocache.xmppstuff.ConnectionHandler;
+import de.odenthma.geocache.xmppstuff.PubSub;
 
 
 @SuppressWarnings("serial")
@@ -32,8 +42,9 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 	private JTextField txtLoginName;
 	private JTextField txtLoginPw;
 	private JTextField txtEmail;
-
+	int xmppPort = 5222;
 	UserType newUser;
+	String server =  "localhost";
 	public CreateUserPanel(ActionListener listener) {
 		initComponents();
 		DefaultFormBuilder builder = new DefaultFormBuilder(new FormLayout(""));
@@ -96,12 +107,44 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 	private void send() throws IOException{
 		try {
 			new Connector().createUser(new MarshallUnmarshall().writeUser(newUser));
+			
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+	public void registerXMPPUser(String user, String password){
+//		 PubSub pb = new PubSub();
+		ConnectionHandler pubsub_man = new ConnectionHandler();
+		pubsub_man.connect(server, xmppPort);
+	      
+	      try{
+	    	  if(!pubsub_man.register(user, password))
+	    			  System.out.println("User schon vorhanden");
+	    	  else 
+	    		  System.out.println("User: "+ user+" registriert");
+	      }
+	      finally{
+	    	  pubsub_man.disconnect();
+	      }
+	}
+	public void subscribeNodes(String user, String password, String node) throws XMPPException{
+//		PubSub pb = new PubSub();
+		ConnectionHandler pubsub_man = new ConnectionHandler();
+		pubsub_man.connect(server, xmppPort);
+		pubsub_man.login(user, password);
+	      try{
+//	    	  pb.subscribe(node);
+	    	  pubsub_man.subscribeToNode(node);
+//	    	  if(!pb.register(user, password))
+//	    			  System.out.println("User schon vorhanden");
+//	    	  else 
+//	    		  System.out.println("User: "+ user+" registriert");
+	      }
+	      finally{
+	    	  pubsub_man.disconnect();
+	      }
+	}
 	public void buildUserType(){
 		newUser = new UserType();
 		UserInformationType ui = new UserInformationType();
@@ -135,10 +178,7 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 			
 			ot.setNews(news);
 			ot.setBenachrichtigung(benachrichtigung);
-//			olt.addOrt(ort);
 		}
-//		olt.addOrte(orte);
-		//bearbeiten
 		ot.setOrtsListe(olt);
 		newUser.setUserInformation(ui);
 		newUser.setAccount(act);
@@ -198,8 +238,22 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 			else{
 				try {
 					buildUserType();
+					registerXMPPUser(txtLoginName.getText(),txtLoginPw.getText());
 					send();
+					String node;
+					for(OrtsType ot: olt.getOrt()){
+						node = "CACHE"+":"+ot.getLat()+":"+ot.getLon()+":"+ot.getUmkreis();
+						try {
+							subscribeNodes(txtLoginName.getText(),txtLoginPw.getText(),node);
+						} 
+						catch (XMPPException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+						
 					JOptionPane.showMessageDialog(this, "Benutzer wurde angelegt!");
+					
 				} 
 				catch (IOException e1) {
 					e1.printStackTrace();
