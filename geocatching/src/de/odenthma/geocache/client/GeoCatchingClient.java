@@ -41,15 +41,18 @@ public class GeoCatchingClient implements ActionListener{
 	private ServerPanel jpServer;
 	private CardLayout cl = new CardLayout();
 	private ConnectionHandler pubsub_man = new ConnectionHandler();
-	private Globals globals = new Globals();
 	
+	/*
+     * erzeugt alle Cards die später zu sehen sind
+     * 
+     */
 	public GeoCatchingClient() throws JAXBException, IOException{
 		jpMenu = new MenuPanel(this);
 		jpShowCache = new ShowCachePanel(this);
 		jpNewUser = new CreateUserPanel(this);
 		jpCreateCache = new CreateCachePanel(this);
 		jpNews = new NewsPanel(this,pubsub_man);
-		jpLogin = new UserPanel(this,globals,pubsub_man);
+		jpLogin = new UserPanel(this,pubsub_man);
 		
 		panels.setLayout(cl);
 		panels.add(jpMenu,MENU);
@@ -59,7 +62,6 @@ public class GeoCatchingClient implements ActionListener{
 		panels.add(jpCreateCache, CCACHE);
 		panels.add(jpLogin, LUSER);
 		cl.show(panels, LUSER);
-//		cl.show(panels, MENU);
 		
 		frame.add(panels);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -89,9 +91,8 @@ public class GeoCatchingClient implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		JButton o = (JButton)e.getSource();
 		String name = o.getText();
-//		System.out.println(name);
-		System.out.println(name);
-		if(name ==  ULOGIN){ name = MENU;}
+		if(name ==  ULOGIN) 
+			name = MENU;
 		
 		frame.setTitle(name);
 		cl.show(panels, name);

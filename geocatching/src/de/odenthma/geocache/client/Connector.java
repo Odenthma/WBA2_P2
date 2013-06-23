@@ -15,6 +15,7 @@ import javax.xml.bind.JAXBException;
 import de.odenthma.geocache.generatedclasses.cache.CacheListType;
 import de.odenthma.geocache.generatedclasses.cache.CacheType;
 import de.odenthma.geocache.generatedclasses.userinformation.UserType;
+import de.odenthma.geocache.utils.ServerAdress;
 
 
 public class Connector {
@@ -30,7 +31,7 @@ public class Connector {
 	
 	public void sendRequestAndData(StringWriter sw) throws IOException{
 		System.out.println("Start sending  request");  
-		url = new URL( "http://localhost:4434/cachelist/new" ); 
+		url = new URL( "http://"+ServerAdress.HOST+":"+ServerAdress.restPort+"/cachelist/new" ); 
 		rc = (HttpURLConnection)url.openConnection();
 		   
 		rc.setRequestMethod("POST");  
@@ -61,7 +62,7 @@ public class Connector {
 	}
 	public void createUser(StringWriter sw) throws IOException{
 		System.out.println("Start sending  request");  
-		url = new URL( "http://localhost:4434/user/new" ); 
+		url = new URL( "http://"+ServerAdress.HOST+":"+ServerAdress.restPort+"/user/new" ); 
 		rc = (HttpURLConnection)url.openConnection();
 		   
 		rc.setRequestMethod("POST");  
@@ -92,7 +93,7 @@ public class Connector {
 	}
 	  public UserType getUser(String user, String password) throws IOException, JAXBException{
 		  String uri =
-				    "http://localhost:4434/user/"+user+"/"+password;
+				    "http://"+ServerAdress.HOST+":"+ServerAdress.restPort+"/user/"+user+"/"+password;
 		  URL url = new URL(uri);
 		  HttpURLConnection connection =
 				    (HttpURLConnection) url.openConnection();
@@ -111,7 +112,7 @@ public class Connector {
 	  
 	  public ArrayList<CacheType> getCaches() throws IOException, JAXBException{
 		  String uri =
-				    "http://localhost:4434/cachelist/new";
+				  "http://"+ServerAdress.HOST+":"+ServerAdress.restPort+"/cachelist/new";
 		  URL url = new URL(uri);
 		  HttpURLConnection connection =
 				    (HttpURLConnection) url.openConnection();
@@ -129,7 +130,7 @@ public class Connector {
 	  }
 	  public ArrayList<CacheType> filterCaches(String filter) throws IOException, JAXBException{
 		  String uri =
-				    "http://localhost:4434/cachelist/new/filter/"+filter;
+				  "http://"+ServerAdress.HOST+":"+ServerAdress.restPort+"/cachelist/new/filter/"+filter;
 		  URL url = new URL(uri);
 		  HttpURLConnection connection =
 				    (HttpURLConnection) url.openConnection();
@@ -147,7 +148,7 @@ public class Connector {
 	  }
 	  public void sendRequestAndDeleteCache(String id) throws IOException{
 		  System.out.println("Start sending  request");  
-			 url = new URL( "http://localhost:4434/cachelist/new/delete/"+id ); 
+			 url = new URL( "http://"+ServerAdress.HOST+":"+ServerAdress.restPort+"/cachelist/new/delete/"+id ); 
 			 rc = (HttpURLConnection)url.openConnection();
 			   
 			 rc.setDoOutput( true );    

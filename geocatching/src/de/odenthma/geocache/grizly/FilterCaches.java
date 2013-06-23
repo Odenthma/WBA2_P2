@@ -1,4 +1,4 @@
-package de.odenthma.geocache.utils;
+package de.odenthma.geocache.grizly;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -10,13 +10,14 @@ import de.odenthma.geocache.client.MarshallUnmarshall;
 import de.odenthma.geocache.generatedclasses.cache.CacheListType;
 import de.odenthma.geocache.generatedclasses.cache.CacheType;
 import de.odenthma.geocache.generatedclasses.cache.CacheTypeEnum;
+import de.odenthma.geocache.utils.CalculatorLatLon;
+import de.odenthma.geocache.utils.Filter;
 
 public class FilterCaches {
-	private static String NEWPATH = "C:/Users/Mel_T/git/WBA2_P2/geocatching/src/de/odenthma/geocache/xml/CacheListNew.xml";
+	private static String NEWPATH = "../geocatching/src/de/odenthma/geocache/xml/CacheListNew.xml";
 	
 	public CacheListType filter(CacheListType caches, String s)
 	{
-		System.out.println(s);
 		
 		ArrayList<CacheType> filtered = new ArrayList<CacheType>();
 		String[] komplett;
@@ -38,47 +39,9 @@ public class FilterCaches {
 		for(int i=0; i<kriterien.length; i++)
 			filtermap.put(kriterien[i], values[i]);
 		int counter;
-//		for(CacheType cache : caches){
-//			counter = 0;
-//			if(filtermap.get(Filter.CACHETYPE) != null)
-//				if(filtermap.get(Filter.CACHETYPE).equals(cache.getTyp())) counter++;
-//			
-//		}
+
 		CacheListType bla = caches;
 		ArrayList<CacheType> cl = bla.getCache();
-		System.out.println("MAPSIZE: "+filtermap.size());
-//		for(CacheType cache : cl){
-//			counter = 0;
-//						
-//			if(filtermap.get(Filter.DISTANCE) != null)
-//				if(new CalculatorLatLon().distance(
-//						Double.parseDouble(filtermap.get(Filter.LAT)),
-//						Double.parseDouble(filtermap.get(Filter.LON)), 
-//						cache.getLocation().getLat(), 
-//						cache.getLocation().getLon(),
-//						'K')<Double.parseDouble(filtermap.get(Filter.DISTANCE))){ counter++; System.out.println("map: "+filtermap.get(Filter.CACHETYPE)+" cache: "+cache.getTyp());}
-//			
-//			if(filtermap.get(Filter.CACHETYPE) != null)
-//				if(filtermap.get(Filter.CACHETYPE).equals(cache.getTyp())){ counter++; System.out.println("map: "+filtermap.get(Filter.CACHETYPE)+" cache: "+cache.getTyp());}
-//			
-//			if(filtermap.get(Filter.SCHWIERIGKEIT)!= null)
-//				if(Double.parseDouble(filtermap.get(Filter.SCHWIERIGKEIT)) >= 
-//					cache.getInformationen().getSchwierigkeit()){ counter++; System.out.println("map: "+filtermap.get(Filter.CACHETYPE)+" cache: "+cache.getTyp());}
-//			
-//			if(filtermap.get(Filter.TERRAIN) != null)
-//				if(Double.parseDouble(filtermap.get(Filter.TERRAIN)) >=
-//					cache.getInformationen().getTerrain()){ counter++; System.out.println("map: "+filtermap.get(Filter.CACHETYPE)+" cache: "+cache.getTyp());}
-//			
-//			if(filtermap.get(Filter.DAUER) != null)
-//				if(Double.parseDouble(filtermap.get(Filter.DAUER)) >=
-//					cache.getInformationen().getGeschaetzteZeit()){ counter++; System.out.println("map: "+filtermap.get(Filter.CACHETYPE)+" cache: "+cache.getTyp());}
-//			
-//			if(filtermap.get(Filter.TRAVELBUG) != null)
-//				if(filtermap.get(Filter.TRAVELBUG).equals(cache.getInformationen().getTravelBug())){ counter++; System.out.println("map: "+filtermap.get(Filter.CACHETYPE)+" cache: "+cache.getTyp());}
-//			System.out.println("size: "+filtermap.size() +" count: "+counter);
-//			if(counter == filtermap.size()) 
-//				filtered.add(cache);
-//		}	
 		
 		for(CacheType cache : cl){
 			counter = 0;
@@ -132,8 +95,9 @@ public class FilterCaches {
 				System.out.println(" cache; "+cache.getCId());
 				System.out.println(""+new CalculatorLatLon().distance(ct.getLocation().getLat(),ct.getLocation().getLon(),
 						cache.getLocation().getLat(),cache.getLocation().getLon(), 'K'));
+				newCaches.add(cache);
 			}
 		}
-		return new ArrayList<CacheType>();
+		return newCaches;
 	}
 }

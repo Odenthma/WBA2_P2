@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	elementFormDefault="qualified">
-	
-	
+
+
 	<xsd:element name="userList" type="userListType" />
-	
-	
+
+
 	<xsd:complexType name="userListType">
 		<xsd:sequence>
-			<xsd:element name="user" type="userType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="user" type="userType" minOccurs="0"
+				maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
-	
-<xsd:simpleType name="bIdRestriction">
+
+	<xsd:simpleType name="bIdRestriction">
 		<xsd:restriction base="xsd:token">
 			<xsd:pattern value="[b][0-9]{4}" /> <!-- nur b+4stellige zahl -->
 		</xsd:restriction>
 	</xsd:simpleType>
-	
+
 	<xsd:complexType name="userType">
 		<xsd:sequence>
 			<xsd:element name="userInformation" type="userInformationType" />
 			<xsd:element name="account" type="accountType" />
 			<xsd:element name="optional" type="optionalType" />
-		</xsd:sequence>,
+		</xsd:sequence>
+		,
 		<xsd:attribute name="b_id" type="bIdRestriction" use="required" />
 	</xsd:complexType>
 
@@ -68,11 +70,12 @@
 
 	<xsd:complexType name="ortsListeType">
 		<xsd:sequence>
-			<xsd:element name="ort" type="ortsType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="ort" type="ortsType" minOccurs="0"
+				maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
-	
-	<xsd:complexType name="ortsType">	
+
+	<xsd:complexType name="ortsType">
 		<xsd:simpleContent>
 			<xsd:extension base="xsd:string">
 				<xsd:attribute name="lat" type="latRestriction" use="required" />

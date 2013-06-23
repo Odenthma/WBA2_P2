@@ -3,12 +3,19 @@ package de.odenthma.geocache.client;
 import de.odenthma.geocache.generatedclasses.cache.CacheType;
 
 public class CacheTableData {
-	String cache[][] ;
-	String type;
-	String spaltenDetail[] = { "Attribut", "Inhalt"};
-	String spaltenPreview[] = { "Cachename", "ID", "Owner", "Datum"};
-	boolean firstElement = true;
+	private String cache[][] ;
+	private String type;
+	private String spaltenDetail[] = { "Attribut", "Inhalt"};
+	private String spaltenPreview[] = { "Cachename", "ID", "Owner", "Datum"};
+	private boolean firstElement = true;
 	
+	/*
+     * erzeugt leere Arrays, welche dann mit Cachedaten befüllt werden
+     * 
+     * String type -> gibt an welcher Datentyp für diese Instanz verwendet wird
+     * preview = Vorschautabelle
+     * detail = Volle Cachetabelle
+     */
 	public CacheTableData(String type){
 		this.type = type;
 		if(type.equals("preview")){
@@ -20,6 +27,10 @@ public class CacheTableData {
 		}
 	}
 	
+	/*
+     * gibt den spzifischen Header der Tabelle zurück
+     * 
+     */
 	public String[] getHeader(){
 		if(type.equals("preview")){
 			return spaltenPreview;
@@ -31,6 +42,10 @@ public class CacheTableData {
 		return null;
 	}
 	
+	/*
+     * Array wird mit Cachedaten befüllt
+     * 
+     */
 	public String[][] fillData(CacheType ct){
 		if(type.equals("preview")){
 			if(firstElement){

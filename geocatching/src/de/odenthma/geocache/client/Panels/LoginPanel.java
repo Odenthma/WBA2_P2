@@ -16,9 +16,9 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 import de.odenthma.geocache.client.Connector;
-import de.odenthma.geocache.client.Globals;
+import de.odenthma.geocache.utils.ServerAdress;
 import de.odenthma.geocache.xmppstuff.ConnectionHandler;
-import de.odenthma.geocache.xmppstuff.PubSub;
+
 
 public class LoginPanel extends JPanel implements ActionListener{
 	public static String LOGIN = "Login";
@@ -31,13 +31,10 @@ public class LoginPanel extends JPanel implements ActionListener{
 	JButton btnAbort;
 	JTextField txtName = new JTextField();
 	JTextField txtPass = new JTextField();
-	Globals globals;
-	 String server =  "localhost";
-     int restPort = 4434;
-     int xmppPort = 5222;
+
      ConnectionHandler pubsub_man;
-	public LoginPanel( ActionListener parentListener, ActionListener mainListener, Globals globals,ConnectionHandler pubsub_man){
-		this.globals = globals;
+	public LoginPanel( ActionListener parentListener, ActionListener mainListener,ConnectionHandler pubsub_man){
+
 		this.pubsub_man = pubsub_man;
 		DefaultFormBuilder builder = new DefaultFormBuilder(new FormLayout(""));
 		
@@ -77,24 +74,15 @@ public class LoginPanel extends JPanel implements ActionListener{
 		String name = o.getText();
 		
 		if(name == LOGIN){
-			try {
-				try{
+			try{
 //					PubSub pb = new PubSub();
 //					ConnectionHandler pubsub_man = new ConnectionHandler();
-					pubsub_man.connect(server, xmppPort);
-					pubsub_man.login(txtName.getText(), txtPass.getText());
-				}
-				finally{}
-			    
-				globals.setActiveUser(new Connector().getUser(txtName.getText(),txtPass.getText()));
-				account = true;
-			} 
-			catch (IOException ex) {
-				System.out.println("Login fehlgeschlafen");
-			} 
-			catch (JAXBException ex) {
-				ex.printStackTrace();
+				pubsub_man.connect(ServerAdress.HOST, ServerAdress.xmppPort);
+				pubsub_man.login(txtName.getText(), txtPass.getText());
 			}
+			finally{}
+			
+			account = true;
 	
 			if(account){
 				btnPseudoLogin.doClick();

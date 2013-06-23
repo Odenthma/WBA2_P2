@@ -34,13 +34,7 @@ public class ConnectionHandler {
     public ConnectionHandler() {
     }
 
-    /**
-     * Establish a connection to the xmpp server
-     * 
-     * @param hostname server address
-     * @param port server port
-     * @return Successful or failed
-     */
+
     public boolean connect(String hostname, int port) {
 
         if (xmpp_conn != null && xmpp_conn.isConnected()) {
@@ -66,13 +60,7 @@ public class ConnectionHandler {
         return true;
     }
 
-    /**
-     * Login to the xmpp server
-     * 
-     * @param username username of the user
-     * @param password password of the user
-     * @return Successful or failed
-     */
+
     public boolean login(String username, String password) {
 
         try {
@@ -87,13 +75,7 @@ public class ConnectionHandler {
         return true;
     }
 
-    /**
-     * Register a user
-     * 
-     * @param username username of the user
-     * @param password password of the user
-     * @return Successful or failed
-     */
+
     public boolean register(String username, String password) {
 
         try {
@@ -105,11 +87,7 @@ public class ConnectionHandler {
         return true;
     }
 
-    /**
-     * Get all nodes known to the xmpp server
-     * 
-     * @return List with all NodeIds
-     */
+
     public List<String> getAllNodes() {
 
         List<String> entries = new ArrayList<String>();
@@ -130,13 +108,6 @@ public class ConnectionHandler {
         return entries;
     }
 
-    /**
-     * Publish an item through a node
-     * 
-     * @param node_id id of the node
-     * @param payload_data payload to publish
-     * @return Successful or failed
-     */
     public boolean publishWithPayload(String node_id, String payload_data) {
         
         LeafNode node = null;
@@ -147,10 +118,8 @@ public class ConnectionHandler {
         }
         
         try {
-        	System.out.println("manager: "+xmpp_conn.isConnected());
-        	System.out.println("Connected: "+getHost()+" "+getUsername());
         	node = pubsub_man.getNode(node_id);
-        
+
         } 
         catch (XMPPException e) {
 
@@ -183,15 +152,6 @@ public class ConnectionHandler {
             PayloadItem<SimplePayload> item = new PayloadItem<SimplePayload>(
                     null, payload);
 
-//            try {
-////                node.send(item);
-////            	 node.publish(item);
-//            } catch (XMPPException e) {
-//                // Item could not be send
-//                e.printStackTrace();
-//                System.err.println("Item could not be sent!");
-//                return false;
-//            }
             
           	 node.publish(item);
          
@@ -201,12 +161,7 @@ public class ConnectionHandler {
         return true;
     }
 
-    /**
-     * Subscribe to a leafnode/topic
-     * 
-     * @param node_id id of the leafnode
-     * @return Successful or failed
-     */
+  
     public boolean subscribeToNode(String node_id) {
         LeafNode node = null;
 
@@ -246,12 +201,7 @@ public class ConnectionHandler {
         return true;
     }
 
-    /**
-     * Unsubscribe from a leafnode
-     * 
-     * @param node_id id of a node
-     * @return Successful or failed
-     */
+ 
     public boolean unsubscribeToNode(String node_id) {
         LeafNode node = null;
 
@@ -270,12 +220,7 @@ public class ConnectionHandler {
         return true;
     }
 
-    /**
-     * Delete a node
-     * 
-     * @param node_id id of the node
-     * @return Successful or failed
-     */
+   
     public boolean deleteNode(String node_id) {
         
         try {
@@ -289,11 +234,7 @@ public class ConnectionHandler {
         return true;
     }
 
-    /**
-     * Return a list with ids of all the nodes the user is subscribed to
-     * 
-     * @return list of node ids
-     */
+    
     public List<String> getSubscribedNodes() {
 
         List<String> entries = new ArrayList<String>();
@@ -313,11 +254,7 @@ public class ConnectionHandler {
 
     }
 
-    /**
-     * 
-     * @param node_id id of the node
-     * @return Node information as a string
-     */
+    
     public String getNodeInformation(String node_id) {
 
         String info = "";
@@ -362,10 +299,7 @@ public class ConnectionHandler {
 
     }
 
-    /**
-     * Attach a listener to all nodes a user is subscribed to
-     * 
-     */
+    
     private void attachListenerToSubscribedNodes() {
 
         List<Subscription> subs;
@@ -392,49 +326,30 @@ public class ConnectionHandler {
         }
     }
 
-    /**
-     * Add a listener which will be used to output all incoming Messages
-     * 
-     * @param listener listener given
-     */
+   
     public void addItemListener(ItemEventListener<Item> listener) {
         this.listener = listener;
         attachListenerToSubscribedNodes();
     }
 
-    /**
-     * Return the username of the user currently logged in
-     * 
-     * @return username
-     */
+    
     public String getUsername() {
         return this.username;
     }
     
-    /**
-     * Return the hostname
-     * 
-     * @return hostname
-     */
+    
     public String getHost() {
         return this.hostname;
     }
     
-    /**
-     * Disconnect from the xmpp server
-     * 
-     */
+    
     public void disconnect() {
         Presence offline = new Presence(Presence.Type.unavailable, "", 1, Presence.Mode.away);
         xmpp_conn.sendPacket(offline);
         xmpp_conn.disconnect();
     }
 
-    /**
-     * Create a ConfigureForm
-     * 
-     * @return configureform
-     */
+    
     private ConfigureForm createForm(FormType type, boolean pers,
             boolean payload, PublishModel pm, AccessModel am) {
         ConfigureForm form = new ConfigureForm(type);

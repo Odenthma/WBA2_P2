@@ -27,7 +27,6 @@ import org.jivesoftware.smackx.pubsub.listener.ItemEventListener;
 
 import de.odenthma.geocache.generatedclasses.userinformation.*;
 import de.odenthma.geocache.xmppstuff.ConnectionHandler;
-import de.odenthma.geocache.xmppstuff.PubSub;
 
 
 

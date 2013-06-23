@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
-import de.odenthma.geocache.client.Globals;
+import de.odenthma.geocache.utils.ServerAdress;
 
 public class ServerPanel extends JPanel implements ActionListener{
 
@@ -25,14 +25,14 @@ public class ServerPanel extends JPanel implements ActionListener{
 	private static String LUSER = "Login";
 	private static String SERVEROK ="Server OK";
 	private JButton btnPseudoServerOkay = new JButton(SERVEROK);
-	private boolean fastLogin = true;
+	private boolean fastLogin = false;
 	JButton btnConnect;
 	JTextField txtServer = new JTextField();
 	JTextField txtPort = new JTextField();
 	JLabel lblStatus = new JLabel();
-	Globals globals;
-	public ServerPanel(ActionListener mainListener, Globals globals){
-		this.globals = globals;
+
+	public ServerPanel(ActionListener mainListener){
+
 		DefaultFormBuilder builder = new DefaultFormBuilder(new FormLayout(""));
 		
 		builder.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -45,13 +45,9 @@ public class ServerPanel extends JPanel implements ActionListener{
 		builder.appendColumn("fill:max(pref; 100px)");
 		builder.append("Serveradresse", txtServer);
 		builder.append("Serverport", txtPort);
-//		builder.nextLine();
-		
-//		builder.nextLine();
+
 		btnConnect = new JButton(LOGIN);
 		btnConnect.addActionListener(this);
-		
-
     
 		builder.append(btnConnect);
 		builder.append(lblStatus);
@@ -65,16 +61,15 @@ public class ServerPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String strUrl;
 		if(fastLogin){
-			strUrl = "http://localhost:4434";
+			strUrl = "http://"+ServerAdress.HOST+":"+ServerAdress.restPort;
 		}
 		else
-			strUrl = txtServer.getText()+":"+txtPort.getText();
+			strUrl = "http://"+txtServer.getText()+":"+txtPort.getText();
 	    try {
 	        URL url = new URL(strUrl);
 	        HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
 	        urlConn.connect();
 	        lblStatus.setText("Server is up: "+ txtServer.getText()+":"+txtPort.getText());
-	        globals.setServer(txtServer.getText()+":"+txtPort.getText());
 	        btnPseudoServerOkay.doClick();
 	        
 	    } 

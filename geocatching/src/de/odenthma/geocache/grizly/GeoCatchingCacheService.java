@@ -21,11 +21,7 @@ import javax.xml.transform.stream.StreamSource;
 import org.jivesoftware.smack.XMPPException;
 
 import de.odenthma.geocache.generatedclasses.cache.*;
-import de.odenthma.geocache.utils.FilterCaches;
 import de.odenthma.geocache.xmppstuff.ConnectionHandler;
-import de.odenthma.geocache.xmppstuff.PubSub;
-
-
 
 @Path( "/cachelist" )
 public class GeoCatchingCacheService {
@@ -45,10 +41,8 @@ public class GeoCatchingCacheService {
 		clt = ob.createCacheListType();
 		JAXBContext context = JAXBContext.newInstance(CacheListType.class.getPackage().getName());
 		Unmarshaller um = context.createUnmarshaller();
-//		clt = (CacheListType)((JAXBElement<?>)um.unmarshal(new FileReader(ORIGINALPATH))).getValue();
 		clt = (CacheListType)((JAXBElement<?>)um.unmarshal(new FileReader(relativeOld.getPath()))).getValue();
-		
-		
+
 		Marshaller m = context.createMarshaller();
 		m.marshal(clt, new FileWriter(NEWPATH));  
 		
@@ -62,7 +56,7 @@ public class GeoCatchingCacheService {
 		   CacheListType caches = getAll();
 		   CacheListType ergebnisse = new CacheListType();
 		   ergebnisse.getCache().add(caches.getCache().get(id));
-		return ergebnisse;
+		   return ergebnisse;
 	   }
 	   
 	 //alle Testcaches
@@ -115,7 +109,7 @@ public class GeoCatchingCacheService {
 		CacheType ct = (CacheType)unmarshall(incomingXML, CacheType.class);
 		caches.addCache(ct);
 		
-		handleNodes(ct);
+//		handleNodes(ct);
 		
 		JAXBContext contexts= JAXBContext.newInstance(CacheListType.class);
 		Marshaller m = contexts.createMarshaller();
@@ -144,6 +138,7 @@ public class GeoCatchingCacheService {
 
 		   return caches;
 	   }
+	
 	@GET
 	@Path("/new/filter/{filter}")
 	   @Produces("application/xml")

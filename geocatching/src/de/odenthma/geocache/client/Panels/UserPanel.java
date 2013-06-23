@@ -14,11 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.xml.bind.JAXBException;
 
-
-
-import de.odenthma.geocache.client.Globals;
 import de.odenthma.geocache.client.MarshallUnmarshall;
-import de.odenthma.geocache.client.PathHandler;
 import de.odenthma.geocache.xmppstuff.ConnectionHandler;
 
 @SuppressWarnings("serial")
@@ -36,12 +32,10 @@ public class UserPanel extends JPanel implements ActionListener{
 	JButton btnLogin = new JButton(ULOGIN);
 	JButton btnOk = new JButton(MENU);
 	private ServerPanel jpServer;
-	Globals globals;
 	ConnectionHandler pubsub_man;
 	
-	public UserPanel(ActionListener listener, Globals globals, ConnectionHandler pubsub_man) throws FileNotFoundException, JAXBException{
+	public UserPanel(ActionListener listener, ConnectionHandler pubsub_man) throws FileNotFoundException, JAXBException{
 		this.listener = listener;
-		this.globals = globals;
 		this.pubsub_man = pubsub_man;
 		initComponents();
 	}
@@ -49,7 +43,7 @@ public class UserPanel extends JPanel implements ActionListener{
 	public void initComponents(){
     	s_panel = new JPanel(new FlowLayout());
     	c_panel = new JPanel(new FlowLayout());
-    	jpServer = new ServerPanel(this,globals);
+    	jpServer = new ServerPanel(this);
     	c_panel.add(jpServer);
 	    s_panel.setBorder(BorderFactory.createTitledBorder("Menü")); 
 	    c_panel.setBorder(BorderFactory.createTitledBorder("User Login"));
@@ -69,10 +63,6 @@ public class UserPanel extends JPanel implements ActionListener{
 		this.setPreferredSize(new Dimension(200, 120));
 	}
 	
-//	public ArrayList<UserType> getUsers() throws FileNotFoundException, JAXBException{
-////		return new MarshallUnmarshall().getUsers(new PathHandler().getPath("/UserListNew.xml"));
-//	}
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -87,7 +77,7 @@ public class UserPanel extends JPanel implements ActionListener{
 			c_panel.add(new CreateUserPanel(listener));
 		}
 		if(name.equals(ULOGIN)){
-			c_panel.add(new LoginPanel(this, listener,globals, pubsub_man));
+			c_panel.add(new LoginPanel(this, listener, pubsub_man));
 		}
 		this.updateUI();
 	}

@@ -17,12 +17,13 @@ import com.jgoodies.forms.layout.FormLayout;
 
 
 
+
 //import info.clearthought.layout.*;
 import de.odenthma.geocache.client.Connector;
 import de.odenthma.geocache.client.MarshallUnmarshall;
 import de.odenthma.geocache.generatedclasses.userinformation.*;
+import de.odenthma.geocache.utils.ServerAdress;
 import de.odenthma.geocache.xmppstuff.ConnectionHandler;
-import de.odenthma.geocache.xmppstuff.PubSub;
 
 
 @SuppressWarnings("serial")
@@ -42,9 +43,10 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 	private JTextField txtLoginName;
 	private JTextField txtLoginPw;
 	private JTextField txtEmail;
-	int xmppPort = 5222;
-	UserType newUser;
-	String server =  "localhost";
+	private OrtsListeType olt = new OrtsListeType();
+	private ArrayList<OrtsType> orte = new ArrayList<OrtsType>();
+	private UserType newUser;
+
 	public CreateUserPanel(ActionListener listener) {
 		initComponents();
 		DefaultFormBuilder builder = new DefaultFormBuilder(new FormLayout(""));
@@ -65,14 +67,12 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 		builder.append("Nachname:", txtLastName);
 		builder.nextLine();
 
-		//Adresse
 		builder.appendSeparator("Adresse");
     
 		builder.append("Straﬂe", txtStreet);
 		builder.nextLine();
 
 		builder.append("PLZ:", txtZip);
-//    	builder.nextLine();
 
 		builder.append("Ort:", txtOrt);
 		builder.nextLine();
@@ -114,9 +114,8 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 		}
 	}
 	public void registerXMPPUser(String user, String password){
-//		 PubSub pb = new PubSub();
 		ConnectionHandler pubsub_man = new ConnectionHandler();
-		pubsub_man.connect(server, xmppPort);
+		pubsub_man.connect(ServerAdress.HOST, ServerAdress.xmppPort);
 	      
 	      try{
 	    	  if(!pubsub_man.register(user, password))
@@ -129,17 +128,11 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 	      }
 	}
 	public void subscribeNodes(String user, String password, String node) throws XMPPException{
-//		PubSub pb = new PubSub();
 		ConnectionHandler pubsub_man = new ConnectionHandler();
-		pubsub_man.connect(server, xmppPort);
+		pubsub_man.connect(ServerAdress.HOST, ServerAdress.xmppPort);
 		pubsub_man.login(user, password);
 	      try{
-//	    	  pb.subscribe(node);
 	    	  pubsub_man.subscribeToNode(node);
-//	    	  if(!pb.register(user, password))
-//	    			  System.out.println("User schon vorhanden");
-//	    	  else 
-//	    		  System.out.println("User: "+ user+" registriert");
 	      }
 	      finally{
 	    	  pubsub_man.disconnect();
@@ -153,7 +146,6 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 		AccountType act = new AccountType();
 		OptionalType ot = new OptionalType();
 		UID userId = new UID();
-		
 		
 		nt.setFirstName(txtFirstName.getText());
 		nt.setLastName(txtLastName.getText());
@@ -189,7 +181,6 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 	}
 	
 	private void initComponents() {
-//		this.add(new CreateUserPanel());
 		
 		//UserInformation
 		txtLastName = new JTextField();
@@ -216,8 +207,8 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 		
 		olt.addOrt(ort);
 	}
-	OrtsListeType olt = new OrtsListeType();
-	ArrayList<OrtsType> orte = new ArrayList<OrtsType>();
+	
+
 	boolean optionals = false;
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -261,14 +252,12 @@ public class CreateUserPanel extends JPanel implements ActionListener{
 			}
 		}
 		if(name.equals("Abonieren")){
-			String[] items = {"One", "Two", "Three", "Four", "Five"};
-//	        JComboBox combo = new JComboBox(items);
 			JTextField txtPLZ = new JTextField("");
 	        JTextField txtLat = new JTextField("");
 	        JTextField txtLon = new JTextField("");
 	        JTextField txtRadius = new JTextField("");
 	        JPanel panel = new JPanel(new GridLayout(0, 1));
-//	        panel.add(combo);
+
 	        panel.add(new JLabel("PLZ:"));
 	        panel.add(txtPLZ);
 	        panel.add(new JLabel("Latitute:"));

@@ -144,6 +144,7 @@ public class CreateCachePanel extends JPanel implements ActionListener{
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void initComponents() {
 		
 		lblName = new JLabel();
@@ -310,21 +311,22 @@ public class CreateCachePanel extends JPanel implements ActionListener{
 		btnSave.setText("Speichern");
 		add(btnSave, new TableLayoutConstraints(1, 22, 1, 22, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 		btnSave.addActionListener(this);
+		
 		//---- button2 ----
 		btnMenu.setText(MENU);
 		btnMenu.addActionListener(listener);
-//		System.out.println(btnMenu.getText());
+
 		add(btnMenu, new TableLayoutConstraints(9, 22, 12, 22, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
 			createCache();
-		} catch (JAXBException e1) {
-			// TODO Auto-generated catch block
+		} 
+		catch (JAXBException e1) {
 			e1.printStackTrace();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
+		} 
+		catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		

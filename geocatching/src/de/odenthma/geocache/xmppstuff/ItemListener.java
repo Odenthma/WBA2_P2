@@ -8,10 +8,7 @@ import org.jivesoftware.smackx.pubsub.listener.ItemEventListener;
 
 public class ItemListener implements ItemEventListener<Item> {
 
-//    private JTextPane logger_field;
-
     public ItemListener() {
-//        this.logger_field = logger_field;
     }
 
     @Override
