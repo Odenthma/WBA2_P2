@@ -26,11 +26,13 @@ public class NewsPanel extends JPanel implements ActionListener{
 	JPanel mainPanel;
 	JFrame frame;
 	ActionListener listener;
+	ConnectionHandler pubsub_man;
 	public void setTitle(){
 		frame.setTitle(NEWS);
 	}
-	public NewsPanel(ActionListener listener) {
+	public NewsPanel(ActionListener listener, ConnectionHandler pubsub_man) {
 		this.listener = listener;
+		this.pubsub_man = pubsub_man;
 		btnMenu.addActionListener(listener);
 		btnShow.addActionListener(this);
 		this.add(lblFeeds);
@@ -41,7 +43,7 @@ public class NewsPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 //		PubSub pb = new PubSub();
-		ConnectionHandler pubsub_man = new ConnectionHandler();
+//		ConnectionHandler pubsub_man = new ConnectionHandler();
 //		try {
 ////			pb.printAllMessagesFromNode("CACHE:56.0:56.0:56");
 ////			pb.getNodes();

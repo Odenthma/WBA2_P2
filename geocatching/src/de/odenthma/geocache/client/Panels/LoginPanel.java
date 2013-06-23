@@ -35,8 +35,10 @@ public class LoginPanel extends JPanel implements ActionListener{
 	 String server =  "localhost";
      int restPort = 4434;
      int xmppPort = 5222;
-	public LoginPanel( ActionListener parentListener, ActionListener mainListener, Globals globals){
+     ConnectionHandler pubsub_man;
+	public LoginPanel( ActionListener parentListener, ActionListener mainListener, Globals globals,ConnectionHandler pubsub_man){
 		this.globals = globals;
+		this.pubsub_man = pubsub_man;
 		DefaultFormBuilder builder = new DefaultFormBuilder(new FormLayout(""));
 		
 		builder.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -78,7 +80,7 @@ public class LoginPanel extends JPanel implements ActionListener{
 			try {
 				try{
 //					PubSub pb = new PubSub();
-					ConnectionHandler pubsub_man = new ConnectionHandler();
+//					ConnectionHandler pubsub_man = new ConnectionHandler();
 					pubsub_man.connect(server, xmppPort);
 					pubsub_man.login(txtName.getText(), txtPass.getText());
 				}

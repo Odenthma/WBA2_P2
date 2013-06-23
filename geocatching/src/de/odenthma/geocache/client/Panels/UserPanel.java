@@ -15,9 +15,11 @@ import javax.swing.border.Border;
 import javax.xml.bind.JAXBException;
 
 
+
 import de.odenthma.geocache.client.Globals;
 import de.odenthma.geocache.client.MarshallUnmarshall;
 import de.odenthma.geocache.client.PathHandler;
+import de.odenthma.geocache.xmppstuff.ConnectionHandler;
 
 @SuppressWarnings("serial")
 public class UserPanel extends JPanel implements ActionListener{
@@ -35,9 +37,12 @@ public class UserPanel extends JPanel implements ActionListener{
 	JButton btnOk = new JButton(MENU);
 	private ServerPanel jpServer;
 	Globals globals;
-	public UserPanel(ActionListener listener, Globals globals) throws FileNotFoundException, JAXBException{
+	ConnectionHandler pubsub_man;
+	
+	public UserPanel(ActionListener listener, Globals globals, ConnectionHandler pubsub_man) throws FileNotFoundException, JAXBException{
 		this.listener = listener;
 		this.globals = globals;
+		this.pubsub_man = pubsub_man;
 		initComponents();
 	}
 	
@@ -82,7 +87,7 @@ public class UserPanel extends JPanel implements ActionListener{
 			c_panel.add(new CreateUserPanel(listener));
 		}
 		if(name.equals(ULOGIN)){
-			c_panel.add(new LoginPanel(this, listener,globals));
+			c_panel.add(new LoginPanel(this, listener,globals, pubsub_man));
 		}
 		this.updateUI();
 	}

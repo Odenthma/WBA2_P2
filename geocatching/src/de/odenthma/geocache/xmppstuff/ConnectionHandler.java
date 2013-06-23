@@ -56,6 +56,7 @@ public class ConnectionHandler {
             xmpp_conn.connect();
             pubsub_man = new PubSubManager(xmpp_conn, "pubsub."
                     + xmpp_conn.getHost());
+           
         } catch (XMPPException e) {
             return false;
         }
@@ -76,6 +77,7 @@ public class ConnectionHandler {
 
         try {
             xmpp_conn.login(username, password);
+            
         } catch (XMPPException e) {
             return false;
         }
@@ -145,15 +147,19 @@ public class ConnectionHandler {
         }
         
         try {
-            node = pubsub_man.getNode(node_id);
-        } catch (XMPPException e) {
+        	System.out.println("manager: "+xmpp_conn.isConnected());
+        	System.out.println("Connected: "+getHost()+" "+getUsername());
+        	node = pubsub_man.getNode(node_id);
+        
+        } 
+        catch (XMPPException e) {
 
             // Node was not found
-            System.err.println("Node was not found! I am gonna create one now.");
-            
+            System.out.println("Node was not found! I am gonna create one now.");
             if (e.getXMPPError().getCode() == 404) {
-                // Node not found
+//                 Node not found
                 try {
+                	System.out.println("nodeID: "+node_id);
                     node = pubsub_man.createNode(node_id);
                     node.sendConfigurationForm(createForm(FormType.submit,
                             true, true, PublishModel.open, AccessModel.open));
@@ -177,14 +183,19 @@ public class ConnectionHandler {
             PayloadItem<SimplePayload> item = new PayloadItem<SimplePayload>(
                     null, payload);
 
-            try {
-                node.send(item);
-            } catch (XMPPException e) {
-                // Item could not be send
-                e.printStackTrace();
-                System.err.println("Item could not be sent!");
-                return false;
-            }
+//            try {
+////                node.send(item);
+////            	 node.publish(item);
+//            } catch (XMPPException e) {
+//                // Item could not be send
+//                e.printStackTrace();
+//                System.err.println("Item could not be sent!");
+//                return false;
+//            }
+            
+          	 node.publish(item);
+         
+            
         }
 
         return true;

@@ -18,6 +18,7 @@ import de.odenthma.geocache.client.Panels.UserPanel;
 import de.odenthma.geocache.client.Panels.MenuPanel;
 import de.odenthma.geocache.client.Panels.NewsPanel;
 import de.odenthma.geocache.client.Panels.ShowCachePanel;
+import de.odenthma.geocache.xmppstuff.ConnectionHandler;
 
 public class GeoCatchingClient implements ActionListener{
 	private static String MENU = "Menu";
@@ -39,7 +40,7 @@ public class GeoCatchingClient implements ActionListener{
 	private UserPanel jpLogin;
 	private ServerPanel jpServer;
 	private CardLayout cl = new CardLayout();
-	
+	private ConnectionHandler pubsub_man = new ConnectionHandler();
 	private Globals globals = new Globals();
 	
 	public GeoCatchingClient() throws JAXBException, IOException{
@@ -47,8 +48,8 @@ public class GeoCatchingClient implements ActionListener{
 		jpShowCache = new ShowCachePanel(this);
 		jpNewUser = new CreateUserPanel(this);
 		jpCreateCache = new CreateCachePanel(this);
-		jpNews = new NewsPanel(this);
-		jpLogin = new UserPanel(this,globals);
+		jpNews = new NewsPanel(this,pubsub_man);
+		jpLogin = new UserPanel(this,globals,pubsub_man);
 		
 		panels.setLayout(cl);
 		panels.add(jpMenu,MENU);

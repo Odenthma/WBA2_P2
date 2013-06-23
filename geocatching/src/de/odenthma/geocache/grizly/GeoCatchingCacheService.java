@@ -81,12 +81,10 @@ public class GeoCatchingCacheService {
 	}
 	
 	public void handleNodes(CacheType ct) {
-//		PubSub ps = new PubSub();
 		ConnectionHandler pubsub_man = new ConnectionHandler();
 		ArrayList<String> allNodes = new ArrayList<String>();
 		pubsub_man.connect("localhost", 5222);
 		pubsub_man.login("publisher", "publisher");			
-
 
 		allNodes = (ArrayList<String>) pubsub_man.getAllNodes();
 
@@ -94,17 +92,19 @@ public class GeoCatchingCacheService {
 			String[] temp;
 			String delimiter = ":";
 			temp = node.split(delimiter);
-			System.out.println(""+temp.length);
+//			System.out.println("Connected: "+pubsub_man.getHost()+" "+pubsub_man.getUsername());
 			if(temp.length==4){
+				System.out.println(""+temp.length+"nodename: "+"CACHE:"+temp[1]+":"+temp[2]+":"+temp[3]+" realnode; "+node);
+				if(node.equals("CACHE:"+temp[1]+":"+temp[2]+":"+temp[3])){
+					System.out.println("asdasdaw"+node);
 				System.out.println("lat: "+temp[1]+" lon:"+temp[2]+" range: "+temp[3]);
-				
 				String payload = "<location><item><push kategorie=\"" + node + "\" titel=\"" + ct.getCId() + "\" datum=\"" + ct.getDatum() + "\" lat=\"" + ct.getLocation().getLat() + "\" lon=\"" + ct.getLocation().getLon()  +"\"></push></item></location>";
 				pubsub_man.publishWithPayload(node, payload);
-			}
-		pubsub_man.disconnect();
-				  	
+				}
+			}	  	
+			System.out.println("node:"+node);
 		}
-			
+		pubsub_man.disconnect();
 	}
 
 	@POST
@@ -133,16 +133,16 @@ public class GeoCatchingCacheService {
 		   CacheListType caches = getAllNew();
 		   for(CacheType ct : caches.getCache()){
 			   if(id.equals(ct.getCId()))
-				   delete = ct;
-				   
+				   delete = ct;   
 		   }
+		   
 		   caches.getCache().remove(delete);
 
 		   JAXBContext context= JAXBContext.newInstance(CacheListType.class);
 		   Marshaller m = context.createMarshaller();
 		   m.marshal(caches, new FileWriter(relativeNew.getPath()));        
 
-		return caches;
+		   return caches;
 	   }
 	@GET
 	@Path("/new/filter/{filter}")
